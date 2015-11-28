@@ -16,5 +16,5 @@ public interface IAdminService {
 	 * @param adminName
 	 * @param password
 	 */
-	void modifyAdminPassword(String adminName, String password);
+	boolean modifyAdminPassword(String adminName, String oldPassword , String newPassword);
 }

@@ -24,11 +24,11 @@ public class AdminDao implements IAdminDao{
 					Admin a=new Admin();
 					a.setAdminName(adminName);
 					a.setPassword(password);
+					db.close(rs);
 					return a;
 				}
 				
 			}  
-		db.close(rs);
 		} catch (SQLException e) {   
 			e.printStackTrace();  
 		} catch (Exception e) {

@@ -10,7 +10,7 @@ public interface IOrderService {
 	 * @param ord
 	 * @return
 	 */
-	Order createOrder(Order ord);
+	void createOrder(Order ord);
 	
 	/**
 	 * 提供查看发送的购买请求服务

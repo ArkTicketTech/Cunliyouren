@@ -14,7 +14,7 @@ public interface IProductDao {
 	 * 根据产品编号删除拥有产品
 	 * @param id
 	 */
-	void delete(int id);
+	void delete(int pId);
 	/**
 	 * 更新产品信息
 	 * 用于二次上传产品信息
@@ -23,7 +23,7 @@ public interface IProductDao {
 	void update(Product pro);
 	/**
 	 * 根据产品名称查找产品
-	 * 用于搜索产品
+	 * 用于精确搜索产品
 	 * @param productName
 	 * @return
 	 */
@@ -35,4 +35,10 @@ public interface IProductDao {
 	 * @return
 	 */
 	Product selectById(int pId);
+    /**
+     * 根据产品名称模糊查找产品
+     * 用于模糊查找产品
+     * @return
+     */
+	ArrayList<Product> fuzzySelectByName(String productName);
 }

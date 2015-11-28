@@ -10,13 +10,13 @@ public interface IProductService {
 	 * @param pro
 	 * @return
 	 */
-	Product uploadProduct(Product pro);
+	void uploadProduct(Product pro);
 	
 	/**
 	 * 提供删除产品服务
 	 * @param id
 	 */
-	void deleteProduct(int id);
+	void deleteProduct(int pId);
 	
 	/**
 	 * 提供搜索产品服务

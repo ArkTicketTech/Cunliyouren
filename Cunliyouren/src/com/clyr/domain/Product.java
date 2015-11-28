@@ -21,6 +21,8 @@ public class Product {
 	private String deliveryPoint;
 	//产品卖家ID
 	private int ownerId;
+	//产品最晚更新时间
+	private String updateTime;
 	
 	public String getProductName() {
 		return productName;
@@ -81,5 +83,11 @@ public class Product {
 	}
 	public void setOwnerId(int ownerId) {
 		this.ownerId = ownerId;
+	}
+	public String getUpdateTime() {
+		return updateTime;
+	}
+	public void setUpdateTime(String updateTime) {
+		this.updateTime = updateTime;
 	}
 }

@@ -1,16 +1,29 @@
 package com.clyr.dao.impl;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.clyr.dao.IOrderDao;
 import com.clyr.domain.Order;
+import com.clyr.utils.DBConn;
 
 public class OrderDao implements IOrderDao{
 
 	@Override
 	public void add(Order ord) {
-		// TODO Auto-generated method stub
-		
+		DBConn db=new DBConn();  
+		db.getConn();
+		db.doInsert("insert into order values("+ord.getBuyerId()+","
+		+ord.getSellerId()+","+ord.getProductId()+","
+		+ord.getPruductNumber()+",'"+ord.getCreateTime()+"')");
+		try {
+			db.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -21,13 +34,57 @@ public class OrderDao implements IOrderDao{
 
 	@Override
 	public ArrayList<Order> selectByBuyer(int bId) {
-		// TODO Auto-generated method stub
+		DBConn db=new DBConn();  
+		db.getConn();  
+		ArrayList<Order> a=new ArrayList<Order>();
+		ResultSet rs=null;
+		rs=db.doSelect("select * from order where buyerId="+bId);  
+		try {  
+			while(rs.next()){  
+				Order o=new Order();
+				o.setBuyerId(rs.getInt("buyerId"));
+				o.setSellerId(rs.getInt("sellerId"));
+				o.setoId(rs.getInt("oId"));
+				o.setCreateTime(rs.getString("createTime"));
+				o.setProductId(rs.getInt("productId"));
+				o.setPruductNumber(rs.getInt("productNumber"));
+				a.add(o);
+			}  
+			db.close(rs);
+			return a;
+		} catch (SQLException e) {   
+			e.printStackTrace();  
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
 		return null;
 	}
 
 	@Override
 	public ArrayList<Order> selectBySeller(int sId) {
-		// TODO Auto-generated method stub
+		DBConn db=new DBConn();  
+		db.getConn();  
+		ArrayList<Order> a=new ArrayList<Order>();
+		ResultSet rs=null;
+		rs=db.doSelect("select * from order where buyerId="+sId);  
+		try {  
+			while(rs.next()){  
+				Order o=new Order();
+				o.setBuyerId(rs.getInt("buyerId"));
+				o.setSellerId(rs.getInt("sellerId"));
+				o.setoId(rs.getInt("oId"));
+				o.setCreateTime(rs.getString("createTime"));
+				o.setProductId(rs.getInt("productId"));
+				o.setPruductNumber(rs.getInt("productNumber"));
+				a.add(o);				
+			}  
+			db.close(rs);
+			return a;
+		} catch (SQLException e) {   
+			e.printStackTrace();  
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
 		return null;
 	}
 	

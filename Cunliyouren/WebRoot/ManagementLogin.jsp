@@ -52,7 +52,7 @@ body{
    </tr>  
    <tr>  
       <td></td>  
-      <td><input type="submit" name="submit" value="登录" style="width: 137px; "/></td>  
+      <td style="color:#FF0000"><input type="submit" name="submit" value="登录" style="width: 137px; "/>${state}</td>  
    </tr>  
 </table>  
 

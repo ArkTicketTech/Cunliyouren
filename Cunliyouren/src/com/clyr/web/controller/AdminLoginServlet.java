@@ -62,6 +62,7 @@ public class AdminLoginServlet extends HttpServlet {
 		
 		if(admin==null) 
 		{
+			request.setAttribute("state", "用户名或密码不正确");
 			request.getRequestDispatcher("/ManagementLogin.jsp").forward(request, response);
 			return;
 		}

@@ -15,9 +15,13 @@ public class AdminService implements IAdminService{
 	}
 
 	@Override
-	public void modifyAdminPassword(String adminName, String password) {
-		
-		
+	public boolean modifyAdminPassword(String adminName, String oldPassword , String newPassword) {
+		if(adminDao.checkAdmin(adminName, oldPassword)==null) return false;
+		Admin a=new Admin();
+		a.setAdminName(adminName);
+		a.setPassword(newPassword);
+		adminDao.update(a);
+		return true;
 	}
 
 }
