@@ -14,7 +14,7 @@ public class OrderDao implements IOrderDao{
 	public void add(Order ord) {
 		DBConn db=new DBConn();  
 		db.getConn();
-		db.doInsert("insert into order values("+ord.getBuyerId()+","
+		db.doInsert("insert into orderForm values("+ord.getBuyerId()+","
 		+ord.getSellerId()+","+ord.getProductId()+","
 		+ord.getPruductNumber()+",'"+ord.getCreateTime()+"')");
 		try {
@@ -38,14 +38,14 @@ public class OrderDao implements IOrderDao{
 		db.getConn();  
 		ArrayList<Order> a=new ArrayList<Order>();
 		ResultSet rs=null;
-		rs=db.doSelect("select * from order where buyerId="+bId);  
+		rs=db.doSelect("select * from orderForm where buyerId="+bId);  
 		try {  
 			while(rs.next()){  
 				Order o=new Order();
 				o.setBuyerId(rs.getInt("buyerId"));
 				o.setSellerId(rs.getInt("sellerId"));
 				o.setoId(rs.getInt("oId"));
-				o.setCreateTime(rs.getString("createTime"));
+				o.setCreateTime(rs.getTimestamp("createTime"));
 				o.setProductId(rs.getInt("productId"));
 				o.setPruductNumber(rs.getInt("productNumber"));
 				a.add(o);
@@ -66,14 +66,14 @@ public class OrderDao implements IOrderDao{
 		db.getConn();  
 		ArrayList<Order> a=new ArrayList<Order>();
 		ResultSet rs=null;
-		rs=db.doSelect("select * from order where buyerId="+sId);  
+		rs=db.doSelect("select * from orderForm where buyerId="+sId);  
 		try {  
 			while(rs.next()){  
 				Order o=new Order();
 				o.setBuyerId(rs.getInt("buyerId"));
 				o.setSellerId(rs.getInt("sellerId"));
 				o.setoId(rs.getInt("oId"));
-				o.setCreateTime(rs.getString("createTime"));
+				o.setCreateTime(rs.getTimestamp("createTime"));
 				o.setProductId(rs.getInt("productId"));
 				o.setPruductNumber(rs.getInt("productNumber"));
 				a.add(o);				

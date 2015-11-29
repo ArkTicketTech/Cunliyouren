@@ -1,5 +1,7 @@
 package com.clyr.domain;
 
+import java.sql.Timestamp;
+
 public class Product {
 	//产品ID号，主键，自增长
 	private int pId;
@@ -22,7 +24,7 @@ public class Product {
 	//产品卖家ID
 	private int ownerId;
 	//产品最晚更新时间
-	private String updateTime;
+	private Timestamp updateTime;
 	
 	public String getProductName() {
 		return productName;
@@ -84,10 +86,10 @@ public class Product {
 	public void setOwnerId(int ownerId) {
 		this.ownerId = ownerId;
 	}
-	public String getUpdateTime() {
+	public Timestamp getUpdateTime() {
 		return updateTime;
 	}
-	public void setUpdateTime(String updateTime) {
+	public void setUpdateTime(Timestamp updateTime) {
 		this.updateTime = updateTime;
 	}
 }

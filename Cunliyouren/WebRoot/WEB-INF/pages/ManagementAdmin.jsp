@@ -66,7 +66,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   					请确认新密码：<input type="password" style="margin:10px"><br>
   					<input type="button" value="提交" style="margin:10px">
   				</form>		
-  				<form action="">
+  				<form action="" enctype="multipart/form-data">
   					更新授权登录页主图：
 					<input type="file" style="margin:10px">
   					<input type="button" value="上传" style="margin:10px">

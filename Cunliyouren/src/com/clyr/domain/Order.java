@@ -1,5 +1,7 @@
 package com.clyr.domain;
 
+import java.sql.Timestamp;
+
 public class Order {
 	//订单ID号,主键，自增长
 	private int oId;
@@ -12,7 +14,7 @@ public class Order {
 	//订购产品数量
 	private int pruductNumber;
 	//订单生成时间
-	private String createTime;
+	private Timestamp createTime;
 	
 	public int getBuyerId() {
 		return buyerId;
@@ -38,10 +40,10 @@ public class Order {
 	public void setPruductNumber(int pruductNumber) {
 		this.pruductNumber = pruductNumber;
 	}
-	public String getCreateTime() {
+	public Timestamp getCreateTime() {
 		return createTime;
 	}
-	public void setCreateTime(String createTime) {
+	public void setCreateTime(Timestamp createTime) {
 		this.createTime = createTime;
 	}
 	public int getoId() {

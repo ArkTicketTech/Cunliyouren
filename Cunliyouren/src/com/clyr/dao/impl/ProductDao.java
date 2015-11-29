@@ -67,7 +67,7 @@ public class ProductDao implements IProductDao{
 				p.setPicture3(rs.getString("picture3"));
 				p.setDeliveryPoint(rs.getString("deliveryPoint"));
 				p.setOwnerId(rs.getInt("ownerId"));
-				p.setUpdateTime(rs.getString("updateTime"));
+				p.setUpdateTime(rs.getTimestamp("updateTime"));
 				a.add(p);
 			}  
 		db.close(rs);
@@ -99,7 +99,7 @@ public class ProductDao implements IProductDao{
 				p.setPicture3(rs.getString("picture3"));
 				p.setDeliveryPoint(rs.getString("deliveryPoint"));
 				p.setOwnerId(rs.getInt("ownerId"));
-				p.setUpdateTime(rs.getString("updateTime"));
+				p.setUpdateTime(rs.getTimestamp("updateTime"));
 			}  
 			db.close(rs);
 			return p;
@@ -131,7 +131,7 @@ public class ProductDao implements IProductDao{
 				p.setPicture3(rs.getString("picture3"));
 				p.setDeliveryPoint(rs.getString("deliveryPoint"));
 				p.setOwnerId(rs.getInt("ownerId"));
-				p.setUpdateTime(rs.getString("updateTime"));
+				p.setUpdateTime(rs.getTimestamp("updateTime"));
 				a.add(p);
 			}  
 		db.close(rs);
