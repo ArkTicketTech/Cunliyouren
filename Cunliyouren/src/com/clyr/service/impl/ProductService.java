@@ -3,12 +3,16 @@ package com.clyr.service.impl;
 import java.util.ArrayList;
 
 import com.clyr.dao.IProductDao;
+import com.clyr.dao.IUserDao;
 import com.clyr.dao.impl.ProductDao;
+import com.clyr.dao.impl.UserDao;
 import com.clyr.domain.Product;
+import com.clyr.domain.User;
 import com.clyr.service.IProductService;
 
 public class ProductService implements IProductService{
 	private IProductDao productDao=new ProductDao();
+	private IUserDao userDao=new UserDao();
 	
 	@Override
 	public void uploadProduct(Product pro) {
@@ -21,11 +25,23 @@ public class ProductService implements IProductService{
 	}
 
 	@Override
-	public ArrayList<Product> searchByProductName(String productName) {
+	public ArrayList<Product> searchByProductName(String productName, User u) {
 		ArrayList<Product> a=new ArrayList<Product>();
+		ArrayList<User> temp=userDao.select(u);
+		boolean flag=true;
 		a.addAll(productDao.selectByName(productName));
 		a.addAll(productDao.fuzzySelectByName(productName));
-		return null;
+		for(Product p:a)
+		{
+			flag=true;
+			for(User t_u:temp)
+			{
+				if(p.getOwnerId()==t_u.getuId()) flag=false;
+			}
+			if(flag)
+				a.remove(p);
+		}
+		return a;
 	}
 
 	@Override

@@ -7,6 +7,8 @@ public class User implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 3452574737281967823L;
+	//用户id，主键，自增长
+	private int uId;
 	//微信平台提供应用内用户唯一标识
 	private String openId;
 	//微信平台用户昵称
@@ -29,6 +31,7 @@ public class User implements Serializable{
 	private String workingAddress;
 	//用户状态 0表示停用 1表示启用
 	private int state;
+	
 	public String getOpenId() {
 		return openId;
 	}
@@ -89,10 +92,16 @@ public class User implements Serializable{
 	public void setWorkingAddress(String workingAddress) {
 		this.workingAddress = workingAddress;
 	}
-	public int isState() {
+	public int getState() {
 		return state;
 	}
 	public void setState(int state) {
 		this.state = state;
+	}
+	public int getuId() {
+		return uId;
+	}
+	public void setuId(int uId) {
+		this.uId = uId;
 	}
 }

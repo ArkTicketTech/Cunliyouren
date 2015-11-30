@@ -15,9 +15,9 @@ public class ProductDao implements IProductDao{
 	public void add(Product pro) {
 		DBConn db=new DBConn();  
 		db.getConn();
-		db.doInsert("insert into t_product values('"+pro.getProductName()+"',"+pro.getPrice()+",'"
+		db.doInsert("insert into t_product values(null,'"+pro.getProductName()+"',"+pro.getPrice()+",'"
 		+pro.getUnit()+"','"+pro.getDescription()+"','"+pro.getPicture1()+"','"+pro.getPicture2()
-		+"','"+pro.getPicture3()+"','"+pro.getDeliveryPoint()+"',"+pro.getOwnerId()+")");
+		+"','"+pro.getPicture3()+"','"+pro.getDeliveryPoint()+"',"+pro.getOwnerId()+",null)");
 		try {
 			db.close();
 		} catch (SQLException e) {
@@ -43,7 +43,32 @@ public class ProductDao implements IProductDao{
 
 	@Override
 	public void update(Product pro) {
-		// TODO Auto-generated method stub
+		DBConn db=new DBConn();  
+		db.getConn();
+		if(!pro.getProductName().equals(""))
+			db.doUpdate("update t_user set productName='"+pro.getProductName()+"' where pId="+pro.getpId());
+		if(pro.getPrice()!=0)
+			db.doUpdate("update t_user set price="+pro.getPrice()+" where pId="+pro.getpId());
+		if(!pro.getUnit().equals(""))
+			db.doUpdate("update t_user set unit='"+pro.getUnit()+"' where pId="+pro.getpId());
+		if(!pro.getDescription().equals(""))
+			db.doUpdate("update t_user set description='"+pro.getDescription()+"' where pId="+pro.getpId());
+		if(!pro.getPicture1().equals(""))
+			db.doUpdate("update t_user set picture1='"+pro.getPicture1()+"' where pId="+pro.getpId());
+		if(!pro.getPicture2().equals(""))
+			db.doUpdate("update t_user set picture2='"+pro.getPicture2()+"' where pId="+pro.getpId());
+		if(!pro.getPicture3().equals(""))
+			db.doUpdate("update t_user set picture3='"+pro.getPicture3()+"' where pId="+pro.getpId());
+		if(!pro.getDeliveryPoint().equals(""))
+			db.doUpdate("update t_user set deliveryPoint='"+pro.getDeliveryPoint()+"' where pId="+pro.getpId());
+		try {
+			db.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+			
 		
 	}
 

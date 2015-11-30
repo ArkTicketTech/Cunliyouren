@@ -17,20 +17,21 @@ create table t_product(
 	picture2 varchar(50),
 	picture3 varchar(50),
 	deliveryPoint varchar(30),
-	ownerId integer,
-	updateTime timestamp  NOT NULL default CURRENT_TIMESTAMP
+	ownerId integer foreign key references t_user(uId),
+	updateTime timestamp  NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP
 );
 
 create table t_order(
 	oId integer not null primary key AUTO_INCREMENT,
-	buyerId integer,
-	sellerId integer,
-	productId integer,
+	buyerId integer foreign key references t_user(uId),
+	sellerId integer foreign key references t_user(uId),
+	productId integer foreign key references t_product(pId),
 	pruductNumber integer,
 	createTime timestamp  NOT NULL default CURRENT_TIMESTAMP
 );
 
 create table t_user(
+	uId integer not null primary key AUTO_INCREMENT,
 	openId varchar(30),
 	nickName varchar(30),
 	unionId varchar(30),

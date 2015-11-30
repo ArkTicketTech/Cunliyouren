@@ -14,9 +14,9 @@ public class OrderDao implements IOrderDao{
 	public void add(Order ord) {
 		DBConn db=new DBConn();  
 		db.getConn();
-		db.doInsert("insert into t_order values("+ord.getBuyerId()+","
+		db.doInsert("insert into t_order values(null,"+ord.getBuyerId()+","
 		+ord.getSellerId()+","+ord.getProductId()+","
-		+ord.getPruductNumber()+",'"+ord.getCreateTime()+"')");
+		+ord.getPruductNumber()+",'"+ord.getCreateTime()+"',null)");
 		try {
 			db.close();
 		} catch (SQLException e) {

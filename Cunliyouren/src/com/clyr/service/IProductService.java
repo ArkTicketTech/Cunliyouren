@@ -3,6 +3,7 @@ package com.clyr.service;
 import java.util.ArrayList;
 
 import com.clyr.domain.Product;
+import com.clyr.domain.User;
 
 public interface IProductService {
 	/**
@@ -23,7 +24,7 @@ public interface IProductService {
 	 * @param productName
 	 * @return
 	 */
-	ArrayList<Product> searchByProductName(String productName);
+	ArrayList<Product> searchByProductName(String productName,User u);
 	
 	/**
 	 * 提供我的店铺产品显示服务
