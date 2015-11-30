@@ -15,7 +15,7 @@ public class ProductDao implements IProductDao{
 	public void add(Product pro) {
 		DBConn db=new DBConn();  
 		db.getConn();
-		db.doInsert("insert into product values('"+pro.getProductName()+"',"+pro.getPrice()+",'"
+		db.doInsert("insert into t_product values('"+pro.getProductName()+"',"+pro.getPrice()+",'"
 		+pro.getUnit()+"','"+pro.getDescription()+"','"+pro.getPicture1()+"','"+pro.getPicture2()
 		+"','"+pro.getPicture3()+"','"+pro.getDeliveryPoint()+"',"+pro.getOwnerId()+")");
 		try {
@@ -31,7 +31,7 @@ public class ProductDao implements IProductDao{
 	public void delete(int pId) {
 		DBConn db=new DBConn();  
 		db.getConn();
-		db.doDelete("delete from product where pId="+pId);
+		db.doDelete("delete from t_product where pId="+pId);
 		try {
 			db.close();
 		} catch (SQLException e) {
@@ -53,7 +53,7 @@ public class ProductDao implements IProductDao{
 		db.getConn();  
 		ArrayList<Product> a=new ArrayList<Product>();
 		ResultSet rs=null;
-		rs=db.doSelect("select * from product where productName="+productName);  
+		rs=db.doSelect("select * from t_product where productName="+productName);  
 		try {  
 			while(rs.next()){  
 				Product p=new Product();
@@ -86,7 +86,7 @@ public class ProductDao implements IProductDao{
 		db.getConn();  
 		Product p=new Product();
 		ResultSet rs=null;
-		rs=db.doSelect("select * from product where pId="+pId);  
+		rs=db.doSelect("select * from t_product where pId="+pId);  
 		try {  
 			if(rs.next()){  
 				p.setpId(rs.getInt("pId"));
@@ -117,7 +117,7 @@ public class ProductDao implements IProductDao{
 		db.getConn();  
 		ArrayList<Product> a=new ArrayList<Product>();
 		ResultSet rs=null;
-		rs=db.doSelect("select * from product where productName like %"+productName+"% and productName!="+productName);  
+		rs=db.doSelect("select * from t_product where productName like %"+productName+"% and productName!="+productName);  
 		try {  
 			while(rs.next()){  
 				Product p=new Product();

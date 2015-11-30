@@ -1,8 +1,13 @@
 package com.clyr.domain;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class Product {
+public class Product implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7143998790200689098L;
 	//产品ID号，主键，自增长
 	private int pId;
 	//产品名称

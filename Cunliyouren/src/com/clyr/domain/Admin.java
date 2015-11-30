@@ -1,6 +1,12 @@
 package com.clyr.domain;
 
-public class Admin {
+import java.io.Serializable;
+
+public class Admin implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 715301753879209150L;
 	//后台管理员用户名
 	private String adminName;
 	//后台管理员密码

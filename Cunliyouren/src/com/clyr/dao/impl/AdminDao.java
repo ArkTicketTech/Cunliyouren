@@ -16,7 +16,7 @@ public class AdminDao implements IAdminDao{
 		DBConn db=new DBConn();  
 		db.getConn();  
 		ResultSet rs=null;
-		rs=db.doSelect("select * from admin where adminName='"+adminName+"'");  
+		rs=db.doSelect("select * from t_admin where adminName='"+adminName+"'");  
 		try {  
 			while(rs.next()){  
 				if(password.equals(rs.getString("password")))
@@ -41,7 +41,7 @@ public class AdminDao implements IAdminDao{
 	public void update(Admin admin) {
 		DBConn db=new DBConn();  
 		db.getConn();
-		db.doUpdate("update admin set password='"+admin.getPassword()+"' where adminName='"+admin.getAdminName()+"'");
+		db.doUpdate("update t_admin set password='"+admin.getPassword()+"' where adminName='"+admin.getAdminName()+"'");
 		try {
 			db.close();
 		} catch (SQLException e) {

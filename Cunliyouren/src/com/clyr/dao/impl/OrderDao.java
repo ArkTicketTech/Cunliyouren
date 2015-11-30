@@ -14,7 +14,7 @@ public class OrderDao implements IOrderDao{
 	public void add(Order ord) {
 		DBConn db=new DBConn();  
 		db.getConn();
-		db.doInsert("insert into orderForm values("+ord.getBuyerId()+","
+		db.doInsert("insert into t_order values("+ord.getBuyerId()+","
 		+ord.getSellerId()+","+ord.getProductId()+","
 		+ord.getPruductNumber()+",'"+ord.getCreateTime()+"')");
 		try {
@@ -38,7 +38,7 @@ public class OrderDao implements IOrderDao{
 		db.getConn();  
 		ArrayList<Order> a=new ArrayList<Order>();
 		ResultSet rs=null;
-		rs=db.doSelect("select * from orderForm where buyerId="+bId);  
+		rs=db.doSelect("select * from t_order where buyerId="+bId);  
 		try {  
 			while(rs.next()){  
 				Order o=new Order();
@@ -66,7 +66,7 @@ public class OrderDao implements IOrderDao{
 		db.getConn();  
 		ArrayList<Order> a=new ArrayList<Order>();
 		ResultSet rs=null;
-		rs=db.doSelect("select * from orderForm where buyerId="+sId);  
+		rs=db.doSelect("select * from t_order where buyerId="+sId);  
 		try {  
 			while(rs.next()){  
 				Order o=new Order();

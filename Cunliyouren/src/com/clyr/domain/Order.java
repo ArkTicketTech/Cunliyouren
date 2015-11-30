@@ -1,8 +1,13 @@
 package com.clyr.domain;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class Order {
+public class Order implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2100164975059774278L;
 	//订单ID号,主键，自增长
 	private int oId;
 	//买家id
