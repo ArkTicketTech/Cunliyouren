@@ -48,6 +48,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	background: #eee;			
     }							
     </style>	
+    <script type="text/javascript" src="<%=basePath  %>JavaScript/jquery.js"></script>
   </head>	
   <body>		
   	<div class="container">			
@@ -57,12 +58,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   		<div class="content">				
   			<div class="sidebar">					
   				<p id="userManage">·用户管理</p>					
-  				<p id="systemManage">·系统管理</p>									
+  				<p id="systemManage"><a href="<%=basePath%>ManagementAdminUIServlet">·系统管理</a></p>									
   			</div>				
   			<div class="maincontent">	
-  				<form width="300px" style="float:left">
+  				<form width="300px" style="float:left" action="ManagementAdminUIServlet" method="post">
   					<input type="text" name="key">
-  					<input type="button" value="检索">
+  					<input type="submit" value="检索">
   				</form>
   				<button style="float:left">按发出购买请求次数降序排序</button>
   				<button style="float:left">按收到购买请求次数降序排序</button>

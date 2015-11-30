@@ -56,7 +56,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   		</div>						
   		<div class="content">				
   			<div class="sidebar">					
-  				<p>·用户管理</p>					
+  				<p><a href="<%=basePath%>ManagementProductUIServlet">·用户管理</a></p>					
   				<p>·系统管理</p>									
   			</div>				
   			<div class="maincontent">	
