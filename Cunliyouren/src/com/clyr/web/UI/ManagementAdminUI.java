@@ -59,9 +59,11 @@ public class ManagementAdminUI extends HttpServlet {
 				Admin admin=service.loginAdmin(username, password);
 				if(admin!=null)
 					request.getRequestDispatcher("/WEB-INF/pages/ManagementAdmin.jsp").forward(request, response);
+				else
+					request.getRequestDispatcher("/WEB-INF/pages/ManagementLogin.jsp").forward(request, response);
 			}
 		}
-		request.getRequestDispatcher("/WEB-INF/pages/ManagementLogin.jsp").forward(request, response);
+		
 	}
 
 	/**

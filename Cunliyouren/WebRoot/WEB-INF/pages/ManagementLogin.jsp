@@ -55,7 +55,7 @@ body{
       <td style="color:#FF0000"><input type="submit" name="submit" value="登录" style="width: 137px; "/>${state}</td>  
    </tr>  
 </table>  
-
+<p align="center" style="color:#FF0000">${result}</p>
   
 </form>  
 </body>  

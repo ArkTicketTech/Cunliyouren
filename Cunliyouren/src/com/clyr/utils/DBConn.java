@@ -20,14 +20,14 @@ public class DBConn {
    			try {
 				pro.load(DBConn.class.getResourceAsStream("jdbc.properties"));
 			} catch (IOException e) {
-				System.out.println("连接数据库异常");
+				System.out.println("connect failure");
 			} 
    			url=pro.getProperty("url");
    			user = pro.getProperty("user");
 			password = pro.getProperty("password");
    			Class.forName(driver);     
    			conn = DriverManager.getConnection(url,user,password);  
-   			System.out.println("-------连接成功------");  
+   			System.out.println("---connect success---");  
    		} catch(ClassNotFoundException classnotfoundexception) {     
    			classnotfoundexception.printStackTrace();     
    			System.err.println("db: " + classnotfoundexception.getMessage());     
@@ -45,7 +45,8 @@ public class DBConn {
 	}     
 	 
 	public void doInsert(String sql) {     
-		try {     
+		try {    
+			conn=DriverManager.getConnection(url,user,password);
 			stmt = conn.createStatement();     
 			int i = stmt.executeUpdate(sql);     
 		} catch(SQLException sqlexception) {     
@@ -56,6 +57,7 @@ public class DBConn {
 	
 	public void doDelete(String sql) {     
   	    try {     
+  	    	conn=DriverManager.getConnection(url,user,password);
   		    stmt = conn.createStatement();     
   		    int i = stmt.executeUpdate(sql);     
   	    } catch(SQLException sqlexception) {     
@@ -65,6 +67,7 @@ public class DBConn {
 	
 	public void doUpdate(String sql) {     
 		try {     
+			conn=DriverManager.getConnection(url,user,password);
 			stmt = conn.createStatement();     
 			int i = stmt.executeUpdate(sql);     
 		} catch(SQLException sqlexception) {     
@@ -77,9 +80,9 @@ public class DBConn {
  			conn=DriverManager.getConnection(url,user,password);  
  			stmt = conn.createStatement(java.sql.ResultSet.TYPE_SCROLL_INSENSITIVE,java.sql.ResultSet.CONCUR_READ_ONLY);       
  			rs = stmt.executeQuery(sql);   
- 			System.out.println("ȡ�ý��");  
+ 			System.out.println("get resultSet");  
  		} catch(SQLException sqlexception) {     
- 			System.err.println("db.executeQuery: " + sqlexception.getMessage());     
+ 			System.err.println("db.executeQuery:" + sqlexception.getMessage());     
  		}     
  		return rs;     
 	}     

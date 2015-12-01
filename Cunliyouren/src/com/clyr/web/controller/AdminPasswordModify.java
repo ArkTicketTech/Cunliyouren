@@ -58,7 +58,9 @@ public class AdminPasswordModify extends HttpServlet {
 		else{
 			IAdminService service=new AdminService();
 			if(service.modifyAdminPassword(adminName, oldPassword, newPassword))
-				result="修改密码成功";
+			{
+				result="修改密码成功 请重新登录";
+			}
 		}
 		request.setAttribute("result", result);
 		request.getRequestDispatcher("ManagementAdminUI").forward(request, response);

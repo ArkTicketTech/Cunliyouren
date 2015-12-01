@@ -41,7 +41,7 @@ public class AdminDao implements IAdminDao{
 	public void update(Admin admin) {
 		DBConn db=new DBConn();  
 		db.getConn();
-		db.doUpdate("update t_admin set password='"+admin.getPassword()+"' where adminName='"+admin.getAdminName()+"'");
+		db.doUpdate("update t_admin set password='"+admin.getPassword()+"' where adminName='"+admin.getAdminName()+"';");
 		try {
 			db.close();
 		} catch (SQLException e) {
