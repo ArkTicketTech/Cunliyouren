@@ -3,33 +3,30 @@ package com.clyr.domain;
 import java.io.Serializable;
 
 public class User implements Serializable{
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 3452574737281967823L;
-	//用户id，主键，自增长
+	//
 	private int uId;
-	//微信平台提供应用内用户唯一标识
+	//
 	private String openId;
-	//微信平台用户昵称
+	//
 	private String nickName;
-	//微信平台提供公众号内用户唯一标识
+	//
 	private String unionId;
-	//用户微信头像，通过访问微信提供的url将图片保存在本地
+	//
 	private String headImgUrl;
-	//用户手机号 选填
+	//
 	private String telNum;
-	//用户家乡
+	//
 	private String homeTown;
-	//用户高中
+	//
 	private String highSchool;
-	//用户大学
+	//
 	private String University;
-	//用户常住地址
+	//
 	private String homeAddress;
-	//用户工作地址
+	//
 	private String workingAddress;
-	//用户状态 0表示停用 1表示启用
+	//
 	private int state;
 	
 	public String getOpenId() {

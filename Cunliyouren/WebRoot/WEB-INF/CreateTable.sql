@@ -7,28 +7,6 @@ create table t_admin(
 	password varchar(20)
 );
 
-create table t_product(
-	pId integer not null primary key AUTO_INCREMENT,
-	productName varchar(30),
-	price double,
-	unit varchar(10),
-	description varchar(255),
-	picture1 varchar(50),
-	picture2 varchar(50),
-	picture3 varchar(50),
-	deliveryPoint varchar(30),
-	ownerId integer foreign key references t_user(uId),
-	updateTime timestamp  NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP
-);
-
-create table t_order(
-	oId integer not null primary key AUTO_INCREMENT,
-	buyerId integer foreign key references t_user(uId),
-	sellerId integer foreign key references t_user(uId),
-	productId integer foreign key references t_product(pId),
-	pruductNumber integer,
-	createTime timestamp  NOT NULL default CURRENT_TIMESTAMP
-);
 
 create table t_user(
 	uId integer not null primary key AUTO_INCREMENT,
@@ -43,4 +21,31 @@ create table t_user(
 	homeAddress varchar(30),
 	workingAddress varchar(30),
 	state integer
+);
+
+create table t_product(
+	pId integer not null primary key AUTO_INCREMENT,
+	productName varchar(30),
+	price double,
+	unit varchar(10),
+	description varchar(255),
+	picture1 varchar(50),
+	picture2 varchar(50),
+	picture3 varchar(50),
+	deliveryPoint varchar(30),
+	ownerId integer,
+	updateTime timestamp  NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+	FOREIGN KEY (ownerId) REFERENCES t_user(uId)
+);
+
+create table t_order(
+	oId integer not null primary key AUTO_INCREMENT,
+	buyerId integer,
+	sellerId integer,
+	productId integer,
+	pruductNumber integer,
+	createTime timestamp  NOT NULL default CURRENT_TIMESTAMP,
+	FOREIGN KEY (buyerId) REFERENCES t_user(uId),
+	FOREIGN KEY (sellerId) REFERENCES t_user(uId),
+	FOREIGN KEY (productId) REFERENCES t_product(pId)
 );

@@ -1,19 +1,26 @@
-package com.clyr.web.UI;
+package com.clyr.web.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class ManagementProductUIServlet extends HttpServlet {
+import com.clyr.domain.Admin;
+import com.clyr.service.IAdminService;
+import com.clyr.service.impl.AdminService;
+import com.clyr.utils.WebUtils;
+import com.clyr.web.formbean.LoginFormBean;
+
+public class AdminLogin extends HttpServlet {
 
 	/**
 	 * Constructor of the object.
 	 */
-	public ManagementProductUIServlet() {
+	public AdminLogin() {
 		super();
 	}
 
@@ -37,7 +44,35 @@ public class ManagementProductUIServlet extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=UTF-8");
+		//将客户端提交的表单数据封装到LoginFormBean对象中
+        LoginFormBean formbean = WebUtils.request2Bean(request,LoginFormBean.class);
+        //校验用户注册填写的表单数据
+        if (formbean.validate() == false) {//如果校验失败
+        	request.setAttribute("formbean", formbean);
+        	request.getRequestDispatcher("/WEB-INF/pages/ManagementLogin.jsp").forward(request, response);
+        	return;
+        }
+		//获取用户填写的登录用户名
+		String username = request.getParameter("username");
+		//获取用户填写的登录密码
+		String password = request.getParameter("password");
+		
+		IAdminService service=new AdminService();
+		
+		Admin admin=service.loginAdmin(username, password);
+		
+		if(admin==null) 
+		{
+			request.setAttribute("state", "用户名或密码不正确");
+			request.getRequestDispatcher("ManagementLoginUI").forward(request, response);
+			return;
+		}
+		Cookie cname=new Cookie("username",username);
+		Cookie cpass=new Cookie("password",password); 
+		response.addCookie(cname);
+		response.addCookie(cpass);
 		request.getRequestDispatcher("/WEB-INF/pages/ManagementProduct.jsp").forward(request, response);
 	}
 

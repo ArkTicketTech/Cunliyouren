@@ -39,12 +39,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     }						
     .sidebar{				
     	float: left;				
-    	width: 100px;				
+    	width: 100px;	
+    	height: 500px;			
     	background: #a4f;			
     }						
     .maincontent{	
     	float: left;
-    	width: 1100px;							
+    	width: 1100px;	
+    	height: 500px;						
     	background: #eee;			
     }							
     </style>	
@@ -56,20 +58,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   		</div>						
   		<div class="content">				
   			<div class="sidebar">					
-  				<p><a href="<%=basePath%>ManagementProductUIServlet">·用户管理</a></p>					
+  				<p><a href="<%=basePath%>ManagementProductUI">·用户管理</a></p>					
   				<p>·系统管理</p>									
   			</div>				
   			<div class="maincontent">	
-  				<form action="">
-  					请输入旧密码：<input type="password" style="margin:10px"><br>
-  					请输入新密码：<input type="password" style="margin:10px"><br>
-  					请确认新密码：<input type="password" style="margin:10px"><br>
-  					<input type="button" value="提交" style="margin:10px">
+  				<a href="<%=basePath%>AdminLogout"><button style="float:right">注销</button></a>
+  				<form action="AdminPasswordModify">
+  					请输入旧密码：<input type="password" style="margin:10px" name="oldPassword"><br>
+  					请输入新密码：<input type="password" style="margin:10px" name="newPassword"><br>
+  					请确认新密码：<input type="password" style="margin:10px" name="comfirmPassword"><br>
+  					<input type="submit" value="提交" style="margin:10px">
+  					<p style="color:#FF0000">${result}</p>
   				</form>		
-  				<form action="" enctype="multipart/form-data">
+  				<form action="UploadMainPagePicture" enctype="multipart/form-data">
   					更新授权登录页主图：
 					<input type="file" style="margin:10px">
-  					<input type="button" value="上传" style="margin:10px">
+  					<input type="submit" value="上传" style="margin:10px">
   				</form>							
   			</div>			
   		</div>				

@@ -4,31 +4,28 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 public class Product implements Serializable{
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 7143998790200689098L;
-	//产品ID号，主键，自增长
+	//
 	private int pId;
-	//产品名称
+	//
 	private String productName;
-	//产品价格
+	//
 	private double price;
-	//产品计量单位
+	//
 	private String unit;
-	//产品文字描述
+	//
 	private String description;
-	//产品图片描述1
+	//
 	private String picture1;
-	//产品图片描述2
+	//
 	private String picture2;
-	//产品图片描述3
+	//
 	private String picture3;
-	//产品交易地点
+	//
 	private String deliveryPoint;
-	//产品卖家ID
+	//
 	private int ownerId;
-	//产品最晚更新时间
+	//
 	private Timestamp updateTime;
 	
 	public String getProductName() {

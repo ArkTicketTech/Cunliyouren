@@ -4,16 +4,21 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class ManagementAdminUIServlet extends HttpServlet {
+import com.clyr.domain.Admin;
+import com.clyr.service.IAdminService;
+import com.clyr.service.impl.AdminService;
+
+public class ManagementAdminUI extends HttpServlet {
 
 	/**
 	 * Constructor of the object.
 	 */
-	public ManagementAdminUIServlet() {
+	public ManagementAdminUI() {
 		super();
 	}
 
@@ -37,8 +42,26 @@ public class ManagementAdminUIServlet extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("success");
-		request.getRequestDispatcher("/WEB-INF/pages/ManagementAdmin.jsp").forward(request, response);
+		Cookie[] c=request.getCookies();
+		String username=null;
+		String password=null;
+		if(c!=null){
+			for(int i=0;i<c.length;i++){
+				if("username".equals(c[i].getName())){
+					username = c[i].getValue() ;	// 接收Cookie信息
+				}
+				if("password".equals(c[i].getName())){
+					password = c[i].getValue() ;	// 接收Cookie信息
+				}
+			}
+			if(username!=null&&password!=null){
+				IAdminService service=new AdminService();
+				Admin admin=service.loginAdmin(username, password);
+				if(admin!=null)
+					request.getRequestDispatcher("/WEB-INF/pages/ManagementAdmin.jsp").forward(request, response);
+			}
+		}
+		request.getRequestDispatcher("/WEB-INF/pages/ManagementLogin.jsp").forward(request, response);
 	}
 
 	/**

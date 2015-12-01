@@ -4,32 +4,32 @@
   <servlet>
     <description>This is the description of my J2EE component</description>
     <display-name>This is the display name of my J2EE component</display-name>
-    <servlet-name>ManagementProductUIServlet</servlet-name>
-    <servlet-class>com.clyr.web.UI.ManagementProductUIServlet</servlet-class>
+    <servlet-name>ManagementProductUI</servlet-name>
+    <servlet-class>com.clyr.web.UI.ManagementProductUI</servlet-class>
   </servlet>
   <servlet>
     <description>This is the description of my J2EE component</description>
     <display-name>This is the display name of my J2EE component</display-name>
-    <servlet-name>ManagementLoginUIServlet</servlet-name>
-    <servlet-class>com.clyr.web.UI.ManagementLoginUIServlet</servlet-class>
+    <servlet-name>ManagementLoginUI</servlet-name>
+    <servlet-class>com.clyr.web.UI.ManagementLoginUI</servlet-class>
   </servlet>
   <servlet>
     <description>This is the description of my J2EE component</description>
     <display-name>This is the display name of my J2EE component</display-name>
-    <servlet-name>ManagementAdminUIServlet</servlet-name>
-    <servlet-class>com.clyr.web.UI.ManagementAdminUIServlet</servlet-class>
+    <servlet-name>ManagementAdminUI</servlet-name>
+    <servlet-class>com.clyr.web.UI.ManagementAdminUI</servlet-class>
   </servlet>
   <servlet>
     <description>This is the description of my J2EE component</description>
     <display-name>This is the display name of my J2EE component</display-name>
-    <servlet-name>AdminLoginServlet</servlet-name>
-    <servlet-class>com.clyr.web.controller.AdminLoginServlet</servlet-class>
+    <servlet-name>AdminLogin</servlet-name>
+    <servlet-class>com.clyr.web.controller.AdminLogin</servlet-class>
   </servlet>
   <servlet>
     <description>This is the description of my J2EE component</description>
     <display-name>This is the display name of my J2EE component</display-name>
-    <servlet-name>AdminPasswordModifyServlet</servlet-name>
-    <servlet-class>com.clyr.web.controller.AdminPasswordModifyServlet</servlet-class>
+    <servlet-name>AdminPasswordModify</servlet-name>
+    <servlet-class>com.clyr.web.controller.AdminPasswordModify</servlet-class>
   </servlet>
   <servlet>
     <description>This is the description of my J2EE component</description>
@@ -67,6 +67,20 @@
     <servlet-name>UserUpdate</servlet-name>
     <servlet-class>com.clyr.web.controller.UserUpdate</servlet-class>
   </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>AdminLogout</servlet-name>
+    <servlet-class>com.clyr.web.controller.AdminLogout</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>UploadMainPagePicture</servlet-name>
+    <servlet-class>com.clyr.web.controller.UploadMainPagePicture</servlet-class>
+  </servlet>
+
+
 
 
 
@@ -80,24 +94,24 @@
 
 
   <servlet-mapping>
-    <servlet-name>ManagementProductUIServlet</servlet-name>
-    <url-pattern>/ManagementProductUIServlet</url-pattern>
+    <servlet-name>ManagementProductUI</servlet-name>
+    <url-pattern>/ManagementProductUI</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>ManagementLoginUIServlet</servlet-name>
-    <url-pattern>/ManagementLoginUIServlet</url-pattern>
+    <servlet-name>ManagementLoginUI</servlet-name>
+    <url-pattern>/ManagementLoginUI</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>ManagementAdminUIServlet</servlet-name>
-    <url-pattern>/ManagementAdminUIServlet</url-pattern>
+    <servlet-name>ManagementAdminUI</servlet-name>
+    <url-pattern>/ManagementAdminUI</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>AdminLoginServlet</servlet-name>
-    <url-pattern>/AdminLoginServlet</url-pattern>
+    <servlet-name>AdminLogin</servlet-name>
+    <url-pattern>/AdminLogin</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>AdminPasswordModifyServlet</servlet-name>
-    <url-pattern>/AdminPasswordModifyServlet</url-pattern>
+    <servlet-name>AdminPasswordModify</servlet-name>
+    <url-pattern>/AdminPasswordModify</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>UploadProduct</servlet-name>
@@ -122,6 +136,14 @@
   <servlet-mapping>
     <servlet-name>UserUpdate</servlet-name>
     <url-pattern>/UserUpdate</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AdminLogout</servlet-name>
+    <url-pattern>/AdminLogout</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UploadMainPagePicture</servlet-name>
+    <url-pattern>/UploadMainPagePicture</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

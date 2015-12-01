@@ -4,21 +4,18 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 public class Order implements Serializable{
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -2100164975059774278L;
-	//订单ID号,主键，自增长
+	//
 	private int oId;
-	//买家id
+	//
 	private int buyerId;
-	//卖家id
+	//
 	private int sellerId; 
-	//订购产品id
+	//
 	private int productId;
-	//订购产品数量
+	//
 	private int pruductNumber;
-	//订单生成时间
+	//
 	private Timestamp createTime;
 	
 	public int getBuyerId() {

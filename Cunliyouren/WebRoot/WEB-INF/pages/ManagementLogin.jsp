@@ -35,7 +35,7 @@ body{
 
 </head>  
 <body>  
-<form action="AdminLoginServlet" method="post" name="form1">  
+<form action="AdminLogin" method="post" name="form1">  
       
       
 <table border="1" cellspacing="1" cellpadding="1"  bordercolor="silver" align="center">  

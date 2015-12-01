@@ -39,12 +39,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     }						
     .sidebar{				
     	float: left;				
-    	width: 100px;				
+    	width: 100px;	
+    	height: 500px;			
     	background: #a4f;			
     }						
     .maincontent{	
     	float: left;
-    	width: 1100px;							
+    	width: 1100px;	
+    	height: 500px;						
     	background: #eee;			
     }							
     </style>	
@@ -57,16 +59,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   		</div>						
   		<div class="content">				
   			<div class="sidebar">					
-  				<p id="userManage">·用户管理</p>					
-  				<p id="systemManage"><a href="<%=basePath%>ManagementAdminUIServlet">·系统管理</a></p>									
+  				<p>·用户管理</p>					
+  				<p><a href="<%=basePath%>ManagementAdminUI">·系统管理</a></p>									
   			</div>				
   			<div class="maincontent">	
-  				<form width="300px" style="float:left" action="ManagementAdminUIServlet" method="post">
+  				<form  style="float:left;width:300px" action="" method="post">
   					<input type="text" name="key">
   					<input type="submit" value="检索">
   				</form>
   				<button style="float:left">按发出购买请求次数降序排序</button>
   				<button style="float:left">按收到购买请求次数降序排序</button>
+  				<a href="<%=basePath%>AdminLogout"><button style="float:right">注销</button></a>
   				<table border="1" width="1100px">
   					<tr>
   						<td>序号</td>
@@ -77,7 +80,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   						<td>家乡</td>
   						<td>高中</td>
   						<td>大学</td>
-  						<td>家停地点</td>
+  						<td>家庭地址</td>
   						<td>工作地点</td>
   						<td>产品1</td>
   						<td>产品2</td>
