@@ -46,17 +46,13 @@ public class AdminLogin extends HttpServlet {
 			throws ServletException, IOException {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
-		//
         LoginFormBean formbean = WebUtils.request2Bean(request,LoginFormBean.class);
-        //
         if (formbean.validate() == false) {//
         	request.setAttribute("formbean", formbean);
         	request.getRequestDispatcher("/WEB-INF/pages/ManagementLogin.jsp").forward(request, response);
         	return;
         }
-		//
 		String username = request.getParameter("username");
-		//
 		String password = request.getParameter("password");
 		
 		IAdminService service=new AdminService();

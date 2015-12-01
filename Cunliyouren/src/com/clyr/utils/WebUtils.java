@@ -8,12 +8,12 @@ import org.apache.commons.beanutils.BeanUtils;
 
 /**
  * @author gacl
- * 把request对象中的请求参数封装到bean中
+ * 锟斤拷request锟斤拷锟斤拷锟叫碉拷锟斤拷锟斤拷锟斤拷锟斤拷装锟斤拷bean锟斤拷
  */
 public class WebUtils {
 
     /**
-     * 将request对象转换成T对象
+     * 灏唕equest鍙傛暟灏佽鎴恇ean
      * @param request 
      * @param clazz
      * @return
@@ -34,7 +34,6 @@ public class WebUtils {
     }
     
     /**
-     * 生成UUID
      * @return
      */
     public static String makeId(){

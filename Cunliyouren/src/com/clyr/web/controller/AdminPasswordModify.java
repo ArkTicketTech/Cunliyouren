@@ -54,11 +54,11 @@ public class AdminPasswordModify extends HttpServlet {
 		String newPassword=request.getParameter("newPassword");
 		String comfirmPassword=request.getParameter("comfirmPassword");
 		if(!comfirmPassword.equals(newPassword))
-			result="�����������벻һ��";
+			result="两次密码输入不一致";
 		else{
 			IAdminService service=new AdminService();
 			if(service.modifyAdminPassword(adminName, oldPassword, newPassword))
-				result="�޸�����ɹ�";
+				result="修改密码成功";
 		}
 		request.setAttribute("result", result);
 		request.getRequestDispatcher("ManagementAdminUI").forward(request, response);

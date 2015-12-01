@@ -5,14 +5,14 @@ import java.sql.*;
 import java.util.Properties;
   
 public class DBConn {     
-	public static String driver;//¶¨ÒåÇı¶¯     
-    public static String url;//¶¨ÒåURL     
-    public static String user;//¶¨ÒåÓÃ»§Ãû     
-	public static String password;//¶¨ÒåÃÜÂë     
- 	public static Connection conn;//¶¨ÒåÁ¬½Ó     
-  	public static Statement stmt;//¶¨ÒåSTMT     
-  	public ResultSet rs;//¶¨Òå½á¹û¼¯     
-  	//ÉèÖÃCONN     
+	public static String driver;     
+    public static String url;    
+    public static String user;   
+	public static String password;   
+ 	public static Connection conn;    
+  	public static Statement stmt;     
+  	public ResultSet rs;
+  	 
    	static{     
    		Properties pro = new Properties();
    		try {   
@@ -20,14 +20,14 @@ public class DBConn {
    			try {
 				pro.load(DBConn.class.getResourceAsStream("jdbc.properties"));
 			} catch (IOException e) {
-				System.out.println("Î´ÕÒµ½ÅäÖÃÎÄ¼ş");
+				System.out.println("è¿æ¥æ•°æ®åº“å¼‚å¸¸");
 			} 
    			url=pro.getProperty("url");
    			user = pro.getProperty("user");
 			password = pro.getProperty("password");
    			Class.forName(driver);     
    			conn = DriverManager.getConnection(url,user,password);  
-   			System.out.println("-------Á¬½Ó³É¹¦------");  
+   			System.out.println("-------è¿æ¥æˆåŠŸ------");  
    		} catch(ClassNotFoundException classnotfoundexception) {     
    			classnotfoundexception.printStackTrace();     
    			System.err.println("db: " + classnotfoundexception.getMessage());     
@@ -35,15 +35,15 @@ public class DBConn {
    			System.err.println("db.getconn(): " + sqlexception.getMessage());     
    		}     
 	}     
-	//¹¹Ôìº¯Êı£¬Ä¬ÈÏ¼Ó²ÃÅäÖÃÎÄ¼şÎªjdbc.driver     
+	     
 	public DBConn(){     
 		this.conn=this.getConn();  
 	}     
-	//·µ»ØConn     
+	   
 	public Connection getConn(){     
  		return this.conn;     
 	}     
-	//Ö´ĞĞ²åÈë     
+	 
 	public void doInsert(String sql) {     
 		try {     
 			stmt = conn.createStatement();     
@@ -53,7 +53,7 @@ public class DBConn {
 		}finally{                     
 		}     
 	}     
-	//Ö´ĞĞÉ¾³ı     
+	
 	public void doDelete(String sql) {     
   	    try {     
   		    stmt = conn.createStatement();     
@@ -62,7 +62,7 @@ public class DBConn {
   		    System.err.println("db.executeDelete:" + sqlexception.getMessage());     
   		}     
     }     
-	//Ö´ĞĞ¸üĞÂ     
+	
 	public void doUpdate(String sql) {     
 		try {     
 			stmt = conn.createStatement();     
@@ -71,24 +71,23 @@ public class DBConn {
 			System.err.println("db.executeUpdate:" + sqlexception.getMessage());     
 		}     
 	}     
-	//²éÑ¯½á¹û¼¯     
+	
  	public ResultSet doSelect(String sql) {     
  		try {  
  			conn=DriverManager.getConnection(url,user,password);  
  			stmt = conn.createStatement(java.sql.ResultSet.TYPE_SCROLL_INSENSITIVE,java.sql.ResultSet.CONCUR_READ_ONLY);       
  			rs = stmt.executeQuery(sql);   
- 			System.out.println("È¡µÃ½á¹û¼¯");  
+ 			System.out.println("È¡ï¿½Ã½ï¿½ï¿½");  
  		} catch(SQLException sqlexception) {     
  			System.err.println("db.executeQuery: " + sqlexception.getMessage());     
  		}     
  		return rs;     
 	}     
 	/**   
-	*¹Ø±ÕÊı¾İ¿â½á¹û¼¯£¬Êı¾İ¿â²Ù×÷¶ÔÏó£¬Êı¾İ¿âÁ´½Ó   
-  	@Function: Close all the statement and conn int this instance and close the parameter ResultSet   
- 	@Param: ResultSet   
- 	@Exception: SQLException,Exception   
-	**/    
+  	 * @Function: Close all the statement and conn int this instance and close the parameter ResultSet   
+ 	 * @Param: ResultSet   
+ 	 * @Exception: SQLException,Exception   
+	 **/    
 	public void close(ResultSet rs) throws SQLException, Exception {     
 		if (rs != null) {     
 			rs.close();     
@@ -107,11 +106,10 @@ public class DBConn {
  	}     
         
 	/**   
- 	*¹Ø±ÕÊı¾İ¿â²Ù×÷¶ÔÏó£¬Êı¾İ¿âÁ¬½Ó¶ÔÏó   
-	* Close all the statement and conn int this instance   
-	* @throws SQLException   
-	* @throws Exception   
-	*/    
+ 	 * Close all the statement and conn int this instance   
+	 * @throws SQLException   
+	 * @throws Exception   
+	 */    
   	public void close() throws SQLException, Exception {     
   		if (stmt != null) {     
   			stmt.close();     
@@ -123,7 +121,7 @@ public class DBConn {
   			conn = null;     
   		}     
 	}   
-    //²âÊÔ·½·¨
+    //Testç±»
 //  public static void main(String []args){  
 //      DBConn db=new DBConn();  
 //      db.getConn();  

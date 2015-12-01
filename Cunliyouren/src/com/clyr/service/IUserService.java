@@ -4,27 +4,27 @@ import com.clyr.domain.User;
 
 public interface IUserService {
 	/**
-	 * Ìá¹©ĞÂÓÃ»§×¢²á·şÎñ
+	 * æä¾›ç¬¬ä¸€æ¬¡ç™»å½•å­˜å‚¨ç”¨æˆ·ä¿¡æ¯æœåŠ¡
 	 * @param u
 	 */
 	void register(User u);
 	/**
-	 * Ìá¹©ÓÃ»§µÇÂ¼ÑéÖ¤·şÎñ
+	 * æä¾›ç™»å½•æœåŠ¡
 	 * @param u
 	 */
 	void login(User u);
 	/**
-	 * Ìá¹©ÓÃ»§¸üĞÂ¸öÈËĞÅÏ¢·şÎñ
+	 * æä¾›ä¸ªäººä¿¡æ¯æ›´æ–°æœåŠ¡
 	 * @param u
 	 */
 	void update(User u);
 	/**
-	 * Ìá¹©ºóÌ¨ÆôÓÃÓÃ»§·şÎñ
+	 * æä¾›å¯ç”¨ç”¨æˆ·æœåŠ¡
 	 * @param u
 	 */
 	void enable(User u);
 	/**
-	 * Ìá¹©ºóÌ¨Í£ÓÃÓÃ»§·şÎñ
+	 * æä¾›åœç”¨ç”¨æˆ·æœåŠ¡
 	 * @param u
 	 */
 	void disable(User u);
