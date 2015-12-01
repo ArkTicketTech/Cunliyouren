@@ -63,18 +63,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   			</div>				
   			<div class="maincontent">	
   				<a href="<%=basePath%>AdminLogout"><button style="float:right">注销</button></a>
-  				<form action="AdminPasswordModify">
+  				<p>修改管理员密码：</p>
+  				<form action="AdminPasswordModify" method="post">
   					请输入旧密码：<input type="password" style="margin:10px" name="oldPassword"><br>
   					请输入新密码：<input type="password" style="margin:10px" name="newPassword"><br>
   					请确认新密码：<input type="password" style="margin:10px" name="comfirmPassword"><br>
   					<input type="submit" value="提交" style="margin:10px">
   					<p style="color:#FF0000">${result}</p>
   				</form>		
-  				<form action="UploadMainPagePicture" enctype="multipart/form-data">
-  					更新授权登录页主图：
-					<input type="file" style="margin:10px">
+  				<p>更新授权登录页主图：</p>
+  				<form action="UploadMainPagePicture" enctype="multipart/form-data"  method="post">
+					<input type="file" style="margin:10px" name="bgPic">
   					<input type="submit" value="上传" style="margin:10px">
-  				</form>							
+  				</form>		
+  				<p style="color:#FF0000">${message}</p>					
   			</div>			
   		</div>				
   </div>	
