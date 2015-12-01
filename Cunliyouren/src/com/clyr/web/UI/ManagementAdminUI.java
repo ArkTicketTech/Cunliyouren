@@ -48,10 +48,10 @@ public class ManagementAdminUI extends HttpServlet {
 		if(c!=null){
 			for(int i=0;i<c.length;i++){
 				if("username".equals(c[i].getName())){
-					username = c[i].getValue() ;	// 接收Cookie信息
+					username = c[i].getValue() ;	
 				}
 				if("password".equals(c[i].getName())){
-					password = c[i].getValue() ;	// 接收Cookie信息
+					password = c[i].getValue() ;	
 				}
 			}
 			if(username!=null&&password!=null){

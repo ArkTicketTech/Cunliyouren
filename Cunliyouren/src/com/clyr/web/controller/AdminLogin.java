@@ -46,17 +46,17 @@ public class AdminLogin extends HttpServlet {
 			throws ServletException, IOException {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
-		//½«¿Í»§¶ËÌá½»µÄ±íµ¥Êı¾İ·â×°µ½LoginFormBean¶ÔÏóÖĞ
+		//
         LoginFormBean formbean = WebUtils.request2Bean(request,LoginFormBean.class);
-        //Ğ£ÑéÓÃ»§×¢²áÌîĞ´µÄ±íµ¥Êı¾İ
-        if (formbean.validate() == false) {//Èç¹ûĞ£ÑéÊ§°Ü
+        //
+        if (formbean.validate() == false) {//
         	request.setAttribute("formbean", formbean);
         	request.getRequestDispatcher("/WEB-INF/pages/ManagementLogin.jsp").forward(request, response);
         	return;
         }
-		//»ñÈ¡ÓÃ»§ÌîĞ´µÄµÇÂ¼ÓÃ»§Ãû
+		//
 		String username = request.getParameter("username");
-		//»ñÈ¡ÓÃ»§ÌîĞ´µÄµÇÂ¼ÃÜÂë
+		//
 		String password = request.getParameter("password");
 		
 		IAdminService service=new AdminService();
@@ -65,7 +65,7 @@ public class AdminLogin extends HttpServlet {
 		
 		if(admin==null) 
 		{
-			request.setAttribute("state", "ÓÃ»§Ãû»òÃÜÂë²»ÕıÈ·");
+			request.setAttribute("state", "ç”¨æˆ·åæˆ–å¯†ç ä¸æ­£ç¡®");
 			request.getRequestDispatcher("ManagementLoginUI").forward(request, response);
 			return;
 		}

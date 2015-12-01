@@ -44,7 +44,7 @@ public class AdminPasswordModify extends HttpServlet {
 
 		Cookie[] cookieSet=request.getCookies();
 		String adminName="";
-		String result="ÃÜÂë´íÎó";
+		String result="å¯†ç ä¸æ­£ç¡®";
 		for(Cookie cookie:cookieSet)
 		{
 			if(cookie.getName().equals("username"))
@@ -54,11 +54,11 @@ public class AdminPasswordModify extends HttpServlet {
 		String newPassword=request.getParameter("newPassword");
 		String comfirmPassword=request.getParameter("comfirmPassword");
 		if(!comfirmPassword.equals(newPassword))
-			result="Á½´ÎÃÜÂëÊäÈë²»Ò»Ñù";
+			result="ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë²»Ò»ï¿½ï¿½";
 		else{
 			IAdminService service=new AdminService();
 			if(service.modifyAdminPassword(adminName, oldPassword, newPassword))
-				result="ĞŞ¸ÄÃÜÂë³É¹¦";
+				result="ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½ï¿½É¹ï¿½";
 		}
 		request.setAttribute("result", result);
 		request.getRequestDispatcher("ManagementAdminUI").forward(request, response);
