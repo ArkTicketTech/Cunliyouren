@@ -12,7 +12,7 @@ public interface IUserService {
 	 * 提供登录服务
 	 * @param u
 	 */
-	void login(User u);
+	boolean login(User u);
 	/**
 	 * 提供个人信息更新服务
 	 * @param u

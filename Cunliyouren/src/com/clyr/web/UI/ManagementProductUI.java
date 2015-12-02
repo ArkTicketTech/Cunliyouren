@@ -48,10 +48,10 @@ public class ManagementProductUI extends HttpServlet {
 		if(c!=null){
 			for(int i=0;i<c.length;i++){
 				if("username".equals(c[i].getName())){
-					username = c[i].getValue() ;	// ½ÓÊÕCookieÐÅÏ¢
+					username = c[i].getValue() ;	// ï¿½ï¿½ï¿½ï¿½Cookieï¿½ï¿½Ï¢
 				}
 				if("password".equals(c[i].getName())){
-					password = c[i].getValue() ;	// ½ÓÊÕCookieÐÅÏ¢
+					password = c[i].getValue() ;	// ï¿½ï¿½ï¿½ï¿½Cookieï¿½ï¿½Ï¢
 				}
 			}
 			if(username!=null&&password!=null){
@@ -59,9 +59,13 @@ public class ManagementProductUI extends HttpServlet {
 				Admin admin=service.loginAdmin(username, password);
 				if(admin!=null)
 					request.getRequestDispatcher("/WEB-INF/pages/ManagementProduct.jsp").forward(request, response);
+				else
+					request.getRequestDispatcher("/WEB-INF/pages/ManagementLogin.jsp").forward(request, response);
 			}
 		}
-		request.getRequestDispatcher("/WEB-INF/pages/ManagementLogin.jsp").forward(request, response);
+		else
+			request.getRequestDispatcher("/WEB-INF/pages/ManagementLogin.jsp").forward(request, response);
+		
 	}
 
 	/**

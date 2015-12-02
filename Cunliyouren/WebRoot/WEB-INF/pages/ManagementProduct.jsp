@@ -51,6 +51,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     }							
     </style>	
     <script type="text/javascript" src="<%=basePath  %>JavaScript/jquery.js"></script>
+    <script type="text/javascript">
+    	$(document).ready(function(){
+    		var v=$(searchResult);
+    		alert(v);
+    	});
+    </script>
   </head>	
   <body>		
   	<div class="container">			
@@ -86,6 +92,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   						<td>产品2</td>
   						<td>产品3</td>
   						<td>操作</td>
+  						
   					</tr>
   				</table>								
   			</div>			
