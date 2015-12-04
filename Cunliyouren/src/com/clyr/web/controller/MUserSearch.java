@@ -2,18 +2,26 @@ package com.clyr.web.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class ProductSearch extends HttpServlet {
+import net.sf.json.JSONArray;
+
+import com.clyr.domain.User;
+import com.clyr.service.impl.OrderService;
+import com.clyr.service.impl.ProductService;
+import com.clyr.service.impl.UserService;
+
+public class MUserSearch extends HttpServlet {
 
 	/**
 	 * Constructor of the object.
 	 */
-	public ProductSearch() {
+	public MUserSearch() {
 		super();
 	}
 
@@ -37,8 +45,16 @@ public class ProductSearch extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		
+		String key=request.getParameter("key");
+		if(!key.equals("")){
+			UserService u_service=new UserService();
+			ArrayList<User> a=u_service.search(key);
+			JSONArray ja=JSONArray.fromObject(a); 
+			request.setAttribute("searchResult", ja);
+			request.getRequestDispatcher("ManagementProductUI").forward(request, response);
+		}
+		else
+			request.getRequestDispatcher("ManagementProductUI").forward(request, response);
 	}
 
 	/**

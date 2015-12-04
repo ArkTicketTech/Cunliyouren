@@ -8,21 +8,21 @@ import com.clyr.domain.Order;
 import com.clyr.service.IOrderService;
 
 public class OrderService implements IOrderService{
-	private IOrderDao adminDao = new OrderDao();
+	private IOrderDao orderDao = new OrderDao();
 
 	@Override
 	public void createOrder(Order ord) {
-		adminDao.add(ord);
+		orderDao.add(ord);
 	}
 
 	@Override
 	public ArrayList<Order> SendedOrder(int uId) {
-		return adminDao.selectByBuyer(uId);
+		return orderDao.selectByBuyer(uId);
 	}
 
 	@Override
 	public ArrayList<Order> ReceivedOrder(int uId) {
-		return adminDao.selectBySeller(uId);
+		return orderDao.selectBySeller(uId);
 	}
 
 }

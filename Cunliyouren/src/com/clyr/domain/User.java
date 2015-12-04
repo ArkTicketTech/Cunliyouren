@@ -1,6 +1,7 @@
 package com.clyr.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class User implements Serializable{
 	private static final long serialVersionUID = 3452574737281967823L;
@@ -21,7 +22,7 @@ public class User implements Serializable{
 	//
 	private String highSchool;
 	//
-	private String University;
+	private String university;
 	//
 	private String homeAddress;
 	//
@@ -29,6 +30,30 @@ public class User implements Serializable{
 	//
 	private int state;
 	
+	private ArrayList<Integer> pid;
+	
+	private int sendOrder;
+	
+	private int receiveOrder;
+	
+	public User()
+	{
+		this.uId=0;
+		this.openId="";
+		this.nickName="";
+		this.unionId="";
+		this.headImgUrl="";
+		this.telNum="";
+		this.homeTown="";
+		this.highSchool="";
+		this.university="";
+		this.homeAddress="";
+		this.workingAddress="";
+		this.state=1;
+		this.pid=null;
+		this.sendOrder=0;
+		this.receiveOrder=0;
+	}
 	public String getOpenId() {
 		return openId;
 	}
@@ -72,10 +97,10 @@ public class User implements Serializable{
 		this.highSchool = highSchool;
 	}
 	public String getUniversity() {
-		return University;
+		return university;
 	}
 	public void setUniversity(String university) {
-		University = university;
+		university = university;
 	}
 	public String getHomeAddress() {
 		return homeAddress;
@@ -100,5 +125,23 @@ public class User implements Serializable{
 	}
 	public void setuId(int uId) {
 		this.uId = uId;
+	}
+	public int getSendOrder() {
+		return sendOrder;
+	}
+	public void setSendOrder(int sendOrder) {
+		this.sendOrder = sendOrder;
+	}
+	public int getReceiveOrder() {
+		return receiveOrder;
+	}
+	public void setReceiveOrder(int receiveOrder) {
+		this.receiveOrder = receiveOrder;
+	}
+	public ArrayList<Integer> getPid() {
+		return pid;
+	}
+	public void setPid(ArrayList<Integer> pid) {
+		this.pid = pid;
 	}
 }

@@ -9,6 +9,12 @@ public class Admin implements Serializable{
 	//
 	private String password;
 	
+	public Admin() {
+		super();
+		this.adminName = "";
+		this.password = "";
+	}
+	
 	public String getAdminName() {
 		return adminName;
 	}

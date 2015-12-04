@@ -28,6 +28,21 @@ public class Product implements Serializable{
 	//
 	private Timestamp updateTime;
 	
+	public Product() {
+		super();
+		this.pId = 0;
+		this.productName = "";
+		this.price = 0;
+		this.unit = "";
+		this.description = "";
+		this.picture1 = "";
+		this.picture2 = "";
+		this.picture3 = "";
+		this.deliveryPoint = "";
+		this.ownerId = 0;
+		this.updateTime = null;
+	}
+	
 	public String getProductName() {
 		return productName;
 	}

@@ -40,4 +40,10 @@ public interface IProductDao {
      * @return
      */
 	ArrayList<Product> fuzzySelectByName(String productName);
+	/**
+	 * 根据uid查找
+	 * @param id
+	 * @return
+	 */
+	ArrayList<Product> selectByuId(int uId);
 }

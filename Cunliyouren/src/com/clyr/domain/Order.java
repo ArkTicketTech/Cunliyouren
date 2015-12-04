@@ -18,6 +18,16 @@ public class Order implements Serializable{
 	//
 	private Timestamp createTime;
 	
+	public Order() {
+		super();
+		this.oId = 0;
+		this.buyerId = 0;
+		this.sellerId = 0;
+		this.productId = 0;
+		this.pruductNumber = 0;
+		this.createTime = null;
+	}
+	
 	public int getBuyerId() {
 		return buyerId;
 	}

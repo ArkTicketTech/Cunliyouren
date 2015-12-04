@@ -48,10 +48,10 @@ public class ManagementProductUI extends HttpServlet {
 		if(c!=null){
 			for(int i=0;i<c.length;i++){
 				if("username".equals(c[i].getName())){
-					username = c[i].getValue() ;	// ����Cookie��Ϣ
+					username = c[i].getValue() ;	
 				}
 				if("password".equals(c[i].getName())){
-					password = c[i].getValue() ;	// ����Cookie��Ϣ
+					password = c[i].getValue() ;	
 				}
 			}
 			if(username!=null&&password!=null){

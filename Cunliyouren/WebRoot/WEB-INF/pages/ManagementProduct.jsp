@@ -50,14 +50,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	background: #eee;			
     }							
     </style>	
-    <script type="text/javascript" src="<%=basePath  %>JavaScript/jquery.js"></script>
+    
+  </head>	
+  <script type="text/javascript" src="<%=basePath  %>JavaScript/jquery.js"></script>
     <script type="text/javascript">
     	$(document).ready(function(){
-    		var v=$(searchResult);
-    		alert(v);
+    		var v=${searchResult};
+    		$.each(v,function(idx,item){     
+  		 		var bodyObj=document.getElementById("mainTable");
+  		 		var rowCount = bodyObj.rows.length;
+				var newRow = bodyObj.insertRow(rowCount++);  
+			    newRow.insertCell(0).innerHTML=idx;
+			    newRow.insertCell(1).innerHTML=item.nickName;
+			    newRow.insertCell(2).innerHTML=item.sendOrder;
+			    newRow.insertCell(3).innerHTML=item.receiveOrder;
+			    newRow.insertCell(4).innerHTML=item.telNum;
+			    newRow.insertCell(5).innerHTML=item.homeTown;
+			    newRow.insertCell(6).innerHTML=item.highSchool;
+			    newRow.insertCell(7).innerHTML=item.university;
+			    newRow.insertCell(8).innerHTML=item.homeAddress;
+			    newRow.insertCell(9).innerHTML=item.workingAddress;
+			    newRow.insertCell(10).innerHTML=item.pid[0];
+			    newRow.insertCell(11).innerHTML=item.pid[1];
+			    newRow.insertCell(12).innerHTML=item.pid[2];
+			    newRow.insertCell(13).innerHTML=item.state;
+			});
     	});
     </script>
-  </head>	
   <body>		
   	<div class="container">			
   		<div class="header">				
@@ -69,14 +88,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   				<p><a href="<%=basePath%>ManagementAdminUI">·系统管理</a></p>									
   			</div>				
   			<div class="maincontent">	
-  				<form  style="float:left;width:300px" action="" method="post">
+  				<form  style="float:left;width:300px" action="MUserSearch" method="post">
   					<input type="text" name="key">
   					<input type="submit" value="检索">
   				</form>
   				<button style="float:left">按发出购买请求次数降序排序</button>
   				<button style="float:left">按收到购买请求次数降序排序</button>
   				<a href="<%=basePath%>AdminLogout"><button style="float:right">注销</button></a>
-  				<table border="1" width="1100px">
+  				<table id="mainTable" border="1" width="1100px">
   					<tr>
   						<td>序号</td>
   						<td>昵称</td>

@@ -64,7 +64,7 @@ public class UserDao implements IUserDao{
 			key+="highSchool='"+u.getHighSchool()+"' and ";
 		if(!u.getUniversity().equals(""))
 			key+="university='"+u.getUniversity()+"' and ";
-		rs=db.doSelect("select * from t_admin where"+key+" 1=1");  
+		rs=db.doSelect("select * from t_user where"+key+" 1=1");  
 		try {  
 			while(rs.next()){  
 				User temp=new User(); 
@@ -80,7 +80,9 @@ public class UserDao implements IUserDao{
 				temp.setHomeAddress(rs.getString("homeAddress"));
 				temp.setWorkingAddress(rs.getString("workingAddress"));
 				temp.setState(rs.getInt("state"));
+				a.add(temp);
 			}  
+			db.close();
 		} catch (SQLException e) {   
 			e.printStackTrace();  
 		} catch (Exception e) {

@@ -51,13 +51,12 @@ public class OrderDao implements IOrderDao{
 				a.add(o);
 			}  
 			db.close(rs);
-			return a;
 		} catch (SQLException e) {   
 			e.printStackTrace();  
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
-		return null;
+		return a;
 	}
 
 	@Override
@@ -66,7 +65,7 @@ public class OrderDao implements IOrderDao{
 		db.getConn();  
 		ArrayList<Order> a=new ArrayList<Order>();
 		ResultSet rs=null;
-		rs=db.doSelect("select * from t_order where buyerId="+sId);  
+		rs=db.doSelect("select * from t_order where sellerId="+sId);  
 		try {  
 			while(rs.next()){  
 				Order o=new Order();
@@ -79,13 +78,12 @@ public class OrderDao implements IOrderDao{
 				a.add(o);				
 			}  
 			db.close(rs);
-			return a;
 		} catch (SQLException e) {   
 			e.printStackTrace();  
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
-		return null;
+		return a;
 	}
 	
 
