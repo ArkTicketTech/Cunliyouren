@@ -26,6 +26,11 @@ public interface IUserService {
 	 */
 	ArrayList<User> search(String key);
 	/**
+	 * 提供用户id查找用户服务
+	 * @param u
+	 */
+	User searchByUId(int uId);
+	/**
 	 * 提供启用用户服务
 	 * @param u
 	 */

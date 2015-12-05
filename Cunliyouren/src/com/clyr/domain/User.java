@@ -32,6 +32,8 @@ public class User implements Serializable{
 	
 	private ArrayList<Integer> pid;
 	
+	private ArrayList<String> pName;
+	
 	private int sendOrder;
 	
 	private int receiveOrder;
@@ -100,7 +102,7 @@ public class User implements Serializable{
 		return university;
 	}
 	public void setUniversity(String university) {
-		university = university;
+		this.university = university;
 	}
 	public String getHomeAddress() {
 		return homeAddress;
@@ -143,5 +145,11 @@ public class User implements Serializable{
 	}
 	public void setPid(ArrayList<Integer> pid) {
 		this.pid = pid;
+	}
+	public ArrayList<String> getpName() {
+		return pName;
+	}
+	public void setpName(ArrayList<String> pName) {
+		this.pName = pName;
 	}
 }

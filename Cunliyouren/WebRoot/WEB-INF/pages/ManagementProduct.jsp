@@ -59,7 +59,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		$.each(v,function(idx,item){     
   		 		var bodyObj=document.getElementById("mainTable");
   		 		var rowCount = bodyObj.rows.length;
-				var newRow = bodyObj.insertRow(rowCount++);  
+				var newRow = bodyObj.insertRow(rowCount++); 
 			    newRow.insertCell(0).innerHTML=idx;
 			    newRow.insertCell(1).innerHTML=item.nickName;
 			    newRow.insertCell(2).innerHTML=item.sendOrder;
@@ -70,12 +70,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    newRow.insertCell(7).innerHTML=item.university;
 			    newRow.insertCell(8).innerHTML=item.homeAddress;
 			    newRow.insertCell(9).innerHTML=item.workingAddress;
-			    newRow.insertCell(10).innerHTML=item.pid[0];
-			    newRow.insertCell(11).innerHTML=item.pid[1];
-			    newRow.insertCell(12).innerHTML=item.pid[2];
-			    newRow.insertCell(13).innerHTML=item.state;
+			    newRow.insertCell(10).innerHTML=item.pName[0];
+			    newRow.insertCell(11).innerHTML=item.pName[1];
+			    newRow.insertCell(12).innerHTML=item.pName[2];
+			    if(item.state==0)
+			    {
+			    	newRow.insertCell(13).innerHTML="<button id='ope"+idx+"' name='Enable'>恢复</button>";
+			    }
+			    else if(item.state==1)
+			    {
+			    	newRow.insertCell(13).innerHTML="<button id='ope"+idx+"' name='Disable'>停用</button>";
+			    }
+			    $("#ope"+idx).click(function(){
+  					$.ajax({
+  						url: "MUser"+$("#ope"+idx).attr('name')+"?user="+item.uId,
+  						success: function(){window.location.reload(true);}
+  						});
+  				});
 			});
-    	});
+  });
     </script>
   <body>		
   	<div class="container">			

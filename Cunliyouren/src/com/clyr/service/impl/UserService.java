@@ -56,7 +56,7 @@ public class UserService implements IUserService{
 		{
 			t_u=a.get(i);
 			flag=true;
-			if(t_u.getNickName().equals(key)||t_u.getTelNum().equals(key)||t_u.getHighSchool().equals(key)
+			if(key.equals("")||t_u.getNickName().equals(key)||t_u.getTelNum().equals(key)||t_u.getHighSchool().equals(key)
 					||t_u.getHomeAddress().equals(key)||t_u.getHomeTown().equals(key)||t_u.getUniversity().equals(key)
 					||t_u.getWorkingAddress().equals(key))
 				flag=false;
@@ -69,17 +69,30 @@ public class UserService implements IUserService{
 				if(a_p!=null)
 				{
 					ArrayList<Integer> a_i=new ArrayList<Integer>();
+					ArrayList<String> a_s=new ArrayList<String>();
 					for(Product p:a_p)
 					{
 						a_i.add(p.getpId());
+						a_s.add(p.getProductName());
+					}
+					while(a_i.size()<3)
+					{
+						a_i.add(0);
+						a_s.add("");
 					}
 					t_u.setPid(a_i);
+					t_u.setpName(a_s);
 				}
 				t_u.setSendOrder(orderDao.selectByBuyer(uid).size());
 				t_u.setReceiveOrder(orderDao.selectBySeller(uid).size());
 			}
 		}
 		return a;
+	}
+
+	@Override
+	public User searchByUId(int uId) {
+		return userDao.selectByUId(uId);
 	}
 
 }

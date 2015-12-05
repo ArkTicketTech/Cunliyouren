@@ -35,6 +35,7 @@ public class UserDao implements IUserDao{
 		DBConn db=new DBConn();  
 		db.getConn();
 		db.doUpdate("update t_user set nickName='"+u.getNickName()+"' where uId="+u.getuId());
+		db.doUpdate("update t_user set state='"+u.getState()+"' where uId="+u.getuId());
 		if(!u.getTelNum().equals(""))
 			db.doUpdate("update t_user set telNum='"+u.getTelNum()+"' where uId="+u.getuId());
 		if(!u.getHomeAddress().equals(""))
@@ -89,6 +90,39 @@ public class UserDao implements IUserDao{
 			e.printStackTrace();
 		} 
 		return a;
+	}
+	
+	@Override
+	public User selectByUId(int uId) {
+		DBConn db=new DBConn();  
+		db.getConn();  
+		User u=new User();
+		ResultSet rs=null;
+		rs=db.doSelect("select * from t_user where uId="+uId);
+		try {  
+			while(rs.next()){  
+				User temp=new User(); 
+				temp.setuId(rs.getInt("uId"));
+				temp.setOpenId(rs.getString("openId"));
+				temp.setNickName(rs.getString("nickName"));
+				temp.setUnionId(rs.getString("unionId"));
+				temp.setHeadImgUrl(rs.getString("headImgUrl"));
+				temp.setTelNum(rs.getString("telNum"));
+				temp.setHomeTown(rs.getString("homeTown"));
+				temp.setHighSchool(rs.getString("highSchool"));
+				temp.setUniversity(rs.getString("university"));
+				temp.setHomeAddress(rs.getString("homeAddress"));
+				temp.setWorkingAddress(rs.getString("workingAddress"));
+				temp.setState(rs.getInt("state"));
+				u=temp;
+			}  
+			db.close();
+		} catch (SQLException e) {   
+			e.printStackTrace();  
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		return u;
 	}
 
 }

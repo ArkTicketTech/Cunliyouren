@@ -2,26 +2,22 @@ package com.clyr.web.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.sf.json.JSONArray;
-
 import com.clyr.domain.User;
-import com.clyr.service.impl.OrderService;
-import com.clyr.service.impl.ProductService;
+import com.clyr.service.IUserService;
 import com.clyr.service.impl.UserService;
 
-public class MUserSearch extends HttpServlet {
+public class MUserDisable extends HttpServlet {
 
 	/**
 	 * Constructor of the object.
 	 */
-	public MUserSearch() {
+	public MUserDisable() {
 		super();
 	}
 
@@ -45,13 +41,11 @@ public class MUserSearch extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String key=request.getParameter("key");
-		if(key==null)
-			key="";
-		UserService u_service=new UserService();
-		ArrayList<User> a=u_service.search(key);
-		JSONArray ja=JSONArray.fromObject(a); 
-		request.setAttribute("searchResult", ja);
+
+		User u=new User();
+		IUserService service=new UserService();
+		u=service.searchByUId(Integer.parseInt(request.getParameter("user")));
+		service.disable(u);
 		request.getRequestDispatcher("ManagementProductUI").forward(request, response);
 	}
 

@@ -20,4 +20,9 @@ public interface IUserDao {
 	 * @param u
 	 */
 	ArrayList<User> select(User u);
+	/**
+	 * 根据id查找用户
+	 * @param u
+	 */
+	User selectByUId(int uId);
 }
