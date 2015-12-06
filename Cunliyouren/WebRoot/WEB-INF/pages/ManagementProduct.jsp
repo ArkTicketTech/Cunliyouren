@@ -57,7 +57,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	$(document).ready(function(){
     		var v=${searchResult};
     		$.each(v,function(idx,item){     
-  		 		var bodyObj=document.getElementById("mainTable");
+  		 		var bodyObj=document.getElementById("mainTBody");
   		 		var rowCount = bodyObj.rows.length;
 				var newRow = bodyObj.insertRow(rowCount++); 
 			    newRow.insertCell(0).innerHTML=idx;
@@ -88,7 +88,49 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   						});
   				});
 			});
-  });
+			
+			function productInfo(pId) { 
+				$.ajax({
+					url:"MProductSearch?pId="+pId,
+					success: function(){}
+				});
+			};
+			
+			$("#sortSend").click(function(){checkColumnValue(2)});
+			$("#sortReceive").click(function(){checkColumnValue(3)});
+			function checkColumnValue(index) {
+				var tableObject = $("#mainTable"); //获取id为tableSort的table对象
+            	var tbBody = tableObject.children("tbody"); //获取table对象下的tbody
+           	    var tbBodyTr = tbBody.find("tr"); //获取tbody下的tr
+                var trsValue = new Array();
+                tbBodyTr.each(function () {
+                    var tds = $(this).find('td');
+                    //获取行号为index列的某一行的单元格内容与该单元格所在行的行内容添加到数组trsValue中
+                    trsValue.push($(tds[index]).html() + ".separator" + $(this).html());
+                    $(this).html("");
+                });
+                var len = trsValue.length;
+                for (var i = 0; i < len; i++) {
+                    for (var j = i + 1; j < len; j++) {
+                        //获取每行分割后数组的第二个值,即文本值
+                        value1 = trsValue[i].split(".separator")[0];
+                        //获取下一行分割后数组的第二个值,即文本值
+                        value2 = trsValue[j].split(".separator")[0];
+                        //接下来是数字\字符串等的比较
+                        value1 = value1 == "" ? 0 : value1;
+                        value2 = value2 == "" ? 0 : value2;
+                        if (parseInt(value1) > parseInt(value2)) {
+                            var temp = trsValue[j];
+                            trsValue[j] = trsValue[i];
+                            trsValue[i] = temp;
+                        };
+                    };
+                }
+                for (var i = 0; i < len; i++) {
+                	$("tbody tr:eq(" + i + ")").html(trsValue[i].split(".separator")[1]);
+                }; 	
+            };			
+  		});
     </script>
   <body>		
   	<div class="container">			
@@ -105,27 +147,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   					<input type="text" name="key">
   					<input type="submit" value="检索">
   				</form>
-  				<button style="float:left">按发出购买请求次数降序排序</button>
-  				<button style="float:left">按收到购买请求次数降序排序</button>
+  				<button id="sortSend" style="float:left">按发出购买请求次数降序排序</button>
+  				<button id="sortReceive"style="float:left">按收到购买请求次数降序排序</button>
   				<a href="<%=basePath%>AdminLogout"><button style="float:right">注销</button></a>
   				<table id="mainTable" border="1" width="1100px">
+  				<thead>
   					<tr>
-  						<td>序号</td>
-  						<td>昵称</td>
-  						<td>发出购买请求次数</td>
-  						<td>收到购买请求次数</td>
-  						<td>手机号</td>
-  						<td>家乡</td>
-  						<td>高中</td>
-  						<td>大学</td>
-  						<td>家庭地址</td>
-  						<td>工作地点</td>
-  						<td>产品1</td>
-  						<td>产品2</td>
-  						<td>产品3</td>
-  						<td>操作</td>
+  						<th>序号</th>
+  						<th>昵称</th>
+  						<th>发出购买请求次数</th>
+  						<th>收到购买请求次数</th>
+  						<th>手机号</th>
+  						<th>家乡</th>
+  						<th>高中</th>
+  						<th>大学</th>
+  						<th>家庭地址</th>
+  						<th>工作地点</th>
+  						<th>产品1</th>
+  						<th>产品2</th>
+  						<th>产品3</th>
+  						<th>操作</th>
   						
   					</tr>
+  					</thead>
+  					<tbody  id="mainTBody">
+  					</tbody>
   				</table>								
   			</div>			
   		</div>				

@@ -97,6 +97,13 @@
     <servlet-name>MUserDisable</servlet-name>
     <servlet-class>com.clyr.web.controller.MUserDisable</servlet-class>
   </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>MProductSearch</servlet-name>
+    <servlet-class>com.clyr.web.controller.MProductSearch</servlet-class>
+  </servlet>
+
 
 
 
@@ -178,6 +185,10 @@
   <servlet-mapping>
     <servlet-name>MUserDisable</servlet-name>
     <url-pattern>/MUserDisable</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>MProductSearch</servlet-name>
+    <url-pattern>/MProductSearch</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
