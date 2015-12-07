@@ -40,15 +40,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     .sidebar{				
     	float: left;				
     	width: 100px;	
-    	height: 500px;			
+    	height: 800px;			
     	background: #a4f;			
     }						
     .maincontent{	
     	float: left;
     	width: 1100px;	
-    	height: 500px;						
+    	height: 800px;						
     	background: #eee;			
-    }							
+    }		
+    #nav { 
+    	background: #fff;
+    	width:450px; 
+    	height: 300px; 
+    	display: none;
+    	border: 1px solid #D4CD49; 
+    	position:absolute;
+         }					
     </style>	
     
   </head>	
@@ -70,9 +78,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    newRow.insertCell(7).innerHTML=item.university;
 			    newRow.insertCell(8).innerHTML=item.homeAddress;
 			    newRow.insertCell(9).innerHTML=item.workingAddress;
-			    newRow.insertCell(10).innerHTML=item.pName[0];
-			    newRow.insertCell(11).innerHTML=item.pName[1];
-			    newRow.insertCell(12).innerHTML=item.pName[2];
+			    newRow.insertCell(10).innerHTML="<div class='pro' name='"+item.pid[0]+"'>"+item.pName[0]+"</div>";
+			    newRow.insertCell(11).innerHTML="<div class='pro' name='"+item.pid[1]+"'>"+item.pName[1]+"</div>";
+			    newRow.insertCell(12).innerHTML="<div class='pro' name='"+item.pid[2]+"'>"+item.pName[2]+"</div>";
 			    if(item.state==0)
 			    {
 			    	newRow.insertCell(13).innerHTML="<button id='ope"+idx+"' name='Enable'>恢复</button>";
@@ -88,35 +96,46 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   						});
   				});
 			});
-			
+			$(".pro").mouseover(function(){ 
+					productInfo($(this).attr("name")); 
+					var X=$(this).offset();
+					$("#nav").css("left",X.left-150+"px").css("top",X.top+30+"px").css("display","block");
+				});
+			$(".pro").mouseout(function(){ $("#nav").css("display","none");});
 			function productInfo(pId) { 
 				$.ajax({
+					type:"POST",
 					url:"MProductSearch?pId="+pId,
-					success: function(){}
+					dataType: "json",
+					success: function(data){ 
+						$("#i_proPic1").attr("src",data[0].picture1);
+						$("#i_proPic2").attr("src",data[0].picture2);
+						$("#i_proPic3").attr("src",data[0].picture3);
+						$("#p_proName").html("产品名称："+data[0].productName);
+						$("#p_proPrice").html("价格:"+data[0].price+"/"+data[0].unit);
+						$("#p_proPlace").html("交易地点:"+data[0].deliveryPoint);
+						$("#d_proDisc").html("简介:"+data[0].description);
+					}
 				});
 			};
 			
 			$("#sortSend").click(function(){checkColumnValue(2)});
 			$("#sortReceive").click(function(){checkColumnValue(3)});
 			function checkColumnValue(index) {
-				var tableObject = $("#mainTable"); //获取id为tableSort的table对象
-            	var tbBody = tableObject.children("tbody"); //获取table对象下的tbody
-           	    var tbBodyTr = tbBody.find("tr"); //获取tbody下的tr
+				var tableObject = $("#mainTable"); 
+            	var tbBody = tableObject.children("tbody"); 
+           	    var tbBodyTr = tbBody.find("tr"); 
                 var trsValue = new Array();
                 tbBodyTr.each(function () {
                     var tds = $(this).find('td');
-                    //获取行号为index列的某一行的单元格内容与该单元格所在行的行内容添加到数组trsValue中
                     trsValue.push($(tds[index]).html() + ".separator" + $(this).html());
                     $(this).html("");
                 });
                 var len = trsValue.length;
                 for (var i = 0; i < len; i++) {
                     for (var j = i + 1; j < len; j++) {
-                        //获取每行分割后数组的第二个值,即文本值
                         value1 = trsValue[i].split(".separator")[0];
-                        //获取下一行分割后数组的第二个值,即文本值
                         value2 = trsValue[j].split(".separator")[0];
-                        //接下来是数字\字符串等的比较
                         value1 = value1 == "" ? 0 : value1;
                         value2 = value2 == "" ? 0 : value2;
                         if (parseInt(value1) > parseInt(value2)) {
@@ -129,11 +148,41 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 for (var i = 0; i < len; i++) {
                 	$("tbody tr:eq(" + i + ")").html(trsValue[i].split(".separator")[1]);
                 }; 	
-            };			
+            };
+            var tableObject = $("#mainTable"); 
+            var currentPage=0;
+           	var pageSize=20;
+           	tableObject.bind("paging",function(){
+           		tableObject.find("tbody tr").hide.slice(currentPage*pageSize,(currentPage+1)*pageSize).show();
+           	});	
+           	var sumRows=tableObject.find("tbody tr").length;
+           	var sumPages=Math.ceil(sumRows/pageSize);
+           	var pager=$("<div class='page'></div>");
+           	for(var pageIndex=0;pageIndex<sumPages;pageIndex++){
+           		$("<a href=''><span>"+(pageIndex+1)+"</span></a>").bind("click",{"newPage":pageIndex},function(event){
+           			currentPage=event.data["newPage"];
+           			tableObject.trigger("paging");
+           		}).appendTo(pager);
+           		pager.append(" ");
+           	}
+           	pager.insertAfter(tableObject);
+           	tableObject.trigger("paging");
   		});
     </script>
   <body>		
-  	<div class="container">			
+  	<div class="container">	
+  		<div id="nav">
+  			<img alt="" src="" style="width:150px;height:150px;float:left;" id="i_proPic1">
+  			<img alt="" src="" style="width:150px;height:150px;float:left;" id="i_proPic2">
+  			<img alt="" src="" style="width:150px;height:150px;float:left;" id="i_proPic3">
+  			<div style="width:225px;height:150px;float:left;">
+  				<p id="p_proName"  style="float:left;width:225px;height:50px;margin:0;"></p>
+  				<p id="p_proPrice" style="float:left;width:225px;height:50px;margin:0;"></p>
+  				<p id="p_proPlace" style="float:left;width:225px;height:50px;margin:0;"></p>
+  			</div>
+  			<div style="width:225px;height:150px;float:left;" id="d_proDisc">
+  			</div>
+  		</div>		
   		<div class="header">				
   			<h1>村里有人管理平台</h1>			
   		</div>						
@@ -172,7 +221,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   					</thead>
   					<tbody  id="mainTBody">
   					</tbody>
-  				</table>								
+  				</table>	
   			</div>			
   		</div>				
   </div>	

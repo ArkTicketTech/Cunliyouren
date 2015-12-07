@@ -32,4 +32,10 @@ public interface IProductService {
 	 * @return
 	 */
 	ArrayList<Product> myProduct(int uId);
+	/**
+	 * 提供根据id搜索服务
+	 * @param uId
+	 * @return
+	 */
+	Product searchByPId(int pId);
 }

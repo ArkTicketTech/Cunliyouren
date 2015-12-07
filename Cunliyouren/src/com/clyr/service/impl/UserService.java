@@ -61,7 +61,10 @@ public class UserService implements IUserService{
 					||t_u.getWorkingAddress().equals(key))
 				flag=false;
 			if(flag)
+			{
 				a.remove(i);	
+				i--;
+			}
 			else
 			{
 				int uid=t_u.getuId();

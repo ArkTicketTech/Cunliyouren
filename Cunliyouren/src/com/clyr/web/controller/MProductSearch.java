@@ -8,6 +8,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSONArray;
+
+import com.clyr.domain.Product;
+import com.clyr.service.IProductService;
+import com.clyr.service.impl.ProductService;
+
 public class MProductSearch extends HttpServlet {
 
 	/**
@@ -38,19 +44,16 @@ public class MProductSearch extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">");
-		out.println("<HTML>");
-		out.println("  <HEAD><TITLE>A Servlet</TITLE></HEAD>");
-		out.println("  <BODY>");
-		out.print("    This is ");
-		out.print(this.getClass());
-		out.println(", using the GET method");
-		out.println("  </BODY>");
-		out.println("</HTML>");
-		out.flush();
-		out.close();
+		response.setCharacterEncoding("utf-8");
+		IProductService service=new ProductService();
+		Product p=service.searchByPId(Integer.parseInt(request.getParameter("pId")));
+		JSONArray ja=JSONArray.fromObject(p);
+		System.out.println(ja);
+		request.setAttribute("pResult", ja);
+		PrintWriter writer = response.getWriter();
+		writer.write(ja.toString());
+		writer.flush();
+		writer.close();
 	}
 
 	/**
@@ -66,19 +69,7 @@ public class MProductSearch extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">");
-		out.println("<HTML>");
-		out.println("  <HEAD><TITLE>A Servlet</TITLE></HEAD>");
-		out.println("  <BODY>");
-		out.print("    This is ");
-		out.print(this.getClass());
-		out.println(", using the POST method");
-		out.println("  </BODY>");
-		out.println("</HTML>");
-		out.flush();
-		out.close();
+		doGet(request,response);
 	}
 
 	/**

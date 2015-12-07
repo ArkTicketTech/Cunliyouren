@@ -95,14 +95,13 @@ public class ProductDao implements IProductDao{
 				p.setUpdateTime(rs.getTimestamp("updateTime"));
 				a.add(p);
 			}  
-		db.close(rs);
-		return a;
+			db.close(rs);
 		} catch (SQLException e) {   
 			e.printStackTrace();  
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
-		return null;
+		return a;
 	}
 
 	@Override
@@ -159,14 +158,13 @@ public class ProductDao implements IProductDao{
 				p.setUpdateTime(rs.getTimestamp("updateTime"));
 				a.add(p);
 			}  
-		db.close(rs);
-		return a;
+			db.close(rs);
 		} catch (SQLException e) {   
 			e.printStackTrace();  
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
-		return null;
+		return a;
 	}
 
 	@Override
@@ -174,11 +172,11 @@ public class ProductDao implements IProductDao{
 		DBConn db=new DBConn();  
 		db.getConn();  
 		ArrayList<Product> a=new ArrayList<Product>();
-		Product p=new Product();
 		ResultSet rs=null;
 		rs=db.doSelect("select * from t_product where ownerId="+uId);  
 		try {  
-			if(rs.next()){  
+			while(rs.next()){  
+				Product p=new Product();
 				p.setpId(rs.getInt("pId"));
 				p.setProductName(rs.getString("productName"));
 				p.setPrice(rs.getDouble("price"));

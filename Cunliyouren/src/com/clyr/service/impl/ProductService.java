@@ -46,9 +46,13 @@ public class ProductService implements IProductService{
 
 	@Override
 	public ArrayList<Product> myProduct(int uId) {
-		int pId;
-		ArrayList<Product> a=new ArrayList<Product>();
+		ArrayList<Product> a=productDao.selectByuId(uId);
 		return a;
 	}
 
+	@Override
+	public Product searchByPId(int pId) {
+		Product p=productDao.selectById(pId);
+		return p;
+	}
 }
