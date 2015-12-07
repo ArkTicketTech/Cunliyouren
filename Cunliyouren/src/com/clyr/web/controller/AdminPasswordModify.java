@@ -31,50 +31,59 @@ public class AdminPasswordModify extends HttpServlet {
 
 	/**
 	 * The doGet method of the servlet. <br>
-	 *
+	 * 
 	 * This method is called when a form has its tag value method equals to get.
 	 * 
-	 * @param request the request send by the client to the server
-	 * @param response the response send by the server to the client
-	 * @throws ServletException if an error occurred
-	 * @throws IOException if an error occurred
+	 * @param request
+	 *            the request send by the client to the server
+	 * @param response
+	 *            the response send by the server to the client
+	 * @throws ServletException
+	 *             if an error occurred
+	 * @throws IOException
+	 *             if an error occurred
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		Cookie[] cookieSet=request.getCookies();
-		String adminName="";
-		String result="密码不正确";
-		for(Cookie cookie:cookieSet)
-		{
-			if(cookie.getName().equals("username"))
-				adminName=cookie.getValue();
+		Cookie[] cookieSet = request.getCookies();
+		String adminName = "";
+		String result = "密码不正确";
+		for (Cookie cookie : cookieSet) {
+			if (cookie.getName().equals("username"))
+				adminName = cookie.getValue();
 		}
-		String oldPassword=request.getParameter("oldPassword");
-		String newPassword=request.getParameter("newPassword");
-		String comfirmPassword=request.getParameter("comfirmPassword");
-		if(!comfirmPassword.equals(newPassword))
-			result="两次密码输入不一致";
-		else{
-			IAdminService service=new AdminService();
-			if(service.modifyAdminPassword(adminName, oldPassword, newPassword))
-			{
-				result="修改密码成功 请重新登录";
+		String oldPassword = request.getParameter("oldPassword");
+		String newPassword = request.getParameter("newPassword");
+		String comfirmPassword = request.getParameter("comfirmPassword");
+		if (!comfirmPassword.equals(newPassword))
+			result = "两次密码输入不一致";
+		else {
+			IAdminService service = new AdminService();
+			if (service
+					.modifyAdminPassword(adminName, oldPassword, newPassword)) {
+				result = "修改密码成功 请重新登录";
 			}
 		}
 		request.setAttribute("result", result);
-		request.getRequestDispatcher("ManagementAdminUI").forward(request, response);
+		request.getRequestDispatcher("ManagementAdminUI").forward(request,
+				response);
 	}
 
 	/**
 	 * The doPost method of the servlet. <br>
-	 *
-	 * This method is called when a form has its tag value method equals to post.
 	 * 
-	 * @param request the request send by the client to the server
-	 * @param response the response send by the server to the client
-	 * @throws ServletException if an error occurred
-	 * @throws IOException if an error occurred
+	 * This method is called when a form has its tag value method equals to
+	 * post.
+	 * 
+	 * @param request
+	 *            the request send by the client to the server
+	 * @param response
+	 *            the response send by the server to the client
+	 * @throws ServletException
+	 *             if an error occurred
+	 * @throws IOException
+	 *             if an error occurred
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -96,8 +105,9 @@ public class AdminPasswordModify extends HttpServlet {
 
 	/**
 	 * Initialization of the servlet. <br>
-	 *
-	 * @throws ServletException if an error occurs
+	 * 
+	 * @throws ServletException
+	 *             if an error occurs
 	 */
 	public void init() throws ServletException {
 		// Put your code here

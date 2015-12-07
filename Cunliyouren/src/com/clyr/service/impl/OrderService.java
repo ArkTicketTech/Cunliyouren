@@ -7,7 +7,7 @@ import com.clyr.dao.impl.OrderDao;
 import com.clyr.domain.Order;
 import com.clyr.service.IOrderService;
 
-public class OrderService implements IOrderService{
+public class OrderService implements IOrderService {
 	private IOrderDao orderDao = new OrderDao();
 
 	@Override

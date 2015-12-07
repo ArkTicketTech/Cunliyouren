@@ -32,51 +32,64 @@ public class ManagementProductUI extends HttpServlet {
 
 	/**
 	 * The doGet method of the servlet. <br>
-	 *
+	 * 
 	 * This method is called when a form has its tag value method equals to get.
 	 * 
-	 * @param request the request send by the client to the server
-	 * @param response the response send by the server to the client
-	 * @throws ServletException if an error occurred
-	 * @throws IOException if an error occurred
+	 * @param request
+	 *            the request send by the client to the server
+	 * @param response
+	 *            the response send by the server to the client
+	 * @throws ServletException
+	 *             if an error occurred
+	 * @throws IOException
+	 *             if an error occurred
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Cookie[] c=request.getCookies();
-		String username=null;
-		String password=null;
-		if(c!=null){
-			for(int i=0;i<c.length;i++){
-				if("username".equals(c[i].getName())){
-					username = c[i].getValue() ;	
+		Cookie[] c = request.getCookies();
+		String username = null;
+		String password = null;
+		if (c != null) {
+			for (int i = 0; i < c.length; i++) {
+				if ("username".equals(c[i].getName())) {
+					username = c[i].getValue();
 				}
-				if("password".equals(c[i].getName())){
-					password = c[i].getValue() ;	
+				if ("password".equals(c[i].getName())) {
+					password = c[i].getValue();
 				}
 			}
-			if(username!=null&&password!=null){
-				IAdminService service=new AdminService();
-				Admin admin=service.loginAdmin(username, password);
-				if(admin!=null)
-					request.getRequestDispatcher("/WEB-INF/pages/ManagementProduct.jsp").forward(request, response);
+			if (username != null && password != null) {
+				IAdminService service = new AdminService();
+				Admin admin = service.loginAdmin(username, password);
+				if (admin != null)
+					request.getRequestDispatcher(
+							"/WEB-INF/pages/ManagementProduct.jsp").forward(
+							request, response);
 				else
-					request.getRequestDispatcher("/WEB-INF/pages/ManagementLogin.jsp").forward(request, response);
+					request.getRequestDispatcher(
+							"/WEB-INF/pages/ManagementLogin.jsp").forward(
+							request, response);
 			}
-		}
-		else
-			request.getRequestDispatcher("/WEB-INF/pages/ManagementLogin.jsp").forward(request, response);
-		
+		} else
+			request.getRequestDispatcher("/WEB-INF/pages/ManagementLogin.jsp")
+					.forward(request, response);
+
 	}
 
 	/**
 	 * The doPost method of the servlet. <br>
-	 *
-	 * This method is called when a form has its tag value method equals to post.
 	 * 
-	 * @param request the request send by the client to the server
-	 * @param response the response send by the server to the client
-	 * @throws ServletException if an error occurred
-	 * @throws IOException if an error occurred
+	 * This method is called when a form has its tag value method equals to
+	 * post.
+	 * 
+	 * @param request
+	 *            the request send by the client to the server
+	 * @param response
+	 *            the response send by the server to the client
+	 * @throws ServletException
+	 *             if an error occurred
+	 * @throws IOException
+	 *             if an error occurred
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -86,8 +99,9 @@ public class ManagementProductUI extends HttpServlet {
 
 	/**
 	 * Initialization of the servlet. <br>
-	 *
-	 * @throws ServletException if an error occurs
+	 * 
+	 * @throws ServletException
+	 *             if an error occurs
 	 */
 	public void init() throws ServletException {
 		// Put your code here

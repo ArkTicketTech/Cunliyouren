@@ -99,7 +99,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			$(".pro").mouseover(function(){ 
 					productInfo($(this).attr("name")); 
 					var X=$(this).offset();
-					$("#nav").css("left",X.left-150+"px").css("top",X.top+30+"px").css("display","block");
+					$("#nav").css("left",X.left-300+"px").css("top",X.top+30+"px").css("display","block");
 				});
 			$(".pro").mouseout(function(){ $("#nav").css("display","none");});
 			function productInfo(pId) { 
@@ -153,13 +153,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             var currentPage=0;
            	var pageSize=20;
            	tableObject.bind("paging",function(){
-           		tableObject.find("tbody tr").hide.slice(currentPage*pageSize,(currentPage+1)*pageSize).show();
+           		tableObject.find("tbody tr").hide().slice(currentPage*pageSize,(currentPage+1)*pageSize).show();
            	});	
            	var sumRows=tableObject.find("tbody tr").length;
            	var sumPages=Math.ceil(sumRows/pageSize);
            	var pager=$("<div class='page'></div>");
            	for(var pageIndex=0;pageIndex<sumPages;pageIndex++){
-           		$("<a href=''><span>"+(pageIndex+1)+"</span></a>").bind("click",{"newPage":pageIndex},function(event){
+           		$("<span style='cursor:hand;text-decoration:underline'>"+(pageIndex+1)+"</span>").bind("click",{'newPage':pageIndex},function(event){
            			currentPage=event.data["newPage"];
            			tableObject.trigger("paging");
            		}).appendTo(pager);
@@ -216,7 +216,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   						<th>产品2</th>
   						<th>产品3</th>
   						<th>操作</th>
-  						
   					</tr>
   					</thead>
   					<tbody  id="mainTBody">

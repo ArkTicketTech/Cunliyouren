@@ -1,47 +1,43 @@
 package com.clyr.web.formbean;
 
-
 import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.beanutils.BeanUtils;
 
-
 public class LoginFormBean {
 
-    //<input type="text" name="username"/>
-    private String username;
-    //<input type="password" name="password"/>
-    private String password;
+	// <input type="text" name="username"/>
+	private String username;
+	// <input type="password" name="password"/>
+	private String password;
 
-    
-    private Map<String, String> errors = new HashMap<String, String>();
+	private Map<String, String> errors = new HashMap<String, String>();
 
-    public Map<String, String> getErrors() {
-        return errors;
-    }
+	public Map<String, String> getErrors() {
+		return errors;
+	}
 
-    public void setErrors(Map<String, String> errors) {
-        this.errors = errors;
-    }
+	public void setErrors(Map<String, String> errors) {
+		this.errors = errors;
+	}
 
-    public boolean validate() {
+	public boolean validate() {
 
-        boolean isOk = true;
-        
+		boolean isOk = true;
 
-        if (this.username == null || this.username.trim().equals("")) {
-            isOk = false;
-            errors.put("userName", "�û�����Ϊ�գ���");
-        } 
+		if (this.username == null || this.username.trim().equals("")) {
+			isOk = false;
+			errors.put("userName", "�û�����Ϊ�գ���");
+		}
 
-        if (this.password == null || this.password.trim().equals("")) {
-            isOk = false;
-            errors.put("userPwd", "���벻��Ϊ�գ���");
-        } 
+		if (this.password == null || this.password.trim().equals("")) {
+			isOk = false;
+			errors.put("userPwd", "���벻��Ϊ�գ���");
+		}
 
-        return isOk;
-    }
+		return isOk;
+	}
 
 	public String getUsername() {
 		return username;
@@ -58,6 +54,5 @@ public class LoginFormBean {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
 
 }

@@ -12,7 +12,7 @@ create table t_user(
 	uId integer not null primary key AUTO_INCREMENT,
 	openId varchar(30) default "",
 	nickName varchar(30) default "",
-	unionId varchar(30) default "",
+	accessToken varchar(50) default "",
 	headImgUrl varchar(50) default "",
 	telNum varchar(15) default "",
 	homeTown varchar(20) default "",
