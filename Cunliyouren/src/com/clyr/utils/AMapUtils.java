@@ -85,6 +85,17 @@ public class AMapUtils {
 		return d;
 	}
 	
+	public static double Distance(String str1 ,String str2)
+	{
+		String a[]=str1.split(",");
+		String b[]=str2.split(",");
+		double long1=Double.valueOf(a[0]);
+		double lat1=Double.valueOf(a[1]);
+		double long2=Double.valueOf(b[0]);
+		double lat2=Double.valueOf(b[1]);
+		return Distance(long1,lat1,long2,lat2);
+	}
+	
 //	public static void main(String args[]){
 //		System.out.print(AMapUtils.getPosition("上海江浦666").getJSONArray("pois").getJSONObject(0).getString("location"));
 //	}

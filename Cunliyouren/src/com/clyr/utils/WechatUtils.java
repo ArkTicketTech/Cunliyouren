@@ -82,9 +82,9 @@ public class WechatUtils {
 	 * 获取u_accesstoken
 	 * @return
 	 */
-	public static U_AccessToken getUAccessToken(){
+	public static U_AccessToken getUAccessToken(String red_url){
 		U_AccessToken token=new U_AccessToken();
-		String url=CODE_URL.replace("APPID", APPID).replace("REDIRECT_URI",REDIRECT_URI).replace("scope", "snsapi_login,snsapi_base,snsapi_userinfo");
+		String url=CODE_URL.replace("APPID", APPID).replace("REDIRECT_URI",REDIRECT_URI+red_url).replace("scope", "snsapi_login,snsapi_base,snsapi_userinfo");
 		JSONObject jsonObjectCode=doGetStr(url);
 		if(jsonObjectCode!=null)
 		{

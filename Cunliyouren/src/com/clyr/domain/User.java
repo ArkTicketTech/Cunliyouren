@@ -26,7 +26,11 @@ public class User implements Serializable {
 	//
 	private String homeAddress;
 	//
+	private String homeAddressLocation;
+	//
 	private String workingAddress;
+	//
+	private String workingAddressLocation;
 	//
 	private int state;
 
@@ -49,7 +53,9 @@ public class User implements Serializable {
 		this.highSchool = "";
 		this.university = "";
 		this.homeAddress = "";
+		this.homeAddressLocation="";
 		this.workingAddress = "";
+		this.workingAddressLocation="";
 		this.state = 1;
 		this.pid = null;
 		this.sendOrder = 0;
@@ -182,5 +188,21 @@ public class User implements Serializable {
 
 	public void setpName(ArrayList<String> pName) {
 		this.pName = pName;
+	}
+
+	public String getHomeAddressLocation() {
+		return homeAddressLocation;
+	}
+
+	public void setHomeAddressLocation(String homeAddressLocation) {
+		this.homeAddressLocation = homeAddressLocation;
+	}
+
+	public String getWorkingAddressLocation() {
+		return workingAddressLocation;
+	}
+
+	public void setWorkingAddressLocation(String workingAddressLocation) {
+		this.workingAddressLocation = workingAddressLocation;
 	}
 }

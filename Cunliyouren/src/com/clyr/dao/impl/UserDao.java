@@ -21,7 +21,8 @@ public class UserDao implements IUserDao {
 				+ u.getHeadImgUrl() + "','" + u.getTelNum() + "','"
 				+ u.getHomeTown() + "','" + u.getHighSchool() + "','"
 				+ u.getUniversity() + "','" + u.getHomeAddress() + "','"
-				+ u.getWorkingAddress() + "'," + u.getState() + ")");
+				+ u.getHomeAddressLocation() + "','" + u.getWorkingAddress() + "','"
+				+ u.getWorkingAddressLocation() + "'," + u.getState() + ")");
 		try {
 			db.close();
 		} catch (SQLException e) {
@@ -87,6 +88,8 @@ public class UserDao implements IUserDao {
 				temp.setUniversity(rs.getString("university"));
 				temp.setHomeAddress(rs.getString("homeAddress"));
 				temp.setWorkingAddress(rs.getString("workingAddress"));
+				temp.setHomeAddress(rs.getString("homeAddressLocation"));
+				temp.setWorkingAddress(rs.getString("workingAddressLocation"));
 				temp.setState(rs.getInt("state"));
 				a.add(temp);
 			}
@@ -120,6 +123,8 @@ public class UserDao implements IUserDao {
 				temp.setUniversity(rs.getString("university"));
 				temp.setHomeAddress(rs.getString("homeAddress"));
 				temp.setWorkingAddress(rs.getString("workingAddress"));
+				temp.setHomeAddress(rs.getString("homeAddressLocation"));
+				temp.setWorkingAddress(rs.getString("workingAddressLocation"));
 				temp.setState(rs.getInt("state"));
 				u = temp;
 			}
@@ -153,6 +158,43 @@ public class UserDao implements IUserDao {
 				temp.setUniversity(rs.getString("university"));
 				temp.setHomeAddress(rs.getString("homeAddress"));
 				temp.setWorkingAddress(rs.getString("workingAddress"));
+				temp.setHomeAddress(rs.getString("homeAddressLocation"));
+				temp.setWorkingAddress(rs.getString("workingAddressLocation"));
+				temp.setState(rs.getInt("state"));
+				u = temp;
+			}
+			db.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return u;
+	}
+	
+	@Override
+	public User selectByAccessToken(String accessToken) {
+		DBConn db = new DBConn();
+		db.getConn();
+		User u = new User();
+		ResultSet rs = null;
+		rs = db.doSelect("select * from t_user where accessToken= '" + accessToken+"'");
+		try {
+			while (rs.next()) {
+				User temp = new User();
+				temp.setuId(rs.getInt("uId"));
+				temp.setOpenId(rs.getString("openId"));
+				temp.setNickName(rs.getString("nickName"));
+				temp.setAccessToken(rs.getString("accessToken"));
+				temp.setHeadImgUrl(rs.getString("headImgUrl"));
+				temp.setTelNum(rs.getString("telNum"));
+				temp.setHomeTown(rs.getString("homeTown"));
+				temp.setHighSchool(rs.getString("highSchool"));
+				temp.setUniversity(rs.getString("university"));
+				temp.setHomeAddress(rs.getString("homeAddress"));
+				temp.setWorkingAddress(rs.getString("workingAddress"));
+				temp.setHomeAddress(rs.getString("homeAddressLocation"));
+				temp.setWorkingAddress(rs.getString("workingAddressLocation"));
 				temp.setState(rs.getInt("state"));
 				u = temp;
 			}

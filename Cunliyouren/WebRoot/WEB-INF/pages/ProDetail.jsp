@@ -32,7 +32,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   			<p id="p_proSeller" style="width:100;margin:0;"></p>
   			<p id="p_selTelNum" style="width:100;margin:0;"></p>
   			<p id="p_proPlace" style="width:100%;margin:0;"></p>
-  			<div align="center" style="width:30%;margin-right:5%;height:8%;background-color:#ffffff;float:right;border:1px solid black;">发送购买请求</div>
+  			<div id="CreateOrder"align="center" style="width:30%;margin-right:5%;height:8%;background-color:#ffffff;float:right;border:1px solid black;">发送购买请求</div>
   			<div align="center" style="width:30%;margin-right:5%;height:8%;background-color:#ffffff;float:right;border:1px solid black;">分享到微信</div>
   		</div>
   		<img alt="" src="" style="width:100%;height:30%;float:left;" id="i_proPic1">

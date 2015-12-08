@@ -151,6 +151,13 @@
     <servlet-name>ReceivedOrderUI</servlet-name>
     <servlet-class>com.clyr.web.UI.ReceivedOrderUI</servlet-class>
   </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>CreateOrder</servlet-name>
+    <servlet-class>com.clyr.web.controller.CreateOrder</servlet-class>
+  </servlet>
+
 
 
 
@@ -278,6 +285,10 @@
   <servlet-mapping>
     <servlet-name>ReceivedOrderUI</servlet-name>
     <url-pattern>/ReceivedOrderUI</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CreateOrder</servlet-name>
+    <url-pattern>/CreateOrder</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

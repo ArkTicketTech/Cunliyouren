@@ -39,4 +39,6 @@ public interface IUserDao {
 	 * @param u
 	 */
 	User selectByOpenId(String openId);
+
+	User selectByAccessToken(String accessToken);
 }

@@ -40,11 +40,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 	</style>
   </head>
+  <script type="text/javascript">
+  	var v=${userInfo};
+  	var aT=${accessToken};
+  	$("#nick").attr("value",userInfo.nickname);
+  	$("#aT").attr("value",aT);
+  	$("#oI").attr("value",userInfo.openid);
+  	$("#hIU").attr("value",userInfo.headimgurl);
+  </script>
   
   <body bgcolor="#ccff99">
     <div style="width:100%;height:15%;margin:6%;">为了让您在村里有人获得更好的用户体验，结识更多村友，建议您先完善以下信息哦~</div>
     <form method="post" name="form1" style="width:88%;height:73%" action="UserRegister">
-    	<p>昵称</p><input type="text" name="nickName" style="width:58%;float:left;margin:1% 0%;height:9%">
+    	<p>昵称</p><input type="text" name="nickName" style="width:58%;float:left;margin:1% 0%;height:9%" readonly="readonly" id="nick">
     	<p>手机号码</p><input type="text" name="telNum" style="width:58%;float:left;margin:1% 0%;height:9%">
     	<p>请选择您的家乡</p>
     	<select name="province" style="width:17%;float:left;margin:1% 1%;height:9%"></select>
@@ -66,6 +74,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	<div class="one">路</div>
     	<input type="text" name="workingAddressNum" style="width:12%;float:left;margin:1% 0%;height:9%">
     	<div class="one">弄</div>
+    	<input type="text" name="accessToken" style="display:none%" id="aT">
+    	<input type="text" name="openId" style="display:none%" id="oI">
+    	<input type="text" name="headImgUrl" style="display:none%" id="hIU">
     	<input type="submit" value="提交" style="float:right;margin-right:8%;margin-top:8%">
     </form>
   </body>

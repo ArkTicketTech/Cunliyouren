@@ -55,4 +55,6 @@ public interface IUserService {
 	void disable(User u);
 
 	User searchByOpenId(String openId);
+
+	User searchByAccessToken(String accessToken);
 }

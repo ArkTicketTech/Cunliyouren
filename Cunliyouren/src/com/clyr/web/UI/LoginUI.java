@@ -49,21 +49,20 @@ public class LoginUI extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		U_AccessToken token=WechatUtils.getUAccessToken();
-		IUserService service=new UserService();
-		User u=service.searchByOpenId(token.getOpenId());
-		if(u!=null)
+		JSONObject token=(JSONObject) request.getAttribute("token");
+		IUserService uservice=new UserService();
+		User u=uservice.searchByOpenId(token.getString("openId"));
+		JSONObject ja=JSONObject.fromObject(token);
+		if(u==null)
 		{
-			request.setAttribute("headUrl", u.getHeadImgUrl());
-			request.setAttribute("nickname", u.getNickName());
-			request.setAttribute("openid", u.getOpenId());
+			JSONObject j_info=WechatUtils.getUserInfo(token.getString("access_token"), token.getString("openId"));
+			request.setAttribute("token", ja);
+			request.setAttribute("headUrl", j_info.getString("headimgurl"));
 		}
 		else
 		{
-			JSONObject ja=WechatUtils.getUserInfo(token.getAccess_token(), token.getOpenId());
-			request.setAttribute("headUrl", ja.getString("headimgurl"));
-			request.setAttribute("nickname", ja.getString("nickname"));
-			request.setAttribute("openid", ja.getString("openid"));
+			request.setAttribute("token", ja);
+			request.setAttribute("headUrl", u.getHeadImgUrl());
 		}
 		request.getRequestDispatcher("/WEB-INF/pages/Login.jsp").forward(request, response);
 	}

@@ -8,6 +8,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSONObject;
+
+import com.clyr.domain.U_AccessToken;
+import com.clyr.domain.User;
+import com.clyr.service.IUserService;
+import com.clyr.service.impl.UserService;
+import com.clyr.utils.WechatUtils;
+
 public class MainUI extends HttpServlet {
 
 	/**
@@ -37,8 +45,19 @@ public class MainUI extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		request.getRequestDispatcher("/WEB-INF/pages/Main.jsp").forward(request, response);
+		U_AccessToken token=WechatUtils.getUAccessToken("MainUI");
+		IUserService uservice=new UserService();
+		User u=uservice.searchByAccessToken(token.getAccess_token());
+		if(u!=null)
+		{
+			request.getRequestDispatcher("/WEB-INF/pages/Main.jsp").forward(request, response);
+		}
+		else
+		{
+			JSONObject jt=JSONObject.fromObject(token);
+			request.setAttribute("token", jt);
+			request.getRequestDispatcher("/WEB-INF/pages/LoginUI").forward(request, response);
+		}
 	}
 
 	/**

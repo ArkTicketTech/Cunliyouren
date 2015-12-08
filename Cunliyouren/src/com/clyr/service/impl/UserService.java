@@ -100,4 +100,9 @@ public class UserService implements IUserService {
 	public User searchByOpenId(String openId) {
 		return userDao.selectByOpenId(openId);
 	}
+	
+	@Override
+	public User searchByAccessToken(String accessToken) {
+		return userDao.selectByAccessToken(accessToken);
+	}
 }

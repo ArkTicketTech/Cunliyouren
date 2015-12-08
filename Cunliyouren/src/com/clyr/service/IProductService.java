@@ -44,4 +44,6 @@ public interface IProductService {
 	 * @return
 	 */
 	Product searchByPId(int pId);
+
+	void updateProduct(Product pro);
 }

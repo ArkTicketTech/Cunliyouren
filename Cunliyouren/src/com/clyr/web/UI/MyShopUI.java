@@ -2,11 +2,27 @@ package com.clyr.web.UI;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
+import com.clyr.domain.Order;
+import com.clyr.domain.Product;
+import com.clyr.domain.U_AccessToken;
+import com.clyr.domain.User;
+import com.clyr.service.IOrderService;
+import com.clyr.service.IProductService;
+import com.clyr.service.IUserService;
+import com.clyr.service.impl.OrderService;
+import com.clyr.service.impl.ProductService;
+import com.clyr.service.impl.UserService;
+import com.clyr.utils.WechatUtils;
 
 public class MyShopUI extends HttpServlet {
 
@@ -37,8 +53,22 @@ public class MyShopUI extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		request.getRequestDispatcher("/WEB-INF/pages/MyShop.jsp").forward(request, response);
+		U_AccessToken token=WechatUtils.getUAccessToken("MyShopUI");
+		IUserService uservice=new UserService();
+		IProductService pservice=new ProductService();
+		User u=uservice.searchByAccessToken(token.getAccess_token());
+		if(u==null) 
+		{
+			JSONObject jt=JSONObject.fromObject(token);
+			request.setAttribute("token", jt);
+			request.getRequestDispatcher("/WEB-INF/pages/LoginUI").forward(request, response);
+		}
+		else{
+			ArrayList<Product> a_p=pservice.myProduct(u.getuId());
+			JSONArray ja=JSONArray.fromObject(a_p);
+			request.setAttribute("myProduct", ja);
+			request.getRequestDispatcher("/WEB-INF/pages/MyShop.jsp").forward(request, response);
+		}
 	}
 
 	/**

@@ -8,6 +8,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.clyr.domain.Product;
+import com.clyr.service.IProductService;
+import com.clyr.service.impl.ProductService;
+
 public class UploadProduct extends HttpServlet {
 
 	/**
@@ -41,20 +45,33 @@ public class UploadProduct extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">");
-		out.println("<HTML>");
-		out.println("  <HEAD><TITLE>A Servlet</TITLE></HEAD>");
-		out.println("  <BODY>");
-		out.print("    This is ");
-		out.print(this.getClass());
-		out.println(", using the GET method");
-		out.println("  </BODY>");
-		out.println("</HTML>");
-		out.flush();
-		out.close();
+		Product p=new Product();
+		IProductService service=new ProductService();
+		if(request.getParameter("pId").equals("")){
+			p.setOwnerId(Integer.parseInt(request.getParameter("uId")));
+			p.setProductName(request.getParameter("productName"));
+			p.setPrice(Double.valueOf(request.getParameter("price")));
+			p.setUnit(request.getParameter("unit"));
+			p.setDescription(request.getParameter("description"));
+			p.setPicture1(request.getParameter("picture1"));
+			p.setPicture2(request.getParameter("picture2"));
+			p.setPicture3(request.getParameter("picture3"));
+			p.setDeliveryPoint(request.getParameter("deliveryPoint"));
+			service.uploadProduct(p);
+		}
+		else
+		{
+			p.setpId(Integer.parseInt(request.getParameter("pId")));
+			p.setProductName(request.getParameter("productName"));
+			p.setPrice(Double.valueOf(request.getParameter("price")));
+			p.setUnit(request.getParameter("unit"));
+			p.setDescription(request.getParameter("description"));
+			p.setPicture1(request.getParameter("picture1"));
+			p.setPicture2(request.getParameter("picture2"));
+			p.setPicture3(request.getParameter("picture3"));
+			p.setDeliveryPoint(request.getParameter("deliveryPoint"));
+			service.updateProduct(p);
+		}
 	}
 
 	/**
@@ -75,19 +92,7 @@ public class UploadProduct extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">");
-		out.println("<HTML>");
-		out.println("  <HEAD><TITLE>A Servlet</TITLE></HEAD>");
-		out.println("  <BODY>");
-		out.print("    This is ");
-		out.print(this.getClass());
-		out.println(", using the POST method");
-		out.println("  </BODY>");
-		out.println("</HTML>");
-		out.flush();
-		out.close();
+		doGet(request,response);
 	}
 
 	/**

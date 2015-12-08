@@ -8,6 +8,7 @@ create table t_admin(
 );
 
 
+
 create table t_user(
 	uId integer not null primary key AUTO_INCREMENT,
 	openId varchar(30) default "",
@@ -19,7 +20,9 @@ create table t_user(
 	highSchool varchar(30) default "",
 	university varchar(30) default "",
 	homeAddress varchar(30) default "",
+	homeAddressLocation varchar(50) default "",
 	workingAddress varchar(30) default "",
+	workingAddressLocation varchar(50) default "",
 	state integer DEFAULT 1
 );
 
@@ -50,28 +53,28 @@ create table t_order(
 	FOREIGN KEY (productId) REFERENCES t_product(pId)
 );
 
---测试数据
-insert into t_user values(1,"000001","test","00001","1.jpg","13111111111","sh","jdfz","ecnu","666","3663",1);
-insert into t_user values(2,"000002","test1","00002","2.jpg","1322222222","bj","qhfz","qhdx","222","2333",1);
-insert into t_user values(3,"000003","test2","00003","2.jpg","1322222222","bj","qhfz","qhdx","222","2333",1);
-insert into t_user values(4,"000004","test3","00004","2.jpg","1322222222","bj","qhfz","qhdx","222","2333",1);
-insert into t_user values(5,"000005","test4","00005","2.jpg","1322222222","bj","qhfz","qhdx","222","2333",1);
-insert into t_user values(6,"000006","test5","00006","2.jpg","1322222222","bj","qhfz","qhdx","222","2333",1);
-insert into t_user values(7,"000007","test6","00007","2.jpg","1322222222","bj","qhfz","qhdx","222","2333",1);
-insert into t_user values(8,"000008","test7","00008","2.jpg","1322222222","bj","qhfz","qhdx","222","2333",1);
-insert into t_user values(9,"000009","test8","00009","2.jpg","1322222222","bj","qhfz","qhdx","222","2333",1);
-insert into t_user values(10,"000010","test9","00010","2.jpg","1322222222","bj","qhfz","qhdx","222","2333",1);
-insert into t_user values(11,"000011","test10","00011","2.jpg","1322222222","bj","qhfz","qhdx","222","2333",1);
-insert into t_user values(12,"000012","test11","00012","2.jpg","1322222222","bj","qhfz","qhdx","222","2333",1);
-insert into t_user values(13,"000013","test12","00013","2.jpg","1322222222","bj","qhfz","qhdx","222","2333",1);
-insert into t_user values(14,"000014","test13","00014","2.jpg","1322222222","bj","qhfz","qhdx","222","2333",1);
-insert into t_user values(15,"000015","test14","00015","2.jpg","1322222222","bj","qhfz","qhdx","222","2333",1);
-insert into t_user values(16,"000016","test15","00016","2.jpg","1322222222","bj","qhfz","qhdx","222","2333",1);
-insert into t_user values(17,"000017","test16","00017","2.jpg","1322222222","bj","qhfz","qhdx","222","2333",1);
-insert into t_user values(18,"000018","test17","00018","2.jpg","1322222222","bj","qhfz","qhdx","222","2333",1);
-insert into t_user values(19,"000019","test18","00019","2.jpg","1322222222","bj","qhfz","qhdx","222","2333",1);
-insert into t_user values(20,"000020","test19","00020","2.jpg","1322222222","bj","qhfz","qhdx","222","2333",1);
-insert into t_user values(21,"000021","test20","00021","2.jpg","1322222222","bj","qhfz","qhdx","222","2333",1);
+
+insert into t_user(uId,openId,nickName,accessToken,headImgUrl,telNum,homeTown,highSchool,university,homeAddress,workingAddress,state) values(1,"000001","test","00001","1.jpg","1311111111","sh","jdfz","ecnu","666","3663",1);
+insert into t_user(uId,openId,nickName,accessToken,headImgUrl,telNum,homeTown,highSchool,university,homeAddress,workingAddress,state) values(2,"000002","test1","00002","2.jpg","1322222222","bj","qhfz","qhdx","222","2333",1);
+insert into t_user(uId,openId,nickName,accessToken,headImgUrl,telNum,homeTown,highSchool,university,homeAddress,workingAddress,state) values(3,"000003","test2","00003","2.jpg","1322222222","bj","qhfz","qhdx","222","2333",1);
+insert into t_user(uId,openId,nickName,accessToken,headImgUrl,telNum,homeTown,highSchool,university,homeAddress,workingAddress,state) values(4,"000004","test3","00004","2.jpg","1322222222","bj","qhfz","qhdx","222","2333",1);
+insert into t_user(uId,openId,nickName,accessToken,headImgUrl,telNum,homeTown,highSchool,university,homeAddress,workingAddress,state) values(5,"000005","test4","00005","2.jpg","1322222222","bj","qhfz","qhdx","222","2333",1);
+insert into t_user(uId,openId,nickName,accessToken,headImgUrl,telNum,homeTown,highSchool,university,homeAddress,workingAddress,state) values(6,"000006","test5","00006","2.jpg","1322222222","bj","qhfz","qhdx","222","2333",1);
+insert into t_user(uId,openId,nickName,accessToken,headImgUrl,telNum,homeTown,highSchool,university,homeAddress,workingAddress,state) values(7,"000007","test6","00007","2.jpg","1322222222","bj","qhfz","qhdx","222","2333",1);
+insert into t_user(uId,openId,nickName,accessToken,headImgUrl,telNum,homeTown,highSchool,university,homeAddress,workingAddress,state) values(8,"000008","test7","00008","2.jpg","1322222222","bj","qhfz","qhdx","222","2333",1);
+insert into t_user(uId,openId,nickName,accessToken,headImgUrl,telNum,homeTown,highSchool,university,homeAddress,workingAddress,state) values(9,"000009","test8","00009","2.jpg","1322222222","bj","qhfz","qhdx","222","2333",1);
+insert into t_user(uId,openId,nickName,accessToken,headImgUrl,telNum,homeTown,highSchool,university,homeAddress,workingAddress,state) values(10,"000010","test9","00010","2.jpg","1322222222","bj","qhfz","qhdx","222","2333",1);
+insert into t_user(uId,openId,nickName,accessToken,headImgUrl,telNum,homeTown,highSchool,university,homeAddress,workingAddress,state) values(11,"000011","test10","00011","2.jpg","1322222222","bj","qhfz","qhdx","222","2333",1);
+insert into t_user(uId,openId,nickName,accessToken,headImgUrl,telNum,homeTown,highSchool,university,homeAddress,workingAddress,state) values(12,"000012","test11","00012","2.jpg","1322222222","bj","qhfz","qhdx","222","2333",1);
+insert into t_user(uId,openId,nickName,accessToken,headImgUrl,telNum,homeTown,highSchool,university,homeAddress,workingAddress,state) values(13,"000013","test12","00013","2.jpg","1322222222","bj","qhfz","qhdx","222","2333",1);
+insert into t_user(uId,openId,nickName,accessToken,headImgUrl,telNum,homeTown,highSchool,university,homeAddress,workingAddress,state) values(14,"000014","test13","00014","2.jpg","1322222222","bj","qhfz","qhdx","222","2333",1);
+insert into t_user(uId,openId,nickName,accessToken,headImgUrl,telNum,homeTown,highSchool,university,homeAddress,workingAddress,state) values(15,"000015","test14","00015","2.jpg","1322222222","bj","qhfz","qhdx","222","2333",1);
+insert into t_user(uId,openId,nickName,accessToken,headImgUrl,telNum,homeTown,highSchool,university,homeAddress,workingAddress,state) values(16,"000016","test15","00016","2.jpg","1322222222","bj","qhfz","qhdx","222","2333",1);
+insert into t_user(uId,openId,nickName,accessToken,headImgUrl,telNum,homeTown,highSchool,university,homeAddress,workingAddress,state) values(17,"000017","test16","00017","2.jpg","1322222222","bj","qhfz","qhdx","222","2333",1);
+insert into t_user(uId,openId,nickName,accessToken,headImgUrl,telNum,homeTown,highSchool,university,homeAddress,workingAddress,state) values(18,"000018","test17","00018","2.jpg","1322222222","bj","qhfz","qhdx","222","2333",1);
+insert into t_user(uId,openId,nickName,accessToken,headImgUrl,telNum,homeTown,highSchool,university,homeAddress,workingAddress,state) values(19,"000019","test18","00019","2.jpg","1322222222","bj","qhfz","qhdx","222","2333",1);
+insert into t_user(uId,openId,nickName,accessToken,headImgUrl,telNum,homeTown,highSchool,university,homeAddress,workingAddress,state) values(20,"000020","test19","00020","2.jpg","1322222222","bj","qhfz","qhdx","222","2333",1);
+insert into t_user(uId,openId,nickName,accessToken,headImgUrl,telNum,homeTown,highSchool,university,homeAddress,workingAddress,state) values(21,"000021","test20","00021","2.jpg","1322222222","bj","qhfz","qhdx","222","2333",1);
 insert into t_product(productName,price,unit,description,deliveryPoint,ownerId) values("p1",2,"个","p1 2.00","sh",1);
 insert into t_product(productName,price,unit,description,deliveryPoint,ownerId) values("p2",3,"个","p2 3.00","gz",1);
 insert into t_product(productName,price,unit,description,deliveryPoint,ownerId) values("p3",5,"个","2220","sh",2);

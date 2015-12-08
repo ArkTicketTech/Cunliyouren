@@ -18,6 +18,11 @@ public class ProductService implements IProductService {
 	public void uploadProduct(Product pro) {
 		productDao.add(pro);
 	}
+	
+	@Override
+	public void updateProduct(Product pro) {
+		productDao.update(pro);
+	}
 
 	@Override
 	public void deleteProduct(int pId) {

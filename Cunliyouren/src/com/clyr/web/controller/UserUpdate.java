@@ -8,6 +8,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.clyr.domain.User;
+import com.clyr.service.IUserService;
+import com.clyr.service.impl.UserService;
+import com.clyr.utils.AMapUtils;
+
 public class UserUpdate extends HttpServlet {
 
 	/**
@@ -42,19 +47,19 @@ public class UserUpdate extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">");
-		out.println("<HTML>");
-		out.println("  <HEAD><TITLE>A Servlet</TITLE></HEAD>");
-		out.println("  <BODY>");
-		out.print("    This is ");
-		out.print(this.getClass());
-		out.println(", using the GET method");
-		out.println("  </BODY>");
-		out.println("</HTML>");
-		out.flush();
-		out.close();
+		User u=new User();
+		u.setAccessToken(request.getParameter("accessToken"));
+		u.setOpenId(request.getParameter("openId"));
+		u.setNickName(request.getParameter("nickName"));
+		u.setTelNum(request.getParameter("telNum"));
+		u.setHeadImgUrl(request.getParameter("headImgUrl"));
+		u.setHomeAddress(request.getParameter("homeAddressCity")+request.getParameter("homeAddressRoad")+request.getParameter("homeAddressNum"));
+		u.setWorkingAddress(request.getParameter("workingAddressCity")+request.getParameter("workingAddressRoad")+request.getParameter("workingAddressNum"));
+		u.setHomeAddressLocation(AMapUtils.getPosition(u.getHomeAddress()).getJSONArray("pois").getJSONObject(0).getString("location"));
+		u.setWorkingAddressLocation(AMapUtils.getPosition(u.getWorkingAddress()).getJSONArray("pois").getJSONObject(0).getString("location"));
+		IUserService service=new UserService();
+		service.update(u);
+		request.getRequestDispatcher("/WEB-INF/pages/Main.jsp").forward(request, response);
 	}
 
 	/**
@@ -75,19 +80,7 @@ public class UserUpdate extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">");
-		out.println("<HTML>");
-		out.println("  <HEAD><TITLE>A Servlet</TITLE></HEAD>");
-		out.println("  <BODY>");
-		out.print("    This is ");
-		out.print(this.getClass());
-		out.println(", using the POST method");
-		out.println("  </BODY>");
-		out.println("</HTML>");
-		out.flush();
-		out.close();
+		doGet(request,response);
 	}
 
 	/**

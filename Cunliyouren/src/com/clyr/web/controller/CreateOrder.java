@@ -1,4 +1,4 @@
-package com.clyr.web.UI;
+package com.clyr.web.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -8,20 +8,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.sf.json.JSONObject;
-
-import com.clyr.domain.U_AccessToken;
-import com.clyr.domain.User;
-import com.clyr.service.IUserService;
-import com.clyr.service.impl.UserService;
-import com.clyr.utils.WechatUtils;
-
-public class PersonalCenterUI extends HttpServlet {
+public class CreateOrder extends HttpServlet {
 
 	/**
 	 * Constructor of the object.
 	 */
-	public PersonalCenterUI() {
+	public CreateOrder() {
 		super();
 	}
 
@@ -45,22 +37,7 @@ public class PersonalCenterUI extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		U_AccessToken token=WechatUtils.getUAccessToken("PersonalCenterUI");
-		IUserService uservice=new UserService();
-		User u=uservice.searchByAccessToken(token.getAccess_token());
-		if(u!=null)
-		{
-			JSONObject ja=WechatUtils.getUserInfo(u.getAccessToken(), u.getOpenId());
-			request.setAttribute("accessToken", token.getAccess_token());
-			request.setAttribute("userInfo", ja);
-			request.getRequestDispatcher("/WEB-INF/pages/PersonalCenter.jsp").forward(request, response);
-		}
-		else
-		{
-			JSONObject jt=JSONObject.fromObject(token);
-			request.setAttribute("token", jt);
-			request.getRequestDispatcher("/WEB-INF/pages/LoginUI").forward(request, response);
-		}
+		
 	}
 
 	/**

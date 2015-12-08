@@ -8,6 +8,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSONObject;
+
+import com.clyr.service.IProductService;
+import com.clyr.service.impl.ProductService;
+
 public class ProDetailUI extends HttpServlet {
 
 	/**
@@ -37,7 +42,10 @@ public class ProDetailUI extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		int pId=Integer.parseInt(request.getParameter("pId"));
+		IProductService service=new ProductService();
+		JSONObject ja=JSONObject.fromObject(service.searchByPId(pId));
+		request.setAttribute("product", ja);
 		request.getRequestDispatcher("/WEB-INF/pages/ProDetail.jsp").forward(request, response);
 	}
 
