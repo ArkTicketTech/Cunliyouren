@@ -6,13 +6,9 @@ import com.clyr.domain.Product;
 import com.clyr.domain.User;
 
 public class DaoTest {
-	public static void main(String args[])
-	{
-		ProductDao pd=new ProductDao();
-		ArrayList<Product> a=pd.fuzzySelectByName("p");
-		for(Product p:a)
-		{
-			System.out.println(p.getUpdateTime());
-		}
-	}
+//	public static void main(String args[])
+//	{
+//		UserDao dao=new UserDao();
+//		System.out.println(dao.selectByOpenId("000001").getNickName());
+//	}
 }

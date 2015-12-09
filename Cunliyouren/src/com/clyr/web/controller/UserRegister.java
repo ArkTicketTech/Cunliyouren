@@ -2,12 +2,17 @@ package com.clyr.web.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSONObject;
+
+import com.clyr.domain.U_AccessToken;
 import com.clyr.domain.User;
 import com.clyr.service.IUserService;
 import com.clyr.service.impl.UserService;
@@ -46,24 +51,55 @@ public class UserRegister extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		User u=new User();
-		u.setAccessToken(request.getParameter("accessToken"));
-		u.setOpenId(request.getParameter("openId"));
-		u.setNickName(request.getParameter("nickName"));
-		u.setTelNum(request.getParameter("telNum"));
-		u.setHeadImgUrl(request.getParameter("headImgUrl"));
-		u.setHomeTown(request.getParameter("province")+request.getParameter("city")+request.getParameter("district"));
-		u.setHighSchool(request.getParameter("highSchool"));
-		u.setUniversity(request.getParameter("university"));
-		u.setHomeAddress(request.getParameter("homeAddressCity")+request.getParameter("homeAddressRoad")+request.getParameter("homeAddressNum"));
-		u.setWorkingAddress(request.getParameter("workingAddressCity")+request.getParameter("workingAddressRoad")+request.getParameter("workingAddressNum"));
-		u.setHomeAddressLocation(AMapUtils.getPosition(u.getHomeAddress()).getJSONArray("pois").getJSONObject(0).getString("location"));
-		u.setWorkingAddressLocation(AMapUtils.getPosition(u.getWorkingAddress()).getJSONArray("pois").getJSONObject(0).getString("location"));
-		IUserService service=new UserService();
-		service.register(u);
-		request.setAttribute("openId", u.getOpenId());
-		request.getRequestDispatcher("/WEB-INF/pages/Main.jsp").forward(request, response);
+		String err="本项必填";	
+		if(request.getParameter("homeAddressCity").equals("") || 
+				request.getParameter("homeAddressRoad").equals("") ||
+				request.getParameter("homeAddressNum").equals(""))
+		{
+			err="请填写目前常住地点";
+			request.setAttribute("accessToken", request.getParameter("accessToken"));
+			HashMap<String, String> m=new HashMap<String, String>();
+			m.put("nickname", request.getParameter("nickName"));
+			m.put("openid", request.getParameter("openId"));
+			m.put("headimgurl", request.getParameter("headImgUrl"));
+			JSONObject j=JSONObject.fromObject(m);
+			request.setAttribute("userInfo",j );
+			request.setAttribute("err", err);
+			request.getRequestDispatcher("/WEB-INF/pages/Register.jsp").forward(request, response);
+		}
+		else if(request.getParameter("workingAddressCity").equals("") || 
+	    		request.getParameter("workingAddressRoad").equals("") ||
+	    		request.getParameter("workingAddressNum").equals(""))
+	    {
+			err="请填写目前工作地点";
+	    	HashMap<String, String> m=new HashMap<String, String>();
+			m.put("nickname", request.getParameter("nickName"));
+			m.put("openid", request.getParameter("openId"));
+			m.put("headimgurl", request.getParameter("headImgUrl"));
+			JSONObject j=JSONObject.fromObject(m);
+			request.setAttribute("userInfo",j );
+	    	request.setAttribute("err", err);
+	    	request.getRequestDispatcher("/WEB-INF/pages/Register.jsp").forward(request, response);
+	    }
+		else{
+			User u=new User();
+			u.setAccessToken(request.getParameter("accessToken"));
+			u.setOpenId(request.getParameter("openId"));
+			u.setNickName(request.getParameter("nickName"));
+			u.setTelNum(request.getParameter("telNum"));
+			u.setHeadImgUrl(request.getParameter("headImgUrl"));
+			u.setHomeTown(request.getParameter("province")+request.getParameter("city")+request.getParameter("district"));
+			u.setHighSchool(request.getParameter("highSchool"));
+			u.setUniversity(request.getParameter("university"));
+			u.setHomeAddress(request.getParameter("homeAddressCity")+request.getParameter("homeAddressRoad")+request.getParameter("homeAddressNum"));
+			u.setWorkingAddress(request.getParameter("workingAddressCity")+request.getParameter("workingAddressRoad")+request.getParameter("workingAddressNum"));
+			u.setHomeAddressLocation(AMapUtils.getPosition(u.getHomeAddress()).getJSONArray("pois").getJSONObject(0).getString("location"));
+			u.setWorkingAddressLocation(AMapUtils.getPosition(u.getWorkingAddress()).getJSONArray("pois").getJSONObject(0).getString("location"));
+			IUserService service=new UserService();
+			service.register(u);
+			request.setAttribute("openId", u.getOpenId());
+			request.getRequestDispatcher("/WEB-INF/pages/Main.jsp").forward(request, response);
+		}
 	}
 
 	/**

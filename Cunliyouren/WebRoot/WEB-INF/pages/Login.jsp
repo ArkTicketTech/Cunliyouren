@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'Login.jsp' starting page</title>
+    <title>请登录村里有人</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -24,7 +24,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script  type="text/javascript">
     $(document).ready(function(){
     	$("#login").click(function(){
-    		location.href=<%=basePath%>+"UserLogin?accessToken='"+${accessToken}+"'&openId='"+${openId}+"'";
+    		location.href="<%=basePath%>UserLogin?accessToken=${accessToken}&openId=${openId}";
     	});
     });
     </script>
@@ -35,8 +35,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	<div style="margin:5%;width:90%;height:60%">
     	<img alt="" src="Resource/MainPagePic/MainPic" style="width:100%;height:100%">
     </div>
-    <div style="width:100%;height:%30" align="center">
-    	<img alt="" src=${headUrl} style="width:100%;height:100%" id="login">
+    <div style="width:100%;height:%30" align="center" >
+    	<img alt="" src=${headUrl } style="width:30%;height:20%"  id="login">
     </div>
   </body>
 </html>

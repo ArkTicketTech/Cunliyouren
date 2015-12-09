@@ -68,29 +68,31 @@ public class ProductSearch extends HttpServlet {
 		a=service.addConstraint(a, request.getParameter("school"), u);
 		a=service.addConstraint(a, request.getParameter("workAdd"), u);
 		a=service.addConstraint(a, request.getParameter("homeAdd"), u);
-		System.out.println(a);
 		JSONArray result=JSONArray.fromObject(a);
 		ArrayList<RelationBean> a_r=new ArrayList<RelationBean>();
 		StringBuffer buffer=new StringBuffer();
 		for(int i=0;i<a.size();i++)
 		{
 			User temp=new User();
+			RelationBean rb=new RelationBean();
 			temp=userv.searchByUId(a.get(i).getOwnerId());
-			a_r.get(i).setFriendName(temp.getNickName());
+			rb.setFriendName(temp.getNickName());
 			if(temp.getHomeTown().equals(u.getHomeTown()))
-				a_r.get(i).setHometown(1);
+				rb.setHometown(1);
 			if(temp.getHighSchool().equals(u.getHighSchool()) || 
 					temp.getUniversity().equals(u.getUniversity()))
-				a_r.get(i).setSchool(1);
+				rb.setSchool(1);
 			if(AMapUtils.Distance(temp.getHomeAddressLocation(), u.getHomeAddressLocation())<3000)
-				a_r.get(i).setHomeAdd(1);
+				rb.setHomeAdd(1);
 			if(AMapUtils.Distance(temp.getWorkingAddressLocation(), u.getWorkingAddressLocation())<3000)
-				a_r.get(i).setWorkAdd(1);
+				rb.setWorkAdd(1);
+			a_r.add(rb);
 		}
 		JSONArray relation=JSONArray.fromObject(a_r);
 		String r=joinJSONArray(result,relation);
 		JSONArray ja=JSONArray.fromObject(r);
-		request.setAttribute("result", r);
+		request.setAttribute("result", ja);
+		request.setAttribute("openId", openId);
 		request.getRequestDispatcher("/WEB-INF/pages/Main.jsp").forward(request, response);
 	}
 
@@ -136,22 +138,19 @@ public class ProductSearch extends HttpServlet {
           int len = mData.size();
           for (int i = 0; i < len; i++) {
             JSONObject obj1 = (JSONObject) mData.get(i);
+            JSONObject obj2 = (JSONObject) array.get(i);
             if (i == len - 1)
-              buffer.append(obj1.toString());
+            {
+            	String str=obj2.toString().substring(1);
+            	buffer.append(obj1.toString()).deleteCharAt(buffer.length()-1).append(",").append(str);
+            }
             else
-              buffer.append(obj1.toString()).append(",");
+            {
+            	String str=obj2.toString().substring(1);
+            	buffer.append(obj1.toString()).deleteCharAt(buffer.length()-1).append(",").append(str).append(",");
+            }
           }
-          len = array.size();
-          if (len > 0)
-            buffer.append(",");
-          for (int i = 0; i < len; i++) {
-            JSONObject obj1 = (JSONObject) array.get(i);
-            if (i == len - 1)
-              buffer.append(obj1.toString());
-            else
-              buffer.append(obj1.toString()).append(",");
-          }
-//          buffer.insert(0, "[").append("]");
+          buffer.insert(0, "[").append("]");
           return buffer.toString();
         } catch (Exception e) {
         }

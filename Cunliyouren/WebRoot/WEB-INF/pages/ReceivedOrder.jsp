@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'ReceivedOrder.jsp' starting page</title>
+    <title>我收到的订单</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -23,13 +23,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   <script type="text/javascript" src="<%=basePath  %>JavaScript/jquery.js"></script>
   <script type="text/javascript">
+  $(document).ready(function(){
+  	var v=${receivedOrder};
   	$("#back").click(function(){
 		location.href="<%=basePath  %>MainUI";
 	});
+  	var c=$("#container");
+  	$.each(v,function(idx,item){
+  		var div=$("<div style='width:100%;height:250px;float:left'></div>");
+  		var p1=$("")
+  	});
+  });
   </script>
   <body bgcolor="#ccff99" align="center">
     <div style="width:40%;height:8%;background-color:#ffffff;border:1px solid black;margin-left:30%">我收到的购买请求</div>
-    <div style="width:90%;"></div>
+    <div style="width:90%;" id="container"></div>
     <div id="back" style="width:30%;margin:5%;height:8%;background-color:#ffffff;float:right;border:1px solid black;">返回上一页</div>
   </body>
 </html>

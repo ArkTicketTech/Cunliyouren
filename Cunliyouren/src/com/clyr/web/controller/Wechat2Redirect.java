@@ -40,7 +40,7 @@ public class Wechat2Redirect extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String state=request.getParameter("state");
-		request.getRequestDispatcher(WechatUtils.getBaseUrl(state)).forward(request,response);
+		response.sendRedirect(WechatUtils.getBaseUrl(state));
 	}
 
 	/**

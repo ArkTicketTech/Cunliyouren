@@ -53,7 +53,7 @@ public class ReceivedOrderUI extends HttpServlet {
 			throws ServletException, IOException {
 		IUserService uservice=new UserService();
 		IOrderService oservice=new OrderService();
-		String openId=request.getParameter("");
+		String openId=request.getParameter("openId");
 		User u=uservice.searchByOpenId(openId);
 		ArrayList<Order> a_o=oservice.ReceivedOrder(u.getuId());
 		JSONArray ja=JSONArray.fromObject(a_o);

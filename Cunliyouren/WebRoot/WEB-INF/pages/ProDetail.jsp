@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'ProDetail.jsp' starting page</title>
+    <title>产品详情</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -24,17 +24,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <script type="text/javascript" src="<%=basePath  %>JavaScript/jquery.js"></script>
   <script type="text/javascript">
   $(document).ready(function(){
-    var p=${product};
-    var seller=${seller};
-    var openId=${openId};
-    $("#p_proName").html(p.productName);
-    $("#p_proPrice").html(p.price);
-    $("#p_proDes").html(p.description);
-    $("#p_proSeller").html(seller.nickName);
-    $("#p_selTelNum").html(seller.telNum);
-    $("#i_proPic1").attr("value",picture1);
-    $("#i_proPic2").attr("value",picture2);
-    $("#i_proPic3").attr("value",picture3);
+	    var p=${product};
+	    var seller=${seller};
+	    var openId=${openId};
+	    $("#p_proName").html(p.productName);
+	    $("#p_proPrice").html(p.price);
+	    $("#p_proDes").html(p.description);
+	    $("#p_proSeller").html(seller.nickName);
+	    $("#p_selTelNum").html(seller.telNum);
+	    $("#i_proPic1").attr("value",picture1);
+	    $("#i_proPic2").attr("value",picture2);
+	    $("#i_proPic3").attr("value",picture3);
     $("#Create").click(function(){
     	$.ajax({
   			url:"<%=basePath%>CreateOrder",
@@ -44,7 +44,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   				  "productId":p.pId
   				  },
   			success:function(){alert("下单成功");$("#CreateNum").css("display","none");},
-  			error:alert("下单失败")
+  			error:function(){alert("下单失败");}
   		});});
     $("#Cancel").click(function(){
   		$("#CreateNum").css("display","none");
@@ -61,11 +61,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   });
   </script>
   <body bgcolor="#ccff99">
-  	<div id="CreateNum" style="display:none;position:fixed;left:40%;top:40%;width:20%;height:20%;">
+  	<div id="CreateNum" style="display:none;position:fixed;left:40%;top:40%;width:20%;height:20%;background-color:#ffffff;border:1px solid black;">
   		请输入购买数量:
   		<input type="text" id="pNum">
   		<button id="Create">提交</button>
-  		<button id="Cancel">提交</button>
+  		<button id="Cancel">取消</button>
   	</div>
   	<div>老乡的店铺</div>
     <div style="width:90%;margin:5%">
@@ -79,9 +79,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   			<div id="CreateOrder"align="center" style="width:30%;margin-right:5%;height:8%;background-color:#ffffff;float:right;border:1px solid black;">发送购买请求</div>
   			<div align="center" style="width:30%;margin-right:5%;height:8%;background-color:#ffffff;float:right;border:1px solid black;">分享到微信</div>
   		</div>
-  		<img alt="" src="" style="width:100%;height:30%;float:left;" id="i_proPic1">
-  		<img alt="" src="" style="width:100%;height:30%;float:left;" id="i_proPic2">
-  		<img alt="" src="" style="width:100%;height:30%;float:left;" id="i_proPic3">
+  		<img alt="" src="" style="width:100%;height:40%;float:left;" id="i_proPic1">
+  		<img alt="" src="" style="width:100%;height:40%;float:left;" id="i_proPic2">
+  		<img alt="" src="" style="width:100%;height:40%;float:left;" id="i_proPic3">
   	</div>
   	<div id="re_Top" align="center" style="width:30%;margin:5%;height:8%;background-color:#ffffff;float:right;border:1px solid black;">返回顶部</div>
   	<div id="re_Main" align="center" style="width:30%;margin:5%;height:8%;background-color:#ffffff;float:right;border:1px solid black;">返回村友集市列表</div>

@@ -54,7 +54,9 @@ public class UserLogin extends HttpServlet {
 		String openId=request.getParameter("openId");
 		IUserService service=new UserService();
 		User u=service.searchByOpenId(openId);
-		if(u!=null)
+		System.out.println(accessToken);
+		System.out.println(openId);
+		if(u.getuId()!=0)
 		{
 			u.setAccessToken(accessToken);
 			service.update(u);
