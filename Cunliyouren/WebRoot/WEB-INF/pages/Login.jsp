@@ -22,10 +22,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
   <script type="text/javascript" src="<%=basePath  %>JavaScript/jquery.js"></script>
     <script  type="text/javascript">
-    	var v=${token};
+    $(document).ready(function(){
     	$("#login").click(function(){
-    		location.href=<%=basePath%>+"UserLogin?accessToken='"+token.access_token+"'&openId='"+token.openid+"'";
+    		location.href=<%=basePath%>+"UserLogin?accessToken='"+${accessToken}+"'&openId='"+${openId}+"'";
     	});
+    });
     </script>
 
   </head>
@@ -35,7 +36,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	<img alt="" src="Resource/MainPagePic/MainPic" style="width:100%;height:100%">
     </div>
     <div style="width:100%;height:%30" align="center">
-    	<img alt="" src="${headUrl}" style="width:100%;height:100%" id="login">
+    	<img alt="" src=${headUrl} style="width:100%;height:100%" id="login">
     </div>
   </body>
 </html>

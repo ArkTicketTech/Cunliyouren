@@ -51,22 +51,14 @@ public class SendedOrderUI extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		U_AccessToken token=WechatUtils.getUAccessToken("SendedOrderUI");
 		IUserService uservice=new UserService();
 		IOrderService oservice=new OrderService();
-		User u=uservice.searchByAccessToken(token.getAccess_token());
-		if(u==null) 
-		{
-			JSONObject jt=JSONObject.fromObject(token);
-			request.setAttribute("token", jt);
-			request.getRequestDispatcher("/WEB-INF/pages/LoginUI").forward(request, response);
-		}
-		else{
-			ArrayList<Order> a_o=oservice.SendedOrder(u.getuId());
-			JSONArray ja=JSONArray.fromObject(a_o);
-			request.setAttribute("sendedOrder", ja);
-			request.getRequestDispatcher("/WEB-INF/pages/SendedOrder.jsp").forward(request, response);
-		}
+		String openId=request.getParameter("openId");
+		User u=uservice.searchByOpenId(openId);
+		ArrayList<Order> a_o=oservice.SendedOrder(u.getuId());
+		JSONArray ja=JSONArray.fromObject(a_o);
+		request.setAttribute("sendedOrder", ja);
+		request.getRequestDispatcher("/WEB-INF/pages/SendedOrder.jsp").forward(request, response);
 	}
 
 	/**

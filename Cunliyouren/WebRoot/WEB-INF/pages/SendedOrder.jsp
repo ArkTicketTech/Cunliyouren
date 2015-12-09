@@ -21,9 +21,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	-->
 
   </head>
+  <script type="text/javascript" src="<%=basePath  %>JavaScript/jquery.js"></script>
   
   <body bgcolor="#ccff99" align="center">
-    <div style="width:40%;height:8%;background-color:#ffffff;border:1px solid black;">我发送的购买请求</div>
+    <div style="width:40%;height:8%;background-color:#ffffff;border:1px solid black;margin-left:30%">我发送的购买请求</div>
     <div style="width:90%;"></div>
   </body>
 </html>

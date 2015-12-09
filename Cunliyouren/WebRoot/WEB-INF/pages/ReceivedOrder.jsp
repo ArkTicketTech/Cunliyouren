@@ -21,10 +21,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	-->
 
   </head>
-  
+  <script type="text/javascript" src="<%=basePath  %>JavaScript/jquery.js"></script>
+  <script type="text/javascript">
+  	$("#back").click(function(){
+		location.href="<%=basePath  %>MainUI";
+	});
+  </script>
   <body bgcolor="#ccff99" align="center">
-    <div style="width:40%;height:8%;background-color:#ffffff;border:1px solid black;">我收到的购买请求</div>
+    <div style="width:40%;height:8%;background-color:#ffffff;border:1px solid black;margin-left:30%">我收到的购买请求</div>
     <div style="width:90%;"></div>
-    <div style="width:30%;margin:5%;height:8%;background-color:#ffffff;float:right;border:1px solid black;">返回上一页</div>
+    <div id="back" style="width:30%;margin:5%;height:8%;background-color:#ffffff;float:right;border:1px solid black;">返回上一页</div>
   </body>
 </html>

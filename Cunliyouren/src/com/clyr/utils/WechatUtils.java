@@ -21,8 +21,10 @@ public class WechatUtils {
 	private static String APPSECRET;
 	private static String CODE_URL;
 	private static String U_ACCESS_TOKEN_URL;
-	private static String REDIRECT_URI;
+	private static String REDIRECT_URI_BASE;
+	private static String REDIRECT_URI_ALL;
 	private static String GET_USER_INFO_URL;
+	private static String VALIDATE_URL;
 	static {
 		Properties pro = new Properties();
 		try {
@@ -34,8 +36,10 @@ public class WechatUtils {
 		APPSECRET=pro.getProperty("APPSECRET");
 		CODE_URL=pro.getProperty("CODE_URL");
 		U_ACCESS_TOKEN_URL=pro.getProperty("U_ACCESS_TOKEN_URL");
-		REDIRECT_URI=pro.getProperty("REDIRECT_URI");
+		REDIRECT_URI_BASE=pro.getProperty("REDIRECT_URI_BASE");
+		REDIRECT_URI_ALL=pro.getProperty("REDIRECT_URI_ALL");
 		GET_USER_INFO_URL=pro.getProperty("GET_USER_INFO_URL");
+		VALIDATE_URL=pro.getProperty("VALIDATE_URL");
 	}
 	
 	public static JSONObject doGetStr(String url)
@@ -78,26 +82,40 @@ public class WechatUtils {
 		return jsonObject;
 	}
 	
+	
 	/**
-	 * 获取u_accesstoken
+	 * 获取静域code
 	 * @return
 	 */
-	public static U_AccessToken getUAccessToken(String red_url){
+	public static String getBaseUrl(String state){
+		String url=CODE_URL.replace("APPID", APPID).replace("REDIRECT_URI",REDIRECT_URI_BASE).replace("SCOPE", "snsapi_base").replace("STATE", state);
+		return url;
+	}
+	
+	/**
+	 * 获取全域code
+	 * @return
+	 */
+	public static String getALLUrl(String state){
+		String url=CODE_URL.replace("APPID", APPID).replace("REDIRECT_URI",REDIRECT_URI_ALL).replace("SCOPE", "snsapi_base,snsapi_userinfo").replace("STATE", state);
+		return url;
+	}
+	
+	/**
+	 * 通过code获取u_accesstoken
+	 * @return
+	 */
+	public static U_AccessToken getUAccessToken(String code){
 		U_AccessToken token=new U_AccessToken();
-		String url=CODE_URL.replace("APPID", APPID).replace("REDIRECT_URI",REDIRECT_URI+red_url).replace("scope", "snsapi_login,snsapi_base,snsapi_userinfo");
-		JSONObject jsonObjectCode=doGetStr(url);
-		if(jsonObjectCode!=null)
+		String url=U_ACCESS_TOKEN_URL.replace("APPID",APPID).replace("SECRET",APPSECRET).replace("CODE",code);
+		JSONObject jsonObjectAT=doGetStr(url);
+		if(jsonObjectAT!=null)
 		{
-			url=U_ACCESS_TOKEN_URL.replace("APPID",APPID).replace("SECRET",APPSECRET).replace("CODE",jsonObjectCode.getString("code"));
-			JSONObject jsonObjectAT=doGetStr(url);
-			if(jsonObjectAT!=null)
-			{
-				token.setAccess_token(jsonObjectAT.getString("access_token"));
-				token.setExpires_in(jsonObjectAT.getInt("expires_in"));
-				token.setOpenId(jsonObjectAT.getString("openid"));
-				token.setRefresh_token(jsonObjectAT.getString("refresh_token"));
-				token.setScope(jsonObjectAT.getString("scope"));
-			}
+			token.setAccess_token(jsonObjectAT.getString("access_token"));
+			token.setExpires_in(jsonObjectAT.getInt("expires_in"));
+			token.setOpenId(jsonObjectAT.getString("openid"));
+			token.setRefresh_token(jsonObjectAT.getString("refresh_token"));
+			token.setScope(jsonObjectAT.getString("scope"));
 		}
 		return token;
 	}
@@ -106,6 +124,13 @@ public class WechatUtils {
 		String url=GET_USER_INFO_URL.replace("ACCESS_TOKEN", access_token).replace("OPENID",openid);
 		JSONObject jsonObject=doGetStr(url);
 		return jsonObject;
+	}
+	
+	public static JSONObject validate(String access_token,String openid)
+	{
+		String url=VALIDATE_URL.replace("ACCESS_TOKEN", access_token).replace("OPENID", openid);
+		JSONObject jsonObjectAT=doGetStr(url);
+		return jsonObjectAT;	
 	}
 	
 //	public static void main(String args[])

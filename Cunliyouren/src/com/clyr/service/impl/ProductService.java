@@ -9,6 +9,7 @@ import com.clyr.dao.impl.UserDao;
 import com.clyr.domain.Product;
 import com.clyr.domain.User;
 import com.clyr.service.IProductService;
+import com.clyr.utils.AMapUtils;
 
 public class ProductService implements IProductService {
 	private IProductDao productDao = new ProductDao();
@@ -30,21 +31,10 @@ public class ProductService implements IProductService {
 	}
 
 	@Override
-	public ArrayList<Product> searchByProductName(String productName, User u) {
+	public ArrayList<Product> searchByProductName(String productName) {
 		ArrayList<Product> a = new ArrayList<Product>();
-		ArrayList<User> temp = userDao.select(u);
-		boolean flag = true;
 		a.addAll(productDao.selectByName(productName));
 		a.addAll(productDao.fuzzySelectByName(productName));
-		for (Product p : a) {
-			flag = true;
-			for (User t_u : temp) {
-				if (p.getOwnerId() == t_u.getuId())
-					flag = false;
-			}
-			if (flag)
-				a.remove(p);
-		}
 		return a;
 	}
 
@@ -59,4 +49,51 @@ public class ProductService implements IProductService {
 		Product p = productDao.selectById(pId);
 		return p;
 	}
+
+	@Override
+	public ArrayList<Product> addConstraint(ArrayList<Product> a,
+			String constrain, User u) {
+		ArrayList<Product> result=new  ArrayList<Product>();
+		if(constrain.equals("homeTown"))
+		{
+			for(Product p:a)
+			{
+				if(userDao.selectByUId(p.getOwnerId()).getHomeTown().equals(u.getHomeTown()))
+					result.add(p);
+			}
+		}
+		else if(constrain.equals("school"))
+		{
+			for(Product p:a)
+			{
+				if(userDao.selectByUId(p.getOwnerId()).getHighSchool().equals(u.getHighSchool()) || 
+						userDao.selectByUId(p.getOwnerId()).getUniversity().equals(u.getUniversity()))
+					result.add(p);
+			}
+		}
+		else if(constrain.equals("homeAdd"))
+		{
+			for(Product p:a)
+			{
+				if(AMapUtils.Distance(userDao.selectByUId(p.getOwnerId()).getHomeAddressLocation(), u.getHomeAddressLocation())<3000)
+					result.add(p);
+			}
+		}
+		else if(constrain.equals("workAdd"))
+		{
+			for(Product p:a)
+			{
+				if(AMapUtils.Distance(userDao.selectByUId(p.getOwnerId()).getWorkingAddressLocation(), u.getWorkingAddressLocation())<3000)
+					result.add(p);
+			}
+		}
+		else
+		{ 
+			return a;
+		}
+		return result;
+	}
+	
+
 }
+

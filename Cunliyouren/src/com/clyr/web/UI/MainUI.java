@@ -45,19 +45,9 @@ public class MainUI extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		U_AccessToken token=WechatUtils.getUAccessToken("MainUI");
-		IUserService uservice=new UserService();
-		User u=uservice.searchByAccessToken(token.getAccess_token());
-		if(u!=null)
-		{
-			request.getRequestDispatcher("/WEB-INF/pages/Main.jsp").forward(request, response);
-		}
-		else
-		{
-			JSONObject jt=JSONObject.fromObject(token);
-			request.setAttribute("token", jt);
-			request.getRequestDispatcher("/WEB-INF/pages/LoginUI").forward(request, response);
-		}
+		String openId=request.getParameter("openId");
+		request.setAttribute("openId", openId);
+		request.getRequestDispatcher("/WEB-INF/pages/Main.jsp").forward(request, response);
 	}
 
 	/**

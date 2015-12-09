@@ -21,8 +21,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	-->
 
   </head>
+  <script type="text/javascript" src="<%=basePath  %>JavaScript/jquery.js"></script>
   <script type="text/javascript">
+  $(document).ready(function(){
   	var p=${myProduct};
+  	var openId=${openId}
   	$.each(v,function(idx,item){ 
   		$("#pro"+idx).click(function(){
   			$("#pName").attr("value",item.productName);
@@ -66,7 +69,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   				 "picture2":$("#pPic2").attr("src"),
   				 "picture3":$("#pPic3").attr("src"),
   				 "deliveryPoint":$("#pDPoint").attr("value"),
-  				 "ownerId":$("#uId").html()},
+  				 "ownerId":$("#uId").html(),
+  				 "openId":openId},
   			success:alert("上传成功"),
   			error:alert("上传失败")
   		});
@@ -84,6 +88,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   			error:alert("删除失败")
   		});
   	});
+  });
   </script>
   
   <body bgcolor="#ccff99">
@@ -101,9 +106,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	<p style="width:100%;margin:1%;float:left;">请输入产品详细描述</p>
     	<input type="text" style="width:60%;margin:1%;float:left;" name="discription" id="pDis">
     	<p style="width:100%;margin:1%;float:left;">请上传产品图片（最多3张）</p>
-    	<img alt="" src="" id="pPic1" style="width:30%;margin:1%;float:left;">
-    	<img alt="" src="" id="pPic2" style="width:30%;margin:1%;float:left;">
-    	<img alt="" src="" id="pPic3" style="width:30%;margin:1%;float:left;">
+    	<img alt="" src="Resource/addOpe.png" id="pPic1" style="width:30%;margin:1%;float:left;">
+    	<img alt="" src="Resource/addOpe.png" id="pPic2" style="width:30%;margin:1%;float:left;">
+    	<img alt="" src="Resource/addOpe.png" id="pPic3" style="width:30%;margin:1%;float:left;">
     	<p style="width:100%;margin:1%;float:left;">请输入建议交易地点（可协商）</p>
     	<input type="text" style="width:60%;margin:1%;float:left;" name="diliverPoint" id="pDpoint">
     	<p style="display:none;" id="pId"></p>

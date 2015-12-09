@@ -4,9 +4,17 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.clyr.domain.Order;
+import com.clyr.domain.User;
+import com.clyr.service.IOrderService;
+import com.clyr.service.IUserService;
+import com.clyr.service.impl.OrderService;
+import com.clyr.service.impl.UserService;
 
 public class CreateOrder extends HttpServlet {
 
@@ -37,7 +45,18 @@ public class CreateOrder extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+		Order o=new Order();
+		IUserService userv=new UserService();
+		IOrderService oserv=new OrderService();
+		String openId=request.getParameter("openId");
+		User u=userv.searchByOpenId(openId);
+		o.setSellerId(u.getuId());
+		o.setBuyerId(Integer.parseInt(request.getParameter("sellerId")));
+		o.setProductId(Integer.parseInt(request.getParameter("productId")));
+		o.setPruductNumber(Integer.parseInt(request.getParameter("pruductNumber")));
+		oserv.createOrder(o);
+		request.setAttribute("penId", openId);
+		request.getRequestDispatcher("/WEB-INF/pages/LoginUI").forward(request, response);
 	}
 
 	/**

@@ -62,6 +62,7 @@ public class UserRegister extends HttpServlet {
 		u.setWorkingAddressLocation(AMapUtils.getPosition(u.getWorkingAddress()).getJSONArray("pois").getJSONObject(0).getString("location"));
 		IUserService service=new UserService();
 		service.register(u);
+		request.setAttribute("openId", u.getOpenId());
 		request.getRequestDispatcher("/WEB-INF/pages/Main.jsp").forward(request, response);
 	}
 

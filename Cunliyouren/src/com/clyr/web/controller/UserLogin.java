@@ -56,8 +56,9 @@ public class UserLogin extends HttpServlet {
 		User u=service.searchByOpenId(openId);
 		if(u!=null)
 		{
-			Cookie c=new Cookie("openId",openId);
-			response.addCookie(c);
+			u.setAccessToken(accessToken);
+			service.update(u);
+			request.setAttribute("openId", u.getOpenId());
 			request.getRequestDispatcher("/WEB-INF/pages/Main.jsp").forward(request,response);
 		}
 		else

@@ -40,13 +40,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 	</style>
   </head>
+  <script type="text/javascript" src="<%=basePath  %>JavaScript/jquery.js"></script>
   <script type="text/javascript">
+  $(document).ready(function(){
   	var v=${userInfo};
   	var aT=${accessToken};
   	$("#nick").attr("value",userInfo.nickname);
   	$("#aT").attr("value",aT);
   	$("#oI").attr("value",userInfo.openid);
   	$("#hIU").attr("value",userInfo.headimgurl);
+  });
   </script>
   
   <body bgcolor="#ccff99">
@@ -74,9 +77,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	<div class="one">路</div>
     	<input type="text" name="workingAddressNum" style="width:12%;float:left;margin:1% 0%;height:9%">
     	<div class="one">弄</div>
-    	<input type="text" name="accessToken" style="display:none%" id="aT">
-    	<input type="text" name="openId" style="display:none%" id="oI">
-    	<input type="text" name="headImgUrl" style="display:none%" id="hIU">
+    	<input type="text" name="accessToken" style="display:none" id="aT">
+    	<input type="text" name="openId" style="display:none" id="oI">
+    	<input type="text" name="headImgUrl" style="display:none" id="hIU">
     	<input type="submit" value="提交" style="float:right;margin-right:8%;margin-top:8%">
     </form>
   </body>

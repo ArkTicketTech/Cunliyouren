@@ -27,7 +27,7 @@ public interface IProductService {
 	 * @param productName
 	 * @return
 	 */
-	ArrayList<Product> searchByProductName(String productName, User u);
+	ArrayList<Product> searchByProductName(String productName) ;
 
 	/**
 	 * 提供我的产品显示服务
@@ -46,4 +46,13 @@ public interface IProductService {
 	Product searchByPId(int pId);
 
 	void updateProduct(Product pro);
+	
+	/**
+	 * 为搜索结果增加约束
+	 * @param a:被约束列表
+	 * @param constrain:homeTown,school,homeAdd,workAdd.
+	 * @param u:用户
+	 * @return
+	 */
+	ArrayList<Product> addConstraint(ArrayList<Product> a,String constrain, User u) ;
 }

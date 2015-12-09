@@ -45,22 +45,13 @@ public class PersonalCenterUI extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		U_AccessToken token=WechatUtils.getUAccessToken("PersonalCenterUI");
 		IUserService uservice=new UserService();
-		User u=uservice.searchByAccessToken(token.getAccess_token());
-		if(u!=null)
-		{
-			JSONObject ja=WechatUtils.getUserInfo(u.getAccessToken(), u.getOpenId());
-			request.setAttribute("accessToken", token.getAccess_token());
-			request.setAttribute("userInfo", ja);
-			request.getRequestDispatcher("/WEB-INF/pages/PersonalCenter.jsp").forward(request, response);
-		}
-		else
-		{
-			JSONObject jt=JSONObject.fromObject(token);
-			request.setAttribute("token", jt);
-			request.getRequestDispatcher("/WEB-INF/pages/LoginUI").forward(request, response);
-		}
+		String openId=request.getParameter("openId");
+		User u=uservice.searchByOpenId(openId);
+		JSONObject ja=WechatUtils.getUserInfo(u.getAccessToken(), u.getOpenId());
+		request.setAttribute("accessToken", u.getAccessToken());
+		request.setAttribute("userInfo", ja);
+		request.getRequestDispatcher("/WEB-INF/pages/PersonalCenter.jsp").forward(request, response);
 	}
 
 	/**

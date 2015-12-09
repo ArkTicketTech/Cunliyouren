@@ -53,22 +53,15 @@ public class MyShopUI extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		U_AccessToken token=WechatUtils.getUAccessToken("MyShopUI");
+		String openId=request.getParameter("openId");
 		IUserService uservice=new UserService();
 		IProductService pservice=new ProductService();
-		User u=uservice.searchByAccessToken(token.getAccess_token());
-		if(u==null) 
-		{
-			JSONObject jt=JSONObject.fromObject(token);
-			request.setAttribute("token", jt);
-			request.getRequestDispatcher("/WEB-INF/pages/LoginUI").forward(request, response);
-		}
-		else{
-			ArrayList<Product> a_p=pservice.myProduct(u.getuId());
-			JSONArray ja=JSONArray.fromObject(a_p);
-			request.setAttribute("myProduct", ja);
-			request.getRequestDispatcher("/WEB-INF/pages/MyShop.jsp").forward(request, response);
-		}
+		User u=uservice.searchByOpenId(openId);
+		ArrayList<Product> a_p=pservice.myProduct(u.getuId());
+		JSONArray ja=JSONArray.fromObject(a_p);
+		request.setAttribute("myProduct", ja);
+		request.setAttribute("openId", openId);
+		request.getRequestDispatcher("/WEB-INF/pages/MyShop.jsp").forward(request, response);
 	}
 
 	/**

@@ -1,33 +1,24 @@
-package com.clyr.web.UI;
+package com.clyr.web.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
-import com.clyr.domain.Order;
 import com.clyr.domain.U_AccessToken;
-import com.clyr.domain.User;
-import com.clyr.service.IOrderService;
-import com.clyr.service.IUserService;
-import com.clyr.service.impl.OrderService;
-import com.clyr.service.impl.UserService;
 import com.clyr.utils.WechatUtils;
 
-public class ReceivedOrderUI extends HttpServlet {
+public class Info_Scope extends HttpServlet {
 
 	/**
 	 * Constructor of the object.
 	 */
-	public ReceivedOrderUI() {
+	public Info_Scope() {
 		super();
 	}
 
@@ -51,14 +42,12 @@ public class ReceivedOrderUI extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		IUserService uservice=new UserService();
-		IOrderService oservice=new OrderService();
-		String openId=request.getParameter("");
-		User u=uservice.searchByOpenId(openId);
-		ArrayList<Order> a_o=oservice.ReceivedOrder(u.getuId());
-		JSONArray ja=JSONArray.fromObject(a_o);
-		request.setAttribute("receivedOrder", ja);
-		request.getRequestDispatcher("/WEB-INF/pages/ReceivedOrder.jsp").forward(request, response);
+		U_AccessToken token=WechatUtils.getUAccessToken(request.getParameter("code"));
+		JSONObject j_info=WechatUtils.getUserInfo(token.getAccess_token(), token.getOpenId());
+		request.setAttribute("openId", token.getOpenId());
+		request.setAttribute("accessToken", token.getAccess_token());
+		request.setAttribute("headUrl", j_info.getString("headimgurl"));
+		request.getRequestDispatcher(request.getParameter("state")+"UI").forward(request, response);
 	}
 
 	/**

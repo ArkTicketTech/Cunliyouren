@@ -49,21 +49,6 @@ public class LoginUI extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		JSONObject token=(JSONObject) request.getAttribute("token");
-		IUserService uservice=new UserService();
-		User u=uservice.searchByOpenId(token.getString("openId"));
-		JSONObject ja=JSONObject.fromObject(token);
-		if(u==null)
-		{
-			JSONObject j_info=WechatUtils.getUserInfo(token.getString("access_token"), token.getString("openId"));
-			request.setAttribute("token", ja);
-			request.setAttribute("headUrl", j_info.getString("headimgurl"));
-		}
-		else
-		{
-			request.setAttribute("token", ja);
-			request.setAttribute("headUrl", u.getHeadImgUrl());
-		}
 		request.getRequestDispatcher("/WEB-INF/pages/Login.jsp").forward(request, response);
 	}
 

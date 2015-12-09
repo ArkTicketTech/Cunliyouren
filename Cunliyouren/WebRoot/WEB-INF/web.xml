@@ -157,6 +157,27 @@
     <servlet-name>CreateOrder</servlet-name>
     <servlet-class>com.clyr.web.controller.CreateOrder</servlet-class>
   </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Wechat2Redirect</servlet-name>
+    <servlet-class>com.clyr.web.controller.Wechat2Redirect</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Redirect2Web</servlet-name>
+    <servlet-class>com.clyr.web.controller.Redirect2Web</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Info_Scope</servlet-name>
+    <servlet-class>com.clyr.web.controller.Info_Scope</servlet-class>
+  </servlet>
+
+
+
 
 
 
@@ -289,6 +310,18 @@
   <servlet-mapping>
     <servlet-name>CreateOrder</servlet-name>
     <url-pattern>/CreateOrder</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Wechat2Redirect</servlet-name>
+    <url-pattern>/Wechat2Redirect</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Redirect2Web</servlet-name>
+    <url-pattern>/Redirect2Web</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Info_Scope</servlet-name>
+    <url-pattern>/Info_Scope</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

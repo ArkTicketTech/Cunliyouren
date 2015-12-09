@@ -41,6 +41,9 @@ public class UserDao implements IUserDao {
 				+ "' where uId=" + u.getuId());
 		db.doUpdate("update t_user set state='" + u.getState() + "' where uId="
 				+ u.getuId());
+		if (!u.getAccessToken().equals(""))
+			db.doUpdate("update t_user set accessToken='" + u.getAccessToken()
+					+ "' where uId=" + u.getuId());
 		if (!u.getTelNum().equals(""))
 			db.doUpdate("update t_user set telNum='" + u.getTelNum()
 					+ "' where uId=" + u.getuId());

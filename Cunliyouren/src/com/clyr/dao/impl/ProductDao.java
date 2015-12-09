@@ -2,7 +2,12 @@ package com.clyr.dao.impl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import com.clyr.dao.IProductDao;
 
@@ -53,6 +58,9 @@ public class ProductDao implements IProductDao {
 					+ pro.getProductName() + "' where pId=" + pro.getpId());
 		if (pro.getPrice() != 0)
 			db.doUpdate("update t_product set price=" + pro.getPrice()
+					+ " where pId=" + pro.getpId());
+		if (pro.getOwnerId() != 0)
+			db.doUpdate("update t_product set ownerId=" + pro.getOwnerId()
 					+ " where pId=" + pro.getpId());
 		if (!pro.getUnit().equals(""))
 			db.doUpdate("update t_product set unit='" + pro.getUnit()
@@ -112,7 +120,7 @@ public class ProductDao implements IProductDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return a;
+		return sortByTimestamp(a);
 	}
 
 	@Override
@@ -176,7 +184,7 @@ public class ProductDao implements IProductDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return a;
+		return sortByTimestamp(a);
 	}
 
 	@Override
@@ -211,5 +219,37 @@ public class ProductDao implements IProductDao {
 		}
 		return null;
 	}
+	
+	private ArrayList<Product> sortByTimestamp(ArrayList<Product> a)
+	{
+		Comparator<Product> c=new Comparator<Product>(){
+			@Override
+			public int compare(Product o1, Product o2) {
+				DateFormat sdf=new SimpleDateFormat("yyyy/MM/dd/HH/mm/ss");
+				String a2Str=sdf.format(o1.getUpdateTime());
+				String b2Str=sdf.format(o2.getUpdateTime());
+				String A[]=a2Str.split("/");
+				String B[]=b2Str.split("/");
+				if(Integer.parseInt(A[0])<Integer.parseInt(B[0]))
+					return 1;
+				else if(Integer.parseInt(A[1])<Integer.parseInt(B[1]))
+					return 1;
+				else if(Integer.parseInt(A[2])<Integer.parseInt(B[2]))
+					return 1;
+				else if(Integer.parseInt(A[3])<Integer.parseInt(B[3]))
+					return 1;
+				else if(Integer.parseInt(A[4])<Integer.parseInt(B[4]))
+					return 1;
+				else if(Integer.parseInt(A[5])<Integer.parseInt(B[5]))
+					return 1;
+				else
+					return 0;
+			}
+		};
+		Collections.sort(a, c);
+		return a;
+	}
+	
+	
 
 }

@@ -10,8 +10,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONObject;
 
+import com.clyr.domain.Product;
+import com.clyr.domain.User;
 import com.clyr.service.IProductService;
+import com.clyr.service.IUserService;
 import com.clyr.service.impl.ProductService;
+import com.clyr.service.impl.UserService;
 
 public class ProDetailUI extends HttpServlet {
 
@@ -44,8 +48,16 @@ public class ProDetailUI extends HttpServlet {
 			throws ServletException, IOException {
 		int pId=Integer.parseInt(request.getParameter("pId"));
 		IProductService service=new ProductService();
-		JSONObject ja=JSONObject.fromObject(service.searchByPId(pId));
-		request.setAttribute("product", ja);
+		Product p=new Product();
+		p=service.searchByPId(pId);
+		IUserService userv=new UserService();
+		User u=userv.searchByUId(p.getOwnerId());
+		String openId=request.getParameter("openId");
+		JSONObject jp=JSONObject.fromObject(p);
+		JSONObject ju=JSONObject.fromObject(u);
+		request.setAttribute("product", jp);
+		request.setAttribute("seller", ju);
+		request.setAttribute("openId", openId);
 		request.getRequestDispatcher("/WEB-INF/pages/ProDetail.jsp").forward(request, response);
 	}
 
