@@ -44,7 +44,8 @@ public class DeleteProduct extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		IProductService service=new ProductService();
 		service.deleteProduct(Integer.parseInt(request.getParameter("pId")));
 	}

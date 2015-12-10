@@ -46,6 +46,8 @@ public class ProDetailUI extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		int pId=Integer.parseInt(request.getParameter("pId"));
 		IProductService service=new ProductService();
 		Product p=new Product();

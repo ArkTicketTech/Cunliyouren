@@ -43,6 +43,8 @@ public class Redirect2Web extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		U_AccessToken token=WechatUtils.getUAccessToken(request.getParameter("code"));
 		IUserService userv=new UserService();
 		User u=userv.searchByOpenId(token.getOpenId());

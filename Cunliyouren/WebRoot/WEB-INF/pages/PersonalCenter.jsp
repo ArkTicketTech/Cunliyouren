@@ -22,33 +22,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<style type="text/css">
 		p{
 			float:left;
-			margin:1% 6%;
-			width:30%;
-			height:9%
+			margin:3% 2%;
+			width:35%;
+			padding-bottom:8%;
+			height:0;
+			font-size:5vw
 		}
 		.one{
 			float:left;
-			margin:1% 0%;
-			width:4%;
-			height:9%
+			margin:3% 0%;
+			width:6%;
+			height:9%;
+			font-size:5vw
 		}
 		.two{
 			float:left;
-			margin:1% 0%;
-			width:8%;
-			height:9%
+			margin:3% 0%;
+			width:12%;
+			height:9%;
+			font-size:5vw
 		}
 	</style>
   </head>
   <script type="text/javascript" src="<%=basePath  %>JavaScript/jquery.js"></script>
   <script type="text/javascript">
   $(document).ready(function(){
-	var v=${userInfo};
-	var aT=${accessToken};
-	$("#nick").attr("value",v.nickname);
-	$("#aT").attr("value",aT);
-	$("#oI").attr("value",v.openid);
-	$("#hIU").attr("value",v.headimgurl);
   	$("#quit").click(function(){
   		location.href="<%=basePath  %>MainUI";
   		});
@@ -56,34 +54,38 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </script>
   
   <body bgcolor="#ccff99">
-    <div style="width:100%;height:15%;margin:6%;">为了让您在村里有人获得更好的用户体验，结识更多村友，建议您先完善以下信息哦~</div>
-    <form method="post" name="form1" style="width:88%" action="UserUpdate">
-    	<p>昵称</p><input type="text" name="nickName" style="width:58%;float:left;margin:1% 0%;height:9%">
-    	<p>手机号码</p><input type="text" name="telNum" style="width:58%;float:left;margin:1% 0%;height:9%">
-    	<p>请选择您的家乡</p>
-    	<select name="province" style="width:17%;float:left;margin:1% 1%;height:9%"></select>
-    	<select name="city" style="width:17%;float:left;margin:1% 1%;height:9%"></select>
-    	<select name="district" style="width:17%;float:left;margin:1% 1%;height:9%"></select>
-    	<p>您就读高中全称</p><input type="text" name="highSchool" style="width:58%;float:left;margin:1% 0%;height:9%">
-    	<p>您就读大学全称</p><input type="text" name="university" style="width:58%;float:left;margin:1% 0%;height:9%">
+    <div style="width:100%;height:15%;margin:6%;font-size:5vw">为了让您在村里有人获得更好的用户体验，结识更多村友，建议您先完善以下信息哦~</div>
+    <form method="post" name="form1" style="width:100%" action="UserUpdate">
+    	<p>昵称</p>
+    	<input type="text" name="nickName" style="width:58%;float:left;margin:3% 0%;padding:4% 0;height:0;font-size:5vw" readonly="readonly" id="nick" value=${userInfo.nickname }>
+    	<p>手机号码</p>
+    	<input type="text" name="telNum" style="width:58%;float:left;margin:3% 0%;padding:4% 0;height:0;font-size:5vw">
+    	<p>您的家乡</p>
+    	<select name="province" style="width:17%;float:left;margin:3% 1%;padding:4% 0;height:0;font-size:5vw"></select>
+    	<select name="city" style="width:17%;float:left;margin:3% 1%;padding-bottom:8%;height:0;font-size:5vw"></select>
+    	<select name="district" style="width:17%;float:left;margin:3% 1%;padding:4% 0;height:0;font-size:5vw"></select>
+    	<p>就读高中全称</p>
+    	<input type="text" name="highSchool" style="width:58%;float:left;margin:3% 0%;padding:4% 0;height:0;font-size:5vw">
+    	<p>就读大学全称</p>
+    	<input type="text" name="university" style="width:58%;float:left;margin:3% 0%;padding:4% 0;height:0;font-size:5vw">
     	<p>目前常住地点</p>
-    	<input type="text" name="homeAddressCity" style="width:12%;float:left;margin:1% 0%;height:9%">
+    	<input type="text" name="homeAddressCity" style="width:12%;float:left;margin:3% 0%;padding:4% 0;height:0;font-size:5vw">
     	<div class="two">省市</div>
-    	<input type="text" name="homeAddressRoad" style="width:12%;float:left;margin:1% 0%;height:9%">
+    	<input type="text" name="homeAddressRoad" style="width:12%;float:left;margin:3% 0%;padding:4% 0;height:0;font-size:5vw">
     	<div class="one">路 </div>
-    	<input type="text" name="homeAddressNum" style="width:12%;float:left;margin:1% 0%;height:9%">
+    	<input type="text" name="homeAddressNum" style="width:12%;float:left;margin:3% 0%;padding:4% 0;height:0;font-size:5vw">
     	<div class="one">弄</div>
     	<p>目前工作地点</p>
-    	<input type="text" name="workingAddressCity" style="width:12%;float:left;margin:1% 0%;height:9%">
+    	<input type="text" name="workingAddressCity" style="width:12%;float:left;margin:3% 0%;padding:4% 0;height:0;font-size:5vw">
     	<div class="two">省市</div>
-    	<input type="text" name="workingAddressRoad" style="width:12%;float:left;margin:1% 0%;height:9%">
+    	<input type="text" name="workingAddressRoad" style="width:12%;float:left;margin:3% 0%;padding:4% 0;height:0;font-size:5vw">
     	<div class="one">路</div>
-    	<input type="text" name="workingAddressNum" style="width:12%;float:left;margin:1% 0%;height:9%">
+    	<input type="text" name="workingAddressNum" style="width:12%;float:left;margin:3% 0%;padding:4% 0;height:0;font-size:5vw">
     	<div class="one">弄</div>
-    	<input type="text" name="accessToken" style="display:none" id="aT">
-    	<input type="text" name="openId" style="display:none" id="oI">
-    	<input type="text" name="headImgUrl" style="display:none" id="hIU">
-    	<input type="submit" value="提交并返回" style="float:right;margin-right:8%;margin-top:8%">
+    	<input type="text" name="accessToken" style="display:none" id="aT" value=${accessToken } >
+    	<input type="text" name="openId" style="display:none" id="oI" value=${userInfo.openid }>
+    	<input type="text" name="headImgUrl" style="display:none" id="hIU" value=${userInfo.headimgurl }>
+    	<input type="submit" value="提交" style="width:20%;padding:4% 0;height:0;;float:right;margin-right:8%;margin-top:8%;font-size:5vw">
     </form>
     <button id="quit" style="float:left;margin-right:8%;margin-top:7%">放弃并返回</button>
   </body>

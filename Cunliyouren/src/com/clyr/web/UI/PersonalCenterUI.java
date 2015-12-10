@@ -45,6 +45,8 @@ public class PersonalCenterUI extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		IUserService uservice=new UserService();
 		String openId=request.getParameter("openId");
 		User u=uservice.searchByOpenId(openId);

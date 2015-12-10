@@ -14,11 +14,14 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import com.clyr.domain.Order;
+import com.clyr.domain.Product;
 import com.clyr.domain.U_AccessToken;
 import com.clyr.domain.User;
 import com.clyr.service.IOrderService;
+import com.clyr.service.IProductService;
 import com.clyr.service.IUserService;
 import com.clyr.service.impl.OrderService;
+import com.clyr.service.impl.ProductService;
 import com.clyr.service.impl.UserService;
 import com.clyr.utils.WechatUtils;
 
@@ -51,13 +54,34 @@ public class SendedOrderUI extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		IUserService uservice=new UserService();
 		IOrderService oservice=new OrderService();
+		IProductService pservice=new ProductService();
 		String openId=request.getParameter("openId");
 		User u=uservice.searchByOpenId(openId);
 		ArrayList<Order> a_o=oservice.SendedOrder(u.getuId());
-		JSONArray ja=JSONArray.fromObject(a_o);
-		request.setAttribute("sendedOrder", ja);
+		ArrayList<Product> a_p=new ArrayList<Product>();
+		ArrayList<User> a_u=new ArrayList<User>();
+		for(Order o:a_o)
+		{
+			Product p_temp=new Product();
+			User u_temp=new User();
+			p_temp=pservice.searchByPId(o.getProductId());
+			u_temp=uservice.searchByUId(o.getSellerId());
+			a_p.add(p_temp);
+			a_u.add(u_temp);
+		}
+		JSONArray jao=JSONArray.fromObject(a_o);
+		JSONArray jau=JSONArray.fromObject(a_u);
+		String str=joinJSONArray(jao,jau);
+		JSONArray temp=JSONArray.fromObject(str);
+		JSONArray jap=JSONArray.fromObject(a_p);
+		str=joinJSONArray(temp,jap);
+		JSONArray result=JSONArray.fromObject(str);
+		request.setAttribute("sendedOrder", result);
+		request.setAttribute("openId", openId);
 		request.getRequestDispatcher("/WEB-INF/pages/SendedOrder.jsp").forward(request, response);
 	}
 
@@ -86,4 +110,34 @@ public class SendedOrderUI extends HttpServlet {
 		// Put your code here
 	}
 
+	/**
+     * 返回两个JsonArray的合并后的字符串
+     * @param mData
+     * @param array
+     * @return
+     */
+    public String joinJSONArray(JSONArray mData, JSONArray array) {
+        StringBuffer buffer = new StringBuffer();
+        try {
+          int len = mData.size();
+          for (int i = 0; i < len; i++) {
+            JSONObject obj1 = (JSONObject) mData.get(i);
+            JSONObject obj2 = (JSONObject) array.get(i);
+            if (i == len - 1)
+            {
+            	String str=obj2.toString().substring(1);
+            	buffer.append(obj1.toString()).deleteCharAt(buffer.length()-1).append(",").append(str);
+            }
+            else
+            {
+            	String str=obj2.toString().substring(1);
+            	buffer.append(obj1.toString()).deleteCharAt(buffer.length()-1).append(",").append(str).append(",");
+            }
+          }
+          buffer.insert(0, "[").append("]");
+          return buffer.toString();
+        } catch (Exception e) {
+        }
+        return null;
+      }
 }

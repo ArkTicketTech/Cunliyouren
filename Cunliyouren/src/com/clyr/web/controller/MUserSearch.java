@@ -49,6 +49,8 @@ public class MUserSearch extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		String key = request.getParameter("key");
 		if (key == null)
 			key = "";

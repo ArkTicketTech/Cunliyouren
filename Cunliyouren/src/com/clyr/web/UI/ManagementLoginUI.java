@@ -63,6 +63,8 @@ public class ManagementLoginUI extends HttpServlet {
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		request.getRequestDispatcher("/WEB-INF/pages/ManagementLogin.jsp")
 				.forward(request, response);
 	}

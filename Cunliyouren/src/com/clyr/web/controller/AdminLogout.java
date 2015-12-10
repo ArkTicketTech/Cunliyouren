@@ -42,7 +42,8 @@ public class AdminLogout extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		Cookie cookies[] = request.getCookies();
 		if (cookies != null) {
 			for (Cookie cookie : cookies) {

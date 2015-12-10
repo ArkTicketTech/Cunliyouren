@@ -46,7 +46,8 @@ public class UserUpdate extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		User u=new User();
 		u.setAccessToken(request.getParameter("accessToken"));
 		u.setOpenId(request.getParameter("openId"));

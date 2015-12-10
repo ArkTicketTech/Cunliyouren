@@ -51,6 +51,8 @@ public class UserRegister extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		String err="本项必填";	
 		if(request.getParameter("homeAddressCity").equals("") || 
 				request.getParameter("homeAddressRoad").equals("") ||
@@ -91,10 +93,16 @@ public class UserRegister extends HttpServlet {
 			u.setHomeTown(request.getParameter("province")+request.getParameter("city")+request.getParameter("district"));
 			u.setHighSchool(request.getParameter("highSchool"));
 			u.setUniversity(request.getParameter("university"));
-			u.setHomeAddress(request.getParameter("homeAddressCity")+request.getParameter("homeAddressRoad")+request.getParameter("homeAddressNum"));
-			u.setWorkingAddress(request.getParameter("workingAddressCity")+request.getParameter("workingAddressRoad")+request.getParameter("workingAddressNum"));
-			u.setHomeAddressLocation(AMapUtils.getPosition(u.getHomeAddress()).getJSONArray("pois").getJSONObject(0).getString("location"));
-			u.setWorkingAddressLocation(AMapUtils.getPosition(u.getWorkingAddress()).getJSONArray("pois").getJSONObject(0).getString("location"));
+			u.setHomeAddress(request.getParameter("homeAddressCity")+" "+request.getParameter("homeAddressRoad")+"路 "+request.getParameter("homeAddressNum"));
+			u.setWorkingAddress(request.getParameter("workingAddressCity")+" "+request.getParameter("workingAddressRoad")+"路 "+request.getParameter("workingAddressNum"));
+			JSONObject jhaDD=AMapUtils.getPosition(u.getHomeAddress());
+			JSONObject jwaDD=AMapUtils.getPosition(u.getWorkingAddress());
+			if(jhaDD.getString("info").equals("OK"))
+				if(!jhaDD.getString("count").equals("0"))
+					u.setHomeAddressLocation(jhaDD.getJSONArray("pois").getJSONObject(0).getString("location"));
+			if(jwaDD.getString("info").equals("OK"))
+				if(!jwaDD.getString("count").equals("0"))
+					u.setWorkingAddressLocation(jwaDD.getJSONArray("pois").getJSONObject(0).getString("location"));
 			IUserService service=new UserService();
 			service.register(u);
 			request.setAttribute("openId", u.getOpenId());

@@ -45,6 +45,8 @@ public class UploadProduct extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		Product p=new Product();
 		IProductService service=new ProductService();
 		if(request.getParameter("pId").equals("")){

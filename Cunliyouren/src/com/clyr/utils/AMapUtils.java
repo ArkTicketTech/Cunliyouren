@@ -57,7 +57,9 @@ public class AMapUtils {
 	 */
 	public static JSONObject getPosition(String keyWords){
 		String url=KEYWORDS_SEARCH_URL.replace("ADDRESS", keyWords).replace("KEY",key);
+	    url = url.replaceAll(" ", "%20");
 		JSONObject jsonObject=doGetStr(url);
+		System.out.println(jsonObject);
 		return jsonObject;
 	}
 	

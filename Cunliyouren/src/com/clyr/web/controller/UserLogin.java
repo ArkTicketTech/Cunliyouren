@@ -50,6 +50,8 @@ public class UserLogin extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		String accessToken=request.getParameter("accessToken");
 		String openId=request.getParameter("openId");
 		IUserService service=new UserService();

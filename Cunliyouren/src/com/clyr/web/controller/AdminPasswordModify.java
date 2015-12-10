@@ -45,7 +45,8 @@ public class AdminPasswordModify extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		Cookie[] cookieSet = request.getCookies();
 		String adminName = "";
 		String result = "密码不正确";

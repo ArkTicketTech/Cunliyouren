@@ -42,6 +42,8 @@ public class Info_Scope extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		U_AccessToken token=WechatUtils.getUAccessToken(request.getParameter("code"));
 		JSONObject j_info=WechatUtils.getUserInfo(token.getAccess_token(), token.getOpenId());
 		request.setAttribute("openId", token.getOpenId());

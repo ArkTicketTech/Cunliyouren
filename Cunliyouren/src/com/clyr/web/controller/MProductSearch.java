@@ -47,7 +47,8 @@ public class MProductSearch extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("utf-8");
 		IProductService service = new ProductService();
 		Product p = service.searchByPId(Integer.parseInt(request

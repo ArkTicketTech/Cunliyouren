@@ -45,7 +45,8 @@ public class MUserEnable extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		User u = new User();
 		IUserService service = new UserService();
 		u = service.searchByUId(Integer.parseInt(request.getParameter("user")));
