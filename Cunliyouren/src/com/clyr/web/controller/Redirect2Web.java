@@ -48,20 +48,16 @@ public class Redirect2Web extends HttpServlet {
 		U_AccessToken token=WechatUtils.getUAccessToken(request.getParameter("code"));
 		IUserService userv=new UserService();
 		User u=userv.searchByOpenId(token.getOpenId());
-		if(u.getuId()!=0)
+		if(u.getuId()!=0 && u.getState()!=0)
 		{
-			if(WechatUtils.validate(u.getAccessToken(), u.getOpenId()).getString("errmsg").equals("ok"))
-			{
-				request.setAttribute("openId", token.getOpenId());
-				request.getRequestDispatcher(request.getParameter("state")+"UI").forward(request,response);
-			}
-			else
-			{
-				response.sendRedirect(WechatUtils.getALLUrl("Login"));
-			}
+			u.setAccessToken(token.getAccess_token());
+			userv.update(u);
+			request.setAttribute("openId", token.getOpenId());
+			request.getRequestDispatcher("MainUI?openId="+ token.getOpenId()).forward(request,response);
 		}
 		else
 		{
+			System.out.println(WechatUtils.getALLUrl("Login"));
 			response.sendRedirect(WechatUtils.getALLUrl("Login"));
 		}
 	}

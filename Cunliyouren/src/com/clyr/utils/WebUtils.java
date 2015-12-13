@@ -6,9 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.beanutils.BeanUtils;
 
-/**
- * @author gacl ��request�����е���������װ��bean��
- */
+
 public class WebUtils {
 
 	/**

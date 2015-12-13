@@ -59,8 +59,7 @@ public class ReceivedOrderUI extends HttpServlet {
 		IUserService uservice=new UserService();
 		IOrderService oservice=new OrderService();
 		IProductService pservice=new ProductService();
-		String openId=request.getParameter("openId");
-		openId="000001";
+		String openId=request.getAttribute("openId").toString();
 		User u=uservice.searchByOpenId(openId);
 		ArrayList<Order> a_o=oservice.ReceivedOrder(u.getuId());
 		ArrayList<Product> a_p=new ArrayList<Product>();

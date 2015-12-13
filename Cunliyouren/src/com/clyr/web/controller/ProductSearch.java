@@ -72,7 +72,6 @@ public class ProductSearch extends HttpServlet {
 		a=service.addConstraint(a, request.getParameter("homeAdd"), u);
 		JSONArray result=JSONArray.fromObject(a);
 		ArrayList<RelationBean> a_r=new ArrayList<RelationBean>();
-		StringBuffer buffer=new StringBuffer();
 		for(int i=0;i<a.size();i++)
 		{
 			User temp=new User();

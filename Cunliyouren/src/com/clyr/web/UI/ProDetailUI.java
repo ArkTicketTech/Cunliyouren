@@ -16,6 +16,8 @@ import com.clyr.service.IProductService;
 import com.clyr.service.IUserService;
 import com.clyr.service.impl.ProductService;
 import com.clyr.service.impl.UserService;
+import com.clyr.utils.SignUtil;
+import com.clyr.utils.WechatUtils;
 
 public class ProDetailUI extends HttpServlet {
 
@@ -57,6 +59,19 @@ public class ProDetailUI extends HttpServlet {
 		String openId=request.getParameter("openId");
 		JSONObject jp=JSONObject.fromObject(p);
 		JSONObject ju=JSONObject.fromObject(u);
+		long timestamp = SignUtil.create_timestamp();
+		String nonceStr = SignUtil.create_nonce_str();
+        StringBuffer requestUrl = request.getRequestURL();
+        String queryString = request.getQueryString();
+        String url = requestUrl +"?"+queryString;
+		try {
+			String signature = SignUtil.getSignature(WechatUtils.getTicket(), nonceStr, timestamp, url);
+			request.setAttribute("timestamp", timestamp);
+			request.setAttribute("nonceStr", nonceStr);
+			request.setAttribute("signature", signature);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		request.setAttribute("product", jp);
 		request.setAttribute("seller", ju);
 		request.setAttribute("openId", openId);

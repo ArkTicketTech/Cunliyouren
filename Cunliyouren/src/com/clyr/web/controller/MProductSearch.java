@@ -51,10 +51,8 @@ public class MProductSearch extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("utf-8");
 		IProductService service = new ProductService();
-		Product p = service.searchByPId(Integer.parseInt(request
-				.getParameter("pId")));
+		Product p = service.searchByPId(Integer.parseInt(request.getParameter("pId")));
 		JSONArray ja = JSONArray.fromObject(p);
-		System.out.println(ja);
 		request.setAttribute("pResult", ja);
 		PrintWriter writer = response.getWriter();
 		writer.write(ja.toString());

@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>欢迎来带村里有人</title>
+    <title>欢迎来到村里有人</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -28,7 +28,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	$("#hometown").click(function() {
   		if($("#key1").attr("value")=="")
   		{
-	  		$("#hometown").css("background-color","#588c3b");
+	  		$("#hometown").css("background-color","#ccff99");
 	        $("#key1").attr("value","homeTown");
   		}
   		else
@@ -40,7 +40,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	$("#school").click(function() {
   		if($("#key2").attr("value")=="")
   		{
-	  		$("#school").css("background-color","#588c3b");
+	  		$("#school").css("background-color","#ccff99");
 	  		$("#key2").attr("value","school");
   		}
   		else
@@ -52,7 +52,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	$("#homeAdd").click(function() {
   		if($("#key3").attr("value")=="")
   		{
-	  		$("#homeAdd").css("background-color","#588c3b");
+	  		$("#homeAdd").css("background-color","#ccff99");
 	  		$("#key3").attr("value","homeAdd");
   		}
   		else
@@ -64,7 +64,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	$("#workAdd").click(function() {
   		if($("#key4").attr("value")=="")
   		{
-	  		$("#workAdd").css("background-color","#588c3b");
+	  		$("#workAdd").css("background-color","#ccff99");
 	  		$("#key4").attr("value","workAdd");
   		}
   		else
@@ -73,35 +73,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   			$("#key4").attr("value","");
   		}
 	});
-    var openId=<%=request.getAttribute("openId") %>;
   	var result=<%=request.getAttribute("result") %>;
   	$.each(result,function(idx,item){
   		var s_res=$("#s_res");
-  		var div_block=$("<div class='product' style='width:100%;height:0;padding-bottom:25%;'> </div>");
+  		var div_block=$("<div class='product' style='width:100%;height:0;padding-bottom:25%;overflow: hidden;'> </div>");
   		var div_pro=$("<div style='width:50%;height:0;padding-bottom:25%;margin:4%;float:left;background-color:#ffffff;border:1px solid black;'></div>");
-  		var img_pro=$("<img alt='' src='"+item.picture1+"' style='width:49%;height:0;padding-bottom:50%;float:left;border:1px solid black;'>");
+  		var img_pro=$("<img alt='' src='"+item.picture1+"' style='width:49%;float:left;border:1px solid black;'>");
   		var pname_pro=$("<div style='width:49%;height:0;padding-bottom:15%;float:left'>"+item.productName+"</div>");
   		var pprice_pro=$("<div style='width:49%;height:0;padding-bottom:35%;float:left'>"+item.price+"/"+item.unit+"</div>");
   		var div_rel=$("<div style='width:30%;height:0;padding-bottom:25%;margin:4%;float:left;background-color:#ffffff;border:1px solid black;'></div>");
-  		var oname_rel=$("<div style='width:100%;height:0;padding-bottom:25%;float:left;font-size:1.5vw'>"+item.friendName+"</div>");
+  		var oname_rel=$("<div style='width:100%;height:0;padding-bottom:25%;float:left;'>"+item.friendName+"</div>");
   		var rel_str="";
-  		if(item.hometown=1)
+  		if(item.hometown==1)
   		{
   			rel_str=rel_str+"| 同乡 |";
   		}
-  		if(item.school=1) 
+  		if(item.school==1) 
   		{
   			rel_str=rel_str+"| 校友 |";
   		}
-  		if(item.homeAdd=1) 
+  		if(item.homeAdd==1) 
   		{
   			rel_str=rel_str+"|住得近|";
   		}
-  		if(item.workAdd=1) 
+  		if(item.workAdd==1) 
   		{
   			rel_str=rel_str+"|工作近|";
   		}
-  		var orel_rel=$("<div style='width:100%;height:0;padding-bottom:25%;float:left;font-size:1vw'>"+rel_str+"</div>");
+  		var orel_rel=$("<div style='width:100%;height:0;padding-bottom:25%;float:left;'>"+rel_str+"</div>");
   		oname_rel.appendTo(div_rel);
   		orel_rel.appendTo(div_rel);
   		img_pro.appendTo(div_pro);
@@ -109,15 +108,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   		pprice_pro.appendTo(div_pro);
   		div_pro.appendTo(div_block);
   		div_rel.appendTo(div_block);
-  		div_block.bind("click",{'productId':item.pId},function(event){
-  			location.href="<%=basePath%>ProDetailUI?pId="+event.data["productId"];
+  		div_block.bind("click",{'productId':item.pId,'openId':'${openId }'},function(event){
+  			location.href="<%=basePath%>ProDetailUI?pId="+event.data["productId"]+"&openId="+event.data["openId"];
   		}).appendTo(s_res);
   	});
   });
   </script>
   
-  <body bgcolor="#ccff99">
-  	<div style="width:90%;height:5%;margin:2% 5%;font-size:4vw">欢迎来到村友集市，您的村友在卖：</div>
+  <body bgcolor="#ffffff">
+  	<div style="width:100%;height:0;padding-bottom:15%;font-size:4vw;background-color:#ccff99">欢迎来到村友集市，您的村友在卖：</div>
   	<div style="width:90%;height:10%;margin:1% 5%;">
   		<div id="hometown" align="center" style="width:20%;height:0;padding-bottom:9%;margin:2%;background-color:#ffffff;float:left;border:1px solid black;font-size:3.5vw">老乡</div>
   		<div id="school" align="center" style="width:20%;height:0;padding-bottom:9%;margin:2%;background-color:#ffffff;float:left;border:1px solid black;font-size:3.5vw">校友</div>
@@ -129,8 +128,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	<input type="text" style="display:none" id="key2" name="school" value="">
     	<input type="text" style="display:none" id="key3" name="workAdd" value="">
     	<input type="text" style="display:none" id="key4" name="homeAdd" value="">
+    	<input type="text" style="display:none" name="openId" value="${openId }">
     	<input type="text" style="width:60%;margin:5%;height:0;float:left;height:0;padding:3% 0" name="productName">
-    	<input type="submit" value="搜索" style="width:20%;height:0;padding-bottom:6%;margin:5%;background-color:#ffffff;float:left;font-size:3vw">
+    	<input type="submit" value="搜索" style="width:20%;height:6vw;margin:5%;background-color:#ffffff;float:left;font-size:3vw">
     </form>
     <div style="width:100%;margin:1% 5%;overflow:auto" id="s_res">
     </div>

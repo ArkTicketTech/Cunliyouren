@@ -59,7 +59,6 @@ public class AMapUtils {
 		String url=KEYWORDS_SEARCH_URL.replace("ADDRESS", keyWords).replace("KEY",key);
 	    url = url.replaceAll(" ", "%20");
 		JSONObject jsonObject=doGetStr(url);
-		System.out.println(jsonObject);
 		return jsonObject;
 	}
 	
@@ -90,7 +89,9 @@ public class AMapUtils {
 	public static double Distance(String str1 ,String str2)
 	{
 		if(str1.equals("") || str2.equals(""))
+		{
 			return 4000;
+		}
 		String a[]=str1.split(",");
 		String b[]=str2.split(",");
 		double long1=Double.valueOf(a[0]);

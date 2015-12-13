@@ -3,14 +3,19 @@ package com.clyr.web.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.clyr.domain.Product;
+import com.clyr.domain.User;
 import com.clyr.service.IProductService;
 import com.clyr.service.impl.ProductService;
+import com.clyr.service.impl.UserService;
+import com.clyr.utils.SignUtil;
+import com.clyr.utils.WechatUtils;
 
 public class UploadProduct extends HttpServlet {
 
@@ -47,33 +52,97 @@ public class UploadProduct extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
-		Product p=new Product();
 		IProductService service=new ProductService();
-		if(request.getParameter("pId").equals("")){
-			p.setOwnerId(Integer.parseInt(request.getParameter("uId")));
+		String picurl1="";
+		String picurl2="";
+		String picurl3="";
+		if(request.getParameter("productName")==null)
+		{
+			request.setAttribute("message", "上传失败，请确保填写产品名");
+		}
+		else if(request.getParameter("productName").equals(""))
+		{
+			request.setAttribute("message", "上传失败，请确保填写产品名");
+		}
+		else if(request.getParameter("pId").equals("")){
+			Product p=new Product();
+			User u=new User();
+			UserService userv=new UserService();
+			u=userv.searchByOpenId(request.getParameter("openId"));
+			p.setOwnerId(u.getuId());
 			p.setProductName(request.getParameter("productName"));
 			p.setPrice(Double.valueOf(request.getParameter("price")));
 			p.setUnit(request.getParameter("unit"));
 			p.setDescription(request.getParameter("description"));
-			p.setPicture1(request.getParameter("picture1"));
-			p.setPicture2(request.getParameter("picture2"));
-			p.setPicture3(request.getParameter("picture3"));
+			WechatUtils.downloadMedia(request.getParameter("picture1"), request.getSession().getServletContext().getRealPath("/Resource/ProImg"));
+			WechatUtils.downloadMedia(request.getParameter("picture2"), request.getSession().getServletContext().getRealPath("/Resource/ProImg"));
+			WechatUtils.downloadMedia(request.getParameter("picture3"), request.getSession().getServletContext().getRealPath("/Resource/ProImg"));
+			if(request.getParameter("picture1")!=null && !request.getParameter("picture1").equals("Resource/addOpe.png") && !request.getParameter("picture1").equals(""))
+				picurl1="Resource/ProImg/"+request.getParameter("picture1")+".jpeg";
+			else
+				picurl1="Resource/addOpe.png";
+			if(request.getParameter("picture2")!=null && !request.getParameter("picture2").equals("Resource/addOpe.png") && !request.getParameter("picture1").equals(""))
+				picurl2="Resource/ProImg/"+request.getParameter("picture2")+".jpeg";
+			else
+				picurl2="Resource/addOpe.png";
+			if(request.getParameter("picture3")!=null && !request.getParameter("picture3").equals("Resource/addOpe.png") && !request.getParameter("picture1").equals(""))
+				picurl3="Resource/ProImg/"+request.getParameter("picture3")+".jpeg";
+			else
+				picurl3="Resource/addOpe.png";
+			p.setPicture1(picurl1);
+			p.setPicture2(picurl2);
+			p.setPicture3(picurl3);
 			p.setDeliveryPoint(request.getParameter("deliveryPoint"));
+			System.out.println(p);
 			service.uploadProduct(p);
+			request.setAttribute("message", "上传产品成功");
 		}
 		else
 		{
-			p.setpId(Integer.parseInt(request.getParameter("pId")));
-			p.setProductName(request.getParameter("productName"));
+			Product p=service.searchByPId(Integer.parseInt(request.getParameter("pId")));
+			p.setProductName(request.getParameter("productName")+"");
 			p.setPrice(Double.valueOf(request.getParameter("price")));
-			p.setUnit(request.getParameter("unit"));
-			p.setDescription(request.getParameter("description"));
-			p.setPicture1(request.getParameter("picture1"));
-			p.setPicture2(request.getParameter("picture2"));
-			p.setPicture3(request.getParameter("picture3"));
-			p.setDeliveryPoint(request.getParameter("deliveryPoint"));
+			p.setUnit(request.getParameter("unit")+"");
+			System.out.println(request.getParameter("deliveryPoint"));
+			p.setDescription(request.getParameter("description")+"");
+			WechatUtils.downloadMedia(request.getParameter("picture1"), request.getSession().getServletContext().getRealPath("/Resource/ProImg"));
+			WechatUtils.downloadMedia(request.getParameter("picture2"), request.getSession().getServletContext().getRealPath("/Resource/ProImg"));
+			WechatUtils.downloadMedia(request.getParameter("picture3"), request.getSession().getServletContext().getRealPath("/Resource/ProImg"));
+			if(request.getParameter("picture1")!=null && !request.getParameter("picture1").equals("Resource/addOpe.png") && !request.getParameter("picture1").equals(""))
+				picurl1="Resource/ProImg/"+request.getParameter("picture1")+".jpeg";
+			else
+				picurl1="Resource/addOpe.png";
+			if(request.getParameter("picture2")!=null && !request.getParameter("picture2").equals("Resource/addOpe.png") && !request.getParameter("picture1").equals(""))
+				picurl2="Resource/ProImg/"+request.getParameter("picture2")+".jpeg";
+			else
+				picurl2="Resource/addOpe.png";
+			if(request.getParameter("picture3")!=null && !request.getParameter("picture3").equals("Resource/addOpe.png") && !request.getParameter("picture1").equals(""))
+				picurl3="Resource/ProImg/"+request.getParameter("picture3")+".jpeg";
+			else
+				picurl3="Resource/addOpe.png";
+			p.setPicture1(picurl1);
+			p.setPicture2(picurl2);
+			p.setPicture3(picurl3);
+			p.setDeliveryPoint(request.getParameter("deliveryPoint")+"");
 			service.updateProduct(p);
+			request.setAttribute("message", "更新产品成功");
 		}
+		
+		long timestamp = SignUtil.create_timestamp();
+		String nonceStr = SignUtil.create_nonce_str();
+        StringBuffer requestUrl = request.getRequestURL();
+        String queryString = request.getQueryString();
+        String url = requestUrl +"?"+queryString;
+		try {
+			String signature = SignUtil.getSignature(WechatUtils.getTicket(), nonceStr, timestamp, url);
+			request.setAttribute("timestamp", timestamp);
+			request.setAttribute("nonceStr", nonceStr);
+			request.setAttribute("signature", signature);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		request.getRequestDispatcher("MyShopUI").forward(request, response);
 	}
 
 	/**

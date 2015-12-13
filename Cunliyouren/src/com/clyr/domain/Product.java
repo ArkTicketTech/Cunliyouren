@@ -35,9 +35,9 @@ public class Product implements Serializable {
 		this.price = 0;
 		this.unit = "";
 		this.description = "";
-		this.picture1 = "";
-		this.picture2 = "";
-		this.picture3 = "";
+		this.picture1 = "Resource/addOpe.png";
+		this.picture2 = "Resource/addOpe.png";
+		this.picture3 = "Resource/addOpe.png";
 		this.deliveryPoint = "";
 		this.ownerId = 0;
 		this.updateTime = null;

@@ -47,12 +47,20 @@ public class UserDao implements IUserDao {
 		if (!u.getTelNum().equals(""))
 			db.doUpdate("update t_user set telNum='" + u.getTelNum()
 					+ "' where uId=" + u.getuId());
-		if (!u.getHomeAddress().equals(""))
+		if (!u.getHomeAddress().trim().equals(""))
+		{
 			db.doUpdate("update t_user set homeAddress='" + u.getHomeAddress()
 					+ "' where uId=" + u.getuId());
-		if (!u.getWorkingAddress().equals(""))
+			db.doUpdate("update t_user set homeAddressLocation='" + u.getHomeAddressLocation()
+					+ "' where uId=" + u.getuId());
+		}
+		if (!u.getWorkingAddress().trim().equals(""))
+		{
 			db.doUpdate("update t_user set workingAddress='"
 					+ u.getWorkingAddress() + "' where uId=" + u.getuId());
+			db.doUpdate("update t_user set workingAddressLocation='"
+					+ u.getWorkingAddressLocation() + "' where uId=" + u.getuId());
+		}
 		try {
 			db.close();
 		} catch (SQLException e) {
@@ -91,8 +99,8 @@ public class UserDao implements IUserDao {
 				temp.setUniversity(rs.getString("university"));
 				temp.setHomeAddress(rs.getString("homeAddress"));
 				temp.setWorkingAddress(rs.getString("workingAddress"));
-				temp.setHomeAddress(rs.getString("homeAddressLocation"));
-				temp.setWorkingAddress(rs.getString("workingAddressLocation"));
+				temp.setHomeAddressLocation(rs.getString("homeAddressLocation"));
+				temp.setWorkingAddressLocation(rs.getString("workingAddressLocation"));
 				temp.setState(rs.getInt("state"));
 				a.add(temp);
 			}
@@ -126,8 +134,8 @@ public class UserDao implements IUserDao {
 				temp.setUniversity(rs.getString("university"));
 				temp.setHomeAddress(rs.getString("homeAddress"));
 				temp.setWorkingAddress(rs.getString("workingAddress"));
-				temp.setHomeAddress(rs.getString("homeAddressLocation"));
-				temp.setWorkingAddress(rs.getString("workingAddressLocation"));
+				temp.setHomeAddressLocation(rs.getString("homeAddressLocation"));
+				temp.setWorkingAddressLocation(rs.getString("workingAddressLocation"));
 				temp.setState(rs.getInt("state"));
 				u = temp;
 			}
@@ -161,8 +169,8 @@ public class UserDao implements IUserDao {
 				temp.setUniversity(rs.getString("university"));
 				temp.setHomeAddress(rs.getString("homeAddress"));
 				temp.setWorkingAddress(rs.getString("workingAddress"));
-				temp.setHomeAddress(rs.getString("homeAddressLocation"));
-				temp.setWorkingAddress(rs.getString("workingAddressLocation"));
+				temp.setHomeAddressLocation(rs.getString("homeAddressLocation"));
+				temp.setWorkingAddressLocation(rs.getString("workingAddressLocation"));
 				temp.setState(rs.getInt("state"));
 				u = temp;
 			}
@@ -196,8 +204,8 @@ public class UserDao implements IUserDao {
 				temp.setUniversity(rs.getString("university"));
 				temp.setHomeAddress(rs.getString("homeAddress"));
 				temp.setWorkingAddress(rs.getString("workingAddress"));
-				temp.setHomeAddress(rs.getString("homeAddressLocation"));
-				temp.setWorkingAddress(rs.getString("workingAddressLocation"));
+				temp.setHomeAddressLocation(rs.getString("homeAddressLocation"));
+				temp.setWorkingAddressLocation(rs.getString("workingAddressLocation"));
 				temp.setState(rs.getInt("state"));
 				u = temp;
 			}

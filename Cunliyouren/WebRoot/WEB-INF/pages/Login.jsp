@@ -31,12 +31,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
   </head>
   
-  <body bgcolor="#ccff99">
-  	<div style="margin:5%;width:90%;height:60%">
-    	<img alt="" src="Resource/MainPagePic/MainPic" style="width:100%;height:100%">
+  <body bgcolor="#ffffff">
+  	<div style="margin:5%;width:90%;">
+    	<img alt="" src="Resource/MainPagePic/MainPic" style="width:100%;">
     </div>
-    <div style="width:100%;height:%30" align="center" >
-    	<img alt="" src=${headUrl } style="width:30%;height:20%"  id="login">
+    <div style="width:100%;height:0;padding:25% 0" align="center" >
+    	<img alt="" src=<%=request.getAttribute("headUrl") %> style="width:30%;"  id="login">
     </div>
   </body>
 </html>

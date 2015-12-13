@@ -41,8 +41,9 @@ public class Wechat2Redirect extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
-		String state=request.getParameter("state");
-		response.sendRedirect(WechatUtils.getBaseUrl(state));
+		String redi=request.getParameter("redi");
+		System.out.println(redi);
+		response.sendRedirect(WechatUtils.getBaseUrl(redi));
 	}
 
 	/**

@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.clyr.service.IProductService;
 import com.clyr.service.impl.ProductService;
+import com.clyr.utils.SignUtil;
+import com.clyr.utils.WechatUtils;
 
 public class DeleteProduct extends HttpServlet {
 
@@ -47,7 +49,25 @@ public class DeleteProduct extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		IProductService service=new ProductService();
+		String openId=request.getParameter("openId");
 		service.deleteProduct(Integer.parseInt(request.getParameter("pId")));
+		
+		long timestamp = SignUtil.create_timestamp();
+		String nonceStr = SignUtil.create_nonce_str();
+        StringBuffer requestUrl = request.getRequestURL();
+        String queryString = request.getQueryString();
+        String url = requestUrl +"?"+queryString;
+		try {
+			String signature = SignUtil.getSignature(WechatUtils.getTicket(), nonceStr, timestamp, url);
+			request.setAttribute("timestamp", timestamp);
+			request.setAttribute("nonceStr", nonceStr);
+			request.setAttribute("signature", signature);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		request.setAttribute("openId", openId);
+		request.getRequestDispatcher("MyShopUI").forward(request, response);
 	}
 
 	/**

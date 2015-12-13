@@ -49,7 +49,7 @@ public class Info_Scope extends HttpServlet {
 		request.setAttribute("openId", token.getOpenId());
 		request.setAttribute("accessToken", token.getAccess_token());
 		request.setAttribute("headUrl", j_info.getString("headimgurl"));
-		request.getRequestDispatcher(request.getParameter("state")+"UI").forward(request, response);
+		request.getRequestDispatcher("LoginUI?openId="+token.getOpenId()).forward(request, response);
 	}
 
 	/**

@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSONObject;
+
 import com.clyr.domain.User;
 import com.clyr.service.IUserService;
 import com.clyr.service.impl.UserService;
@@ -48,18 +50,37 @@ public class UserUpdate extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
-		User u=new User();
-		u.setAccessToken(request.getParameter("accessToken"));
-		u.setOpenId(request.getParameter("openId"));
-		u.setNickName(request.getParameter("nickName"));
-		u.setTelNum(request.getParameter("telNum"));
-		u.setHeadImgUrl(request.getParameter("headImgUrl"));
-		u.setHomeAddress(request.getParameter("homeAddressCity")+request.getParameter("homeAddressRoad")+request.getParameter("homeAddressNum"));
-		u.setWorkingAddress(request.getParameter("workingAddressCity")+request.getParameter("workingAddressRoad")+request.getParameter("workingAddressNum"));
-		u.setHomeAddressLocation(AMapUtils.getPosition(u.getHomeAddress()).getJSONArray("pois").getJSONObject(0).getString("location"));
-		u.setWorkingAddressLocation(AMapUtils.getPosition(u.getWorkingAddress()).getJSONArray("pois").getJSONObject(0).getString("location"));
 		IUserService service=new UserService();
+		User u=service.searchByOpenId(request.getParameter("openId"));
+		System.out.println(request.getParameter("openId"));
+		System.out.println(u.getNickName());
+		u.setAccessToken(request.getParameter("accessToken"));
+		u.setNickName(request.getParameter("nickName"));
+		u.setHeadImgUrl(request.getParameter("headImgUrl"));
+		String province=request.getParameter("province");
+		if(province==null)
+			province="-";
+		String city=request.getParameter("city");
+		if(city==null)
+			city="-";
+		String country=request.getParameter("country");
+		if(country==null)
+			country="-";
+		u.setHomeTown(province+" "+city+" "+country);
+		u.setHighSchool(request.getParameter("highSchool"));
+		u.setUniversity(request.getParameter("university"));
+		u.setHomeAddress(request.getParameter("homeAddressCity")+" "+request.getParameter("homeAddressRoad")+" "+request.getParameter("homeAddressNum"));
+		u.setWorkingAddress(request.getParameter("workingAddressCity")+" "+request.getParameter("workingAddressRoad")+" "+request.getParameter("workingAddressNum"));
+		JSONObject jhaDD=AMapUtils.getPosition(u.getHomeAddress());
+		JSONObject jwaDD=AMapUtils.getPosition(u.getWorkingAddress());
+		if(jhaDD.getString("info").equals("OK"))
+			if(!jhaDD.getString("count").equals("0"))
+				u.setHomeAddressLocation(jhaDD.getJSONArray("pois").getJSONObject(0).getString("location"));
+		if(jwaDD.getString("info").equals("OK"))
+			if(!jwaDD.getString("count").equals("0"))
+				u.setWorkingAddressLocation(jwaDD.getJSONArray("pois").getJSONObject(0).getString("location"));
 		service.update(u);
+		request.setAttribute("openId", u.getOpenId());
 		request.getRequestDispatcher("/WEB-INF/pages/Main.jsp").forward(request, response);
 	}
 

@@ -22,6 +22,7 @@ import com.clyr.service.IUserService;
 import com.clyr.service.impl.OrderService;
 import com.clyr.service.impl.ProductService;
 import com.clyr.service.impl.UserService;
+import com.clyr.utils.SignUtil;
 import com.clyr.utils.WechatUtils;
 
 public class MyShopUI extends HttpServlet {
@@ -55,12 +56,29 @@ public class MyShopUI extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
-		String openId=request.getParameter("openId");
+		String 	openId=request.getParameter("openId");
+		System.out.println(openId);
 		IUserService uservice=new UserService();
 		IProductService pservice=new ProductService();
 		User u=uservice.searchByOpenId(openId);
+		System.out.println(u.getNickName());
 		ArrayList<Product> a_p=pservice.myProduct(u.getuId());
 		JSONArray ja=JSONArray.fromObject(a_p);
+		
+		long timestamp = SignUtil.create_timestamp();
+		String nonceStr = SignUtil.create_nonce_str();
+        StringBuffer requestUrl = request.getRequestURL();
+        String queryString = request.getQueryString();
+        String url = requestUrl +"?"+queryString;
+		try {
+			String signature = SignUtil.getSignature(WechatUtils.getTicket(), nonceStr, timestamp, url);
+			request.setAttribute("timestamp", timestamp);
+			request.setAttribute("nonceStr", nonceStr);
+			request.setAttribute("signature", signature);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		request.setAttribute("myProduct", ja);
 		request.setAttribute("openId", openId);
 		request.getRequestDispatcher("/WEB-INF/pages/MyShop.jsp").forward(request, response);

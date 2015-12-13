@@ -22,38 +22,38 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     <style type="text/css">			
     body{				
-    	background: #42413C ;				
+    	background: #ffffff ;				
     	margin: 0;				
     	padding: 0;				
     	text-align: center;			
     }						
     .container{				
-    	width: 1200px;				
+    	width: 100%;				
     	background: #FFF;				
     	margin: 0 auto;				
     	text-align: left;			
     }						
     .header{				
     	padding: 10px 0;				
-    	background: #ADB96E;			
+    	background: #ffffff;			
     }						
     .sidebar{				
     	float: left;				
-    	width: 100px;	
-    	height: 500px;			
-    	background: #a4f;			
+    	width: 8%;	
+    	min-height:800px;			
+    	background: #ffffff;			
     }						
     .maincontent{	
     	float: left;
-    	width: 1100px;	
-    	height: 500px;						
-    	background: #eee;			
-    }							
+    	width: 91%;	
+    	min-height:800px;						
+    	background: #ffffff;			
+    }						
     </style>	
   </head>	
   <body>		
   	<div class="container">			
-  		<div class="header">				
+  		<div class="header" align="center">				
   			<h1>村里有人管理平台</h1>			
   		</div>						
   		<div class="content">				

@@ -51,8 +51,31 @@ public class PersonalCenterUI extends HttpServlet {
 		String openId=request.getParameter("openId");
 		User u=uservice.searchByOpenId(openId);
 		JSONObject ja=WechatUtils.getUserInfo(u.getAccessToken(), u.getOpenId());
+		JSONObject ju=JSONObject.fromObject(u);
+		if(!u.getHomeTown().equals(""))
+		{
+			String[] str=(u.getHomeTown()).split(" ");
+			request.setAttribute("province", str[0]);
+			request.setAttribute("city", str[1]);
+			request.setAttribute("country", str[2]);
+		}
+		if(!u.getHomeAddress().equals(""))
+		{
+			String[] str1=(u.getHomeAddress()).split(" ");
+			request.setAttribute("homeAddressCity", str1[0]);
+			request.setAttribute("homeAddressRoad", str1[1]);
+			request.setAttribute("homeAddressNum", str1[2]);
+		}
+		if(!u.getWorkingAddress().equals(""))
+		{
+			String[] str2=(u.getWorkingAddress()).split(" ");
+			request.setAttribute("workingAddressCity", str2[0]);
+			request.setAttribute("workingAddressRoad", str2[1]);
+			request.setAttribute("workingAddressNum", str2[2]);
+		}
 		request.setAttribute("accessToken", u.getAccessToken());
 		request.setAttribute("userInfo", ja);
+		request.setAttribute("user", ju);
 		request.getRequestDispatcher("/WEB-INF/pages/PersonalCenter.jsp").forward(request, response);
 	}
 

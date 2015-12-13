@@ -54,11 +54,12 @@ public class UserRegister extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		String err="本项必填";	
-		if(request.getParameter("homeAddressCity").equals("") || 
+		if((request.getParameter("homeAddressCity").equals("") || 
 				request.getParameter("homeAddressRoad").equals("") ||
-				request.getParameter("homeAddressNum").equals(""))
+				request.getParameter("homeAddressNum").equals("")) &&
+				!(request.getParameter("homeAddressCity")+ request.getParameter("homeAddressRoad")+request.getParameter("homeAddressNum")).equals(""))
 		{
-			err="请填写目前常住地点";
+			err="请完整填写目前常住地点";
 			request.setAttribute("accessToken", request.getParameter("accessToken"));
 			HashMap<String, String> m=new HashMap<String, String>();
 			m.put("nickname", request.getParameter("nickName"));
@@ -69,11 +70,43 @@ public class UserRegister extends HttpServlet {
 			request.setAttribute("err", err);
 			request.getRequestDispatcher("/WEB-INF/pages/Register.jsp").forward(request, response);
 		}
-		else if(request.getParameter("workingAddressCity").equals("") || 
+		else if((request.getParameter("workingAddressCity").equals("") || 
 	    		request.getParameter("workingAddressRoad").equals("") ||
-	    		request.getParameter("workingAddressNum").equals(""))
+	    		request.getParameter("workingAddressNum").equals("")) &&
+	    		!(request.getParameter("workingAddressCity")+ 
+	    		request.getParameter("workingAddressRoad")+
+	    		request.getParameter("workingAddressNum")).equals(""))
 	    {
-			err="请填写目前工作地点";
+			err="请完整填写目前工作地点";
+	    	HashMap<String, String> m=new HashMap<String, String>();
+			m.put("nickname", request.getParameter("nickName"));
+			m.put("openid", request.getParameter("openId"));
+			m.put("headimgurl", request.getParameter("headImgUrl"));
+			JSONObject j=JSONObject.fromObject(m);
+			request.setAttribute("userInfo",j );
+	    	request.setAttribute("err", err);
+	    	request.getRequestDispatcher("/WEB-INF/pages/Register.jsp").forward(request, response);
+	    }
+		else if((request.getParameter("province").equals("") || 
+	    		request.getParameter("city").equals("") ||
+	    		request.getParameter("country").equals("")) &&
+	    		!(request.getParameter("province")+ 
+	    		request.getParameter("city")+
+	    		request.getParameter("country")).equals(""))
+	    {
+			err="请完整填写您的家乡";
+	    	HashMap<String, String> m=new HashMap<String, String>();
+			m.put("nickname", request.getParameter("nickName"));
+			m.put("openid", request.getParameter("openId"));
+			m.put("headimgurl", request.getParameter("headImgUrl"));
+			JSONObject j=JSONObject.fromObject(m);
+			request.setAttribute("userInfo",j );
+	    	request.setAttribute("err", err);
+	    	request.getRequestDispatcher("/WEB-INF/pages/Register.jsp").forward(request, response);
+	    }
+		else if(request.getParameter("telNum").equals(""))
+	    {
+			err="请填写您的手机号码";
 	    	HashMap<String, String> m=new HashMap<String, String>();
 			m.put("nickname", request.getParameter("nickName"));
 			m.put("openid", request.getParameter("openId"));
@@ -90,13 +123,42 @@ public class UserRegister extends HttpServlet {
 			u.setNickName(request.getParameter("nickName"));
 			u.setTelNum(request.getParameter("telNum"));
 			u.setHeadImgUrl(request.getParameter("headImgUrl"));
-			u.setHomeTown(request.getParameter("province")+request.getParameter("city")+request.getParameter("district"));
+			String province=request.getParameter("province");
+			if(province==null)
+				province="-";
+			String city=request.getParameter("city");
+			if(city==null)
+				city="-";
+			String country=request.getParameter("country");
+			if(country==null)
+				country="-";
+			u.setHomeTown(province+" "+city+" "+country);
 			u.setHighSchool(request.getParameter("highSchool"));
 			u.setUniversity(request.getParameter("university"));
-			u.setHomeAddress(request.getParameter("homeAddressCity")+" "+request.getParameter("homeAddressRoad")+"路 "+request.getParameter("homeAddressNum"));
-			u.setWorkingAddress(request.getParameter("workingAddressCity")+" "+request.getParameter("workingAddressRoad")+"路 "+request.getParameter("workingAddressNum"));
-			JSONObject jhaDD=AMapUtils.getPosition(u.getHomeAddress());
-			JSONObject jwaDD=AMapUtils.getPosition(u.getWorkingAddress());
+			String key1=request.getParameter("homeAddressCity")+" "+request.getParameter("homeAddressRoad")+"路 "+request.getParameter("homeAddressNum");
+			String homeAddressCity=request.getParameter("homeAddressCity");
+			if(homeAddressCity.equals(""))
+				homeAddressCity="-";
+			String homeAddressRoad=request.getParameter("homeAddressRoad");
+			if(homeAddressRoad.equals(""))
+				homeAddressRoad="-";
+			String homeAddressNum=request.getParameter("homeAddressNum");
+			if(homeAddressNum.equals(""))
+				homeAddressNum="-";
+			u.setHomeAddress(homeAddressCity+" "+homeAddressRoad+" "+homeAddressNum);
+			String key2=request.getParameter("workingAddressCity")+" "+request.getParameter("workingAddressRoad")+"路 "+request.getParameter("workingAddressNum");
+			String workingAddressCity=request.getParameter("workingAddressCity");
+			if(workingAddressCity.equals(""))
+				workingAddressCity="-";
+			String workingAddressRoad=request.getParameter("workingAddressRoad");
+			if(workingAddressRoad.equals(""))
+				workingAddressRoad="-";
+			String workingAddressNum=request.getParameter("workingAddressNum");
+			if(workingAddressNum.equals(""))
+				workingAddressNum="-";
+			u.setWorkingAddress(workingAddressCity+" "+workingAddressRoad+" "+workingAddressNum);
+			JSONObject jhaDD=AMapUtils.getPosition(key1);
+			JSONObject jwaDD=AMapUtils.getPosition(key2);
 			if(jhaDD.getString("info").equals("OK"))
 				if(!jhaDD.getString("count").equals("0"))
 					u.setHomeAddressLocation(jhaDD.getJSONArray("pois").getJSONObject(0).getString("location"));

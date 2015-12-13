@@ -22,32 +22,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     <style type="text/css">			
     body{				
-    	background: #42413C ;				
+    	background: #ffffff ;				
     	margin: 0;				
     	padding: 0;				
     	text-align: center;			
     }						
     .container{				
-    	width: 1200px;				
+    	width: 100%;				
     	background: #FFF;				
     	margin: 0 auto;				
     	text-align: left;			
     }						
     .header{				
     	padding: 10px 0;				
-    	background: #ADB96E;			
+    	background: #ffffff;			
     }						
     .sidebar{				
     	float: left;				
-    	width: 100px;	
-    	height: 800px;			
-    	background: #a4f;			
+    	width: 8%;	
+    	min-height:800px;			
+    	background: #ffffff;			
     }						
     .maincontent{	
     	float: left;
-    	width: 1100px;	
-    	height: 800px;						
-    	background: #eee;			
+    	width: 91%;	
+    	min-height:800px;						
+    	background: #ffffff;			
     }		
     #nav { 
     	background: #fff;
@@ -183,7 +183,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   			<div style="width:225px;height:150px;float:left;" id="d_proDisc">
   			</div>
   		</div>		
-  		<div class="header">				
+  		<div class="header" align="center">				
   			<h1>村里有人管理平台</h1>			
   		</div>						
   		<div class="content">				
@@ -192,14 +192,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   				<p><a href="<%=basePath%>ManagementAdminUI">·系统管理</a></p>									
   			</div>				
   			<div class="maincontent">	
-  				<form  style="float:left;width:300px" action="MUserSearch" method="post">
-  					<input type="text" name="key">
-  					<input type="submit" value="检索">
+  				<form  style="float:left;width:27%" action="MUserSearch" method="post">
+  					<input type="text" style="float:left;width:80%;font-size:1vw" name="key">
+  					<input type="submit" style="float:left;width:20%;font-size:1vw" value="检索">
   				</form>
-  				<button id="sortSend" style="float:left">按发出购买请求次数降序排序</button>
-  				<button id="sortReceive"style="float:left">按收到购买请求次数降序排序</button>
-  				<a href="<%=basePath%>AdminLogout"><button style="float:right">注销</button></a>
-  				<table id="mainTable" border="1" width="1100px">
+  				<button id="sortSend" style="margin:0 3%;float:left;width:20%;font-size:1vw">按发出购买请求次数降序排序</button>
+  				<button id="sortReceive"style="float:left;width:20%;font-size:1vw">按收到购买请求次数降序排序</button>
+  				<a href="<%=basePath%>AdminLogout"><button style="float:right;width:5%;font-size:1vw">注销</button></a>
+  				<table id="mainTable" border="1" width="100%">
   				<thead>
   					<tr>
   						<th>序号</th>

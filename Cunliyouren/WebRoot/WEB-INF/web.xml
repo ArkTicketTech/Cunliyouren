@@ -175,6 +175,41 @@
     <servlet-name>Info_Scope</servlet-name>
     <servlet-class>com.clyr.web.controller.Info_Scope</servlet-class>
   </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Redirect2WebSended</servlet-name>
+    <servlet-class>com.clyr.web.controller.Redirect2WebSended</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Redirect2WebReceived</servlet-name>
+    <servlet-class>com.clyr.web.controller.Redirect2WebReceived</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Redirect2WebProDetail</servlet-name>
+    <servlet-class>com.clyr.web.controller.Redirect2WebProDetail</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Redirect2WebMyShop</servlet-name>
+    <servlet-class>com.clyr.web.controller.Redirect2WebMyShop</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Redirect2WebPC</servlet-name>
+    <servlet-class>com.clyr.web.controller.Redirect2WebPC</servlet-class>
+  </servlet>
+
+
+
+
+
 
 
 
@@ -322,6 +357,26 @@
   <servlet-mapping>
     <servlet-name>Info_Scope</servlet-name>
     <url-pattern>/Info_Scope</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Redirect2WebSended</servlet-name>
+    <url-pattern>/Redirect2WebSended</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Redirect2WebReceived</servlet-name>
+    <url-pattern>/Redirect2WebReceived</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Redirect2WebProDetail</servlet-name>
+    <url-pattern>/Redirect2WebProDetail</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Redirect2WebMyShop</servlet-name>
+    <url-pattern>/Redirect2WebMyShop</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Redirect2WebPC</servlet-name>
+    <url-pattern>/Redirect2WebPC</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
