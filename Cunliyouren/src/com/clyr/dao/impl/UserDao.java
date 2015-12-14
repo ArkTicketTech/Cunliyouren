@@ -47,6 +47,15 @@ public class UserDao implements IUserDao {
 		if (!u.getTelNum().equals(""))
 			db.doUpdate("update t_user set telNum='" + u.getTelNum()
 					+ "' where uId=" + u.getuId());
+		if (!u.getHomeTown().equals("- - -") && !u.getHomeTown().equals(""))
+			db.doUpdate("update t_user set homeTown='" + u.getHomeTown()
+					+ "' where uId=" + u.getuId());
+		if (!u.getHighSchool().equals(""))
+			db.doUpdate("update t_user set highSchool='" + u.getHighSchool()
+					+ "' where uId=" + u.getuId());
+		if (!u.getUniversity().equals(""))
+			db.doUpdate("update t_user set university='" + u.getUniversity()
+					+ "' where uId=" + u.getuId());
 		if (!u.getHomeAddress().trim().equals(""))
 		{
 			db.doUpdate("update t_user set homeAddress='" + u.getHomeAddress()

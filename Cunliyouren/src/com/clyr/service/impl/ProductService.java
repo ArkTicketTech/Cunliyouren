@@ -52,45 +52,47 @@ public class ProductService implements IProductService {
 
 	@Override
 	public ArrayList<Product> addConstraint(ArrayList<Product> a,
-			String constrain, User u) {
-		ArrayList<Product> result=new  ArrayList<Product>();
-		if(constrain.equals("homeTown"))
+			String constrain , User u) {
+		ArrayList<Product> result=new ArrayList<Product>();
+		System.out.println(constrain);
+		boolean flag=false;
+		for(Product p: a)
 		{
-			for(Product p:a)
+			flag=false;
+			if(constrain.equals("homeTown"))
 			{
 				if(userDao.selectByUId(p.getOwnerId()).getHomeTown().equals(u.getHomeTown()))
-					result.add(p);
+				{
+					flag=true;
+				}
 			}
-		}
-		else if(constrain.equals("school"))
-		{
-			for(Product p:a)
+			if(constrain.equals("school"))
 			{
 				if(userDao.selectByUId(p.getOwnerId()).getHighSchool().equals(u.getHighSchool()) || 
 						userDao.selectByUId(p.getOwnerId()).getUniversity().equals(u.getUniversity()))
-					result.add(p);
+				{
+					flag=true;
+				}
 			}
-		}
-		else if(constrain.equals("homeAdd"))
-		{
-			for(Product p:a)
+			if(constrain.equals("homeAdd"))
 			{
 				if(AMapUtils.Distance(userDao.selectByUId(p.getOwnerId()).getHomeAddressLocation(), u.getHomeAddressLocation())<3000)
-					result.add(p);
+				{
+					flag=true;
+				}
 			}
-		}
-		else if(constrain.equals("workAdd"))
-		{
-			for(Product p:a)
+			if(constrain.equals("workAdd"))
 			{
 				if(AMapUtils.Distance(userDao.selectByUId(p.getOwnerId()).getWorkingAddressLocation(), u.getWorkingAddressLocation())<3000)
-					result.add(p);
+				{
+					flag=true;
+				}
 			}
+			System.out.println(flag);
+			if(flag)
+				result.add(p);
 		}
-		else
-		{ 
-			return a;
-		}
+		
 		return result;
 	}
 	

@@ -24,81 +24,66 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <script type="text/javascript" src="<%=basePath  %>JavaScript/jquery.js"></script>
   <script type="text/javascript">
   $(document).ready(function(){
-  	
-  	$("#hometown").click(function() {
-  		if($("#key1").attr("value")=="")
-  		{
-	  		$("#hometown").css("background-color","#ccff99");
-	        $("#key1").attr("value","homeTown");
-  		}
-  		else
-  		{
-  			$("#hometown").css("background-color","#ffffff");
-	        $("#key1").attr("value","");
-  		}
+  	$("#homeTown").click(function() {
+	  		$("#homeTown").css("background-color","#ccff99");
+	        $("#keySet").attr("value","homeTown");
+	        $("#school").css("background-color","#ffffff");
+  			$("#homeAdd").css("background-color","#ffffff");
+  			$("#workAdd").css("background-color","#ffffff");
+  			location.href="<%=basePath  %>ProductSearch?openId="+$("#openId").html()+"&keyword=homeTown&productName="+$("#pNameSet").val();
     });
   	$("#school").click(function() {
-  		if($("#key2").attr("value")=="")
-  		{
 	  		$("#school").css("background-color","#ccff99");
-	  		$("#key2").attr("value","school");
-  		}
-  		else
-  		{
-  			$("#school").css("background-color","#ffffff");
-  			$("#key2").attr("value","");
-  		}
+	  		$("#keySet").attr("value","school");
+	  		$("#homeTown").css("background-color","#ffffff");
+	        $("#homeAdd").css("background-color","#ffffff");
+  			$("#workAdd").css("background-color","#ffffff");
+  			location.href="<%=basePath  %>ProductSearch?openId="+$("#openId").html()+"&keyword=school&productName="+$("#pNameSet").val();
 	});
   	$("#homeAdd").click(function() {
-  		if($("#key3").attr("value")=="")
-  		{
 	  		$("#homeAdd").css("background-color","#ccff99");
-	  		$("#key3").attr("value","homeAdd");
-  		}
-  		else
-  		{
-  			$("#homeAdd").css("background-color","#ffffff");
-  			$("#key3").attr("value","");
-  		}
+	  		$("#keySet").attr("value","homeAdd");
+	  		$("#homeTown").css("background-color","#ffffff");
+	        $("#school").css("background-color","#ffffff");
+  			$("#workAdd").css("background-color","#ffffff");
+  			location.href="<%=basePath  %>ProductSearch?openId="+$("#openId").html()+"&keyword=homeAdd&productName="+$("#pNameSet").val();
 	});
   	$("#workAdd").click(function() {
-  		if($("#key4").attr("value")=="")
-  		{
 	  		$("#workAdd").css("background-color","#ccff99");
-	  		$("#key4").attr("value","workAdd");
-  		}
-  		else
-  		{
-  			$("#workAdd").css("background-color","#ffffff");
-  			$("#key4").attr("value","");
-  		}
+	  		$("#keySet").attr("value","workAdd");
+	  		$("#homeTown").css("background-color","#ffffff");
+	        $("#school").css("background-color","#ffffff");
+  			$("#homeAdd").css("background-color","#ffffff");
+  			location.href="<%=basePath  %>ProductSearch?openId="+$("#openId").html()+"&keyword=workAdd&productName="+$("#pNameSet").val();
 	});
+  	$("#pNameSet").val($("#pName").html());
+  	$("#keySet").attr("value",$("#key").html());
   	var result=<%=request.getAttribute("result") %>;
   	$.each(result,function(idx,item){
   		var s_res=$("#s_res");
   		var div_block=$("<div class='product' style='width:100%;height:0;padding-bottom:25%;overflow: hidden;'> </div>");
   		var div_pro=$("<div style='width:50%;height:0;padding-bottom:25%;margin:4%;float:left;background-color:#ffffff;border:1px solid black;'></div>");
   		var img_pro=$("<img alt='' src='"+item.picture1+"' style='width:49%;float:left;border:1px solid black;'>");
-  		var pname_pro=$("<div style='width:49%;height:0;padding-bottom:15%;float:left'>"+item.productName+"</div>");
-  		var pprice_pro=$("<div style='width:49%;height:0;padding-bottom:35%;float:left'>"+item.price+"/"+item.unit+"</div>");
+  		var pname_pro=$("<div style='width:49%;height:0;padding-bottom:15%;float:left;font-size:35px'>"+item.productName+"</div>");
+  		var pprice_pro=$("<div style='width:49%;height:0;padding-bottom:35%;float:left;font-size:30px'>"+item.price+"/"+item.unit+"</div>");
   		var div_rel=$("<div style='width:30%;height:0;padding-bottom:25%;margin:4%;float:left;background-color:#ffffff;border:1px solid black;'></div>");
-  		var oname_rel=$("<div style='width:100%;height:0;padding-bottom:25%;float:left;'>"+item.friendName+"</div>");
+  		var oname_rel=$("<div style='width:100%;height:0;padding-bottom:25%;float:left;font-size:35px'>"+item.friendName+"</div>");
   		var rel_str="";
   		if(item.hometown==1)
   		{
-  			rel_str=rel_str+"| 同乡 |";
+  			rel_str=rel_str+"<div align='center' style='width:50%;height:0;padding-bottom:20%;float:left;font-size:30px'>同乡</div>";
   		}
   		if(item.school==1) 
   		{
-  			rel_str=rel_str+"| 校友 |";
+  			rel_str=rel_str+"<div align='center' style='width:50%;height:0;padding-bottom:20%;float:left;font-size:30px'>校友</div>";
   		}
   		if(item.homeAdd==1) 
   		{
-  			rel_str=rel_str+"|住得近|";
+  			rel_str=rel_str+"<div align='center' style='width:50%;height:0;padding-bottom:20%;float:left;font-size:30px'>住得近</div>";
   		}
   		if(item.workAdd==1) 
   		{
-  			rel_str=rel_str+"|工作近|";
+  			rel_str=rel_str+"<div align='center' style='width:50%;height:0;padding-bottom:20%;float:left;font-size:30px'>工作近</div>";
   		}
   		var orel_rel=$("<div style='width:100%;height:0;padding-bottom:25%;float:left;'>"+rel_str+"</div>");
   		oname_rel.appendTo(div_rel);
@@ -112,26 +97,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   			location.href="<%=basePath%>ProDetailUI?pId="+event.data["productId"]+"&openId="+event.data["openId"];
   		}).appendTo(s_res);
   	});
+  	$("#homeTown").css("background-color","#ffffff");
+  	$("#school").css("background-color","#ffffff");
+  	$("#homeAdd").css("background-color","#ffffff");
+  	$("#workAdd").css("background-color","#ffffff");
+  	$("#"+$("#key").html()).css("background-color","#ccff99");
   });
   </script>
   
   <body bgcolor="#ffffff">
-  	<div style="width:100%;height:0;padding-bottom:15%;font-size:4vw;background-color:#ccff99">欢迎来到村友集市，您的村友在卖：</div>
+  	<div style="width:100%;height:0;padding-bottom:15%;font-size:40px;background-color:#ccff99">欢迎来到村友集市，您的村友在卖：</div>
   	<div style="width:90%;height:10%;margin:1% 5%;">
-  		<div id="hometown" align="center" style="width:20%;height:0;padding-bottom:9%;margin:2%;background-color:#ffffff;float:left;border:1px solid black;font-size:3.5vw">老乡</div>
-  		<div id="school" align="center" style="width:20%;height:0;padding-bottom:9%;margin:2%;background-color:#ffffff;float:left;border:1px solid black;font-size:3.5vw">校友</div>
-  		<div id="workAdd" align="center" style="width:20%;height:0;padding-bottom:9%;margin:2%;background-color:#ffffff;float:left;border:1px solid black;font-size:3.5vw">工作近</div>
-  		<div id="homeAdd" align="center" style="width:20%;height:0;padding-bottom:9%;margin:2%;background-color:#ffffff;float:left;border:1px solid black;font-size:3.5vw">住得近</div>
+  		<div id="homeTown" align="center" style="width:20%;height:0;padding:4.5% 0;margin:2%;float:left;border:1px solid black;font-size:30px">老乡</div>
+  		<div id="school" align="center" style="width:20%;height:0;padding:4.5% 0;margin:2%;float:left;border:1px solid black;font-size:30px">校友</div>
+  		<div id="homeAdd" align="center" style="width:20%;height:0;padding:4.5% 0;margin:2%;float:left;border:1px solid black;font-size:30px">住得近</div>
+  		<div id="workAdd" align="center" style="width:20%;height:0;padding:4.5% 0;margin:2%;float:left;border:1px solid black;font-size:30px">工作近</div>
   	</div>
     <form style="width:90%;height:6%;margin:1% 5%;" action="ProductSearch">
-    	<input type="text" style="display:none" id="key1" name="hometown" value="">
-    	<input type="text" style="display:none" id="key2" name="school" value="">
-    	<input type="text" style="display:none" id="key3" name="workAdd" value="">
-    	<input type="text" style="display:none" id="key4" name="homeAdd" value="">
+    	<input type="text" style="display:none" id="keySet" name="keyword" ">
     	<input type="text" style="display:none" name="openId" value="${openId }">
-    	<input type="text" style="width:60%;margin:5%;height:0;float:left;height:0;padding:3% 0" name="productName">
-    	<input type="submit" value="搜索" style="width:20%;height:6vw;margin:5%;background-color:#ffffff;float:left;font-size:3vw">
+    	<input type="text" style="width:60%;margin:5%;height:0;float:left;padding:3% 0;font-size:20px" name="productName" id="pNameSet" >
+    	<input type="submit" value="搜索" style="width:20%;margin:5%;background-color:#ffffff;float:left;font-size:30px">
     </form>
+    <div style="display:none" id="key">${key }</div>
+    <div style="display:none" id="pName">${pname }</div>
+    <div style="display:none" id="openId">${openId }</div>
     <div style="width:100%;margin:1% 5%;overflow:auto" id="s_res">
     </div>
   </body>

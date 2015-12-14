@@ -109,7 +109,7 @@ public class WechatUtils {
 	 * 获取静域code
 	 * @return
 	 */
-	public static String getBaseUrl(String redi){
+	public static String getBaseUrl(String redi, String pId){
 		String url="";
 		if(redi.equals("Main"))
 			url=CODE_URL.replace("APPID", APPID).replace("REDIRECT_URI",REDIRECT_URI_BASE).replace("SCOPE", "snsapi_base");
@@ -122,7 +122,7 @@ public class WechatUtils {
 		else if(redi.equals("PersonalCenter"))
 			url=CODE_URL.replace("APPID", APPID).replace("REDIRECT_URI",REDIRECT_URI_BASE_PC).replace("SCOPE", "snsapi_base");
 		else if(redi.equals("ProDetail"))
-			url=CODE_URL.replace("APPID", APPID).replace("REDIRECT_URI",REDIRECT_URI_BASE_PRODETAIL).replace("SCOPE", "snsapi_base");
+			url=CODE_URL.replace("APPID", APPID).replace("REDIRECT_URI",REDIRECT_URI_BASE_PRODETAIL+"?pId="+pId).replace("SCOPE", "snsapi_base");
 		return url;
 	}
 	

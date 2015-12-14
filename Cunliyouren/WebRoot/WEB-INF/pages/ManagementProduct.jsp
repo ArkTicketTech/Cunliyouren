@@ -26,7 +26,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	margin: 0;				
     	padding: 0;				
     	text-align: center;			
-    }						
+    }
+    a{
+   		text-decoration:none;
+   		color:#000000;
+   	}						
     .container{				
     	width: 100%;				
     	background: #FFF;				
@@ -188,7 +192,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   		</div>						
   		<div class="content">				
   			<div class="sidebar">					
-  				<p>·用户管理</p>					
+  				<p style="color:#FF00FF">·用户管理</p>					
   				<p><a href="<%=basePath%>ManagementAdminUI">·系统管理</a></p>									
   			</div>				
   			<div class="maincontent">	

@@ -29,11 +29,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  	 $.each(sendedOrder,function(idx,item){
  		var container=$("#container");
  		var div=$("<div style='width:90%;height:0;padding-bottom:23%;padding-top:5%;padding-left:5%;margin:5%;background-color:#ffffff;border:1px solid black;'></div>");
- 		var p_div_name=$("<div style='width:15%;height:0;padding-bottom:7%;float:left;font-size:3vw'>"+item.productName+"</div>");
- 		var p_div_price=$("<div style='color:#FF0000;width:85%;height:0;padding-bottom:7%;float:left;font-size:3vw'>"+item.price+"/"+item.unit+"</div>");
- 		var u_div_name=$("<div style='width:15%;height:0;padding-bottom:7%;float:left;font-size:3vw'>"+item.nickName+"</div>");
- 		var u_div_tel=$("<div style='width:85%;height:0;padding-bottom:7%;float:left;font-size:3vw'>"+item.telNum+"</div>");
- 		var o_div_time=$("<div style='width:35%;height:0;padding-bottom:7%;float:right;font-size:3vw'>"+
+ 		var p_div_name=$("<div style='width:15%;height:0;padding-bottom:7%;float:left;font-size:30px'>"+item.productName+"</div>");
+ 		var p_div_price=$("<div style='color:#FF0000;width:85%;height:0;padding-bottom:7%;float:left;font-size:30px'>"+item.price+"/"+item.unit+"</div>");
+ 		var u_div_name=$("<div style='width:15%;height:0;padding-bottom:7%;float:left;font-size:30px'>"+item.nickName+"</div>");
+ 		var u_div_tel=$("<div style='width:85%;height:0;padding-bottom:7%;float:left;font-size:30px'>"+item.telNum+"</div>");
+ 		var o_div_time=$("<div style='width:35%;height:0;padding-bottom:7%;float:right;font-size:30px'>"+
  				(parseInt(item.createTime.year)+1900)+"-"+item.createTime.month+"-"+item.createTime.date+" "+
  				item.createTime.hours+":"+item.createTime.minutes+":"+item.createTime.seconds+"</div>");
  		p_div_name.appendTo(div);
@@ -50,7 +50,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </script>
   
   <body bgcolor="#ffffff">
-    <div align="center" style="background-color:#ccff99;width:40%;padding:5% 1%;border:1px solid black;margin-left:30%;font-size:4vw">我发送的购买请求</div>
+    <div align="center" style="background-color:#ccff99;width:40%;padding:5% 1%;border:1px solid black;margin-left:30%;font-size:40px">我发送的购买请求</div>
     <div style="width:100%;margin-top:6%;" id="container"></div>
   </body>
 </html>

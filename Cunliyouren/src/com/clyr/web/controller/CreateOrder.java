@@ -69,7 +69,7 @@ public class CreateOrder extends HttpServlet {
 			String result="下单失败，不能对自己的商品下单";
 			request.setAttribute("result", result);
 			request.setAttribute("openId", openId);
-			request.getRequestDispatcher("ProDetailUI?pId="+o.getProductId()).forward(request, response);
+			request.getRequestDispatcher("ProDetailUI?pId="+Integer.parseInt(request.getParameter("productId"))).forward(request, response);
 		}
 		else
 		{

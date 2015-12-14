@@ -52,17 +52,27 @@ public class UserService implements IUserService {
 	public ArrayList<User> search(String key) {
 		User t_u = new User();
 		ArrayList<User> a = userDao.select(t_u);
+		ArrayList<Product> a_pp=productDao.selectByName(key);
 		boolean flag = true;
 		for (int i = 0; i < a.size(); i++) {
 			t_u = a.get(i);
 			flag = true;
+			if(a_pp!=null)
+			{
+				for(Product p:a_pp)
+				{
+					if(p.getOwnerId()==t_u.getuId())
+						flag=false;
+				}
+			}
 			if (key.equals("") || t_u.getNickName().equals(key)
 					|| t_u.getTelNum().equals(key)
 					|| t_u.getHighSchool().equals(key)
 					|| t_u.getHomeAddress().equals(key)
 					|| t_u.getHomeTown().equals(key)
 					|| t_u.getUniversity().equals(key)
-					|| t_u.getWorkingAddress().equals(key))
+					|| t_u.getWorkingAddress().equals(key)
+					)
 				flag = false;
 			if (flag) {
 				a.remove(i);

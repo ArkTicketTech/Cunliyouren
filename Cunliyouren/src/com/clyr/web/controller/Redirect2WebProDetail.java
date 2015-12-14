@@ -50,10 +50,12 @@ public class Redirect2WebProDetail extends HttpServlet {
 		User u=userv.searchByOpenId(token.getOpenId());
 		if(u.getuId()!=0 && u.getState()!=0)
 		{
+			System.out.println(request.getParameter("pId"));
 			u.setAccessToken(token.getAccess_token());
 			userv.update(u);
 			request.setAttribute("openId", token.getOpenId());
-			request.getRequestDispatcher("ProDetailUI?openId="+ token.getOpenId()).forward(request,response);
+			request.setAttribute("pId", request.getParameter("pId"));
+			request.getRequestDispatcher("ProDetailUI?openId="+ token.getOpenId()+"&pId="+request.getParameter("pId")).forward(request,response);
 		}
 		else
 		{

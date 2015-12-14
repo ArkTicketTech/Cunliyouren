@@ -32,6 +32,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    $("#p_proDes").html("产品简介："+p.description);
 	    $("#p_proSeller").html("产品卖家："+seller.nickName);
 	    $("#p_selTelNum").html("卖家电话："+seller.telNum);
+	    $("#p_proPlace").html("意向交易地点："+p.deliveryPoint);
 
 	    if(p.picture1!=null&&p.picture1!="")
 	    	$("#i_proPic1").attr("src",p.picture1);
@@ -49,11 +50,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	$("#CreateOrder").click(function(){
   		$("#CreateNum").css("display","block");
   	});
-  	$("#re_top").click(function(){
-  		$(document).scrollTo(0,500);
-  	});
   	$("#re_Main").click(function(){
-  		location.href="<%=basePath  %>MainUI";
+  		location.href="<%=basePath  %>MainUI?openId="+$("#openId").html();
   	});
   	
   	wx.config({
@@ -67,7 +65,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	wx.ready(function(){
   		wx.onMenuShareTimeline({
   		    title: "欢迎来到村里有人",
-  		    imgUrl: $("#i_proPic1").attr("src"),
+  		    link:"<%=basePath  %>Wechat2Redirect?redi=ProDetail&pId="+p.pId,
+  		    imgUrl: "http://cunliyouren.cn/Cunliyouren/"+p.picture1,
   		    success: function () { 
   		        alert("分享成功");
   		    },
@@ -87,22 +86,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div style="width:90%;margin:5%">
     	<div style="color:#FF0000;float:right">${result }</div>
     	<div style="width:100%;float:left;">
-  			<div id="p_proName"  style="width:100%;margin:0;font-size:3vw"></div>
-  			<div id="p_proPrice" style="color:#FF0000;width:100%;margin:0;font-size:3vw"></div>
-  			<div id="p_proDes" style="width:100%;margin:0;font-size:3vw"></div>
-  			<div id="p_proSeller" style="width:100%;margin:0;font-size:3vw"></div>
-  			<div id="p_selTelNum" style="width:100%;margin:0;font-size:3vw"></div>
-  			<div id="p_proPlace" style="width:100%;margin:0;font-size:3vw"></div>
-  			<div id="CreateOrder"align="center" style="width:30%;margin-right:5%;height:0;padding-bottom:15%;background-color:#ffffff;float:right;border:1px solid black;font-size:3vw">发送购买请求</div>
+  			<div id="p_proName"  style="width:100%;margin:0;font-size:30px"></div>
+  			<div id="p_proPrice" style="color:#FF0000;width:100%;margin:0;font-size:30px"></div>
+  			<div id="p_proDes" style="width:100%;margin:0;font-size:30px"></div>
+  			<div id="p_proSeller" style="width:100%;margin:0;font-size:30px"></div>
+  			<div id="p_selTelNum" style="width:100%;margin:0;font-size:30px"></div>
+  			<div id="p_proPlace" style="width:100%;margin:0;font-size:30px"></div>
+  			<div id="CreateOrder"align="center" style="width:30%;margin-right:5%;height:0;padding-bottom:15%;background-color:#ffffff;float:right;border:1px solid black;font-size:30px">发送购买请求</div>
   		</div>
   		<img alt="" src="Resource/Null.gif" style="width:100%;height:90vw;float:left;border:1px solid black;" id="i_proPic1">
   		<img alt="" src="Resource/Null.gif" style="width:100%;height:90vw;float:left;border:1px solid black;" id="i_proPic2">
   		<img alt="" src="Resource/Null.gif" style="width:100%;height:90vw;float:left;border:1px solid black;" id="i_proPic3">
   	</div>
-  	<div id="re_Top" align="center" style="width:30%;margin:5%;height:0;padding-bottom:15%;background-color:#ffffff;float:right;border:1px solid black;font-size:3vw">返回顶部</div>
-  	<div id="re_Main" align="center" style="width:30%;margin:5%;height:0;padding-bottom:15%;background-color:#ffffff;float:right;border:1px solid black;font-size:3vw">返回村友集市列表</div>
+  	<div id="re_Main" align="center" style="width:30%;margin:5%;height:0;padding-bottom:15%;background-color:#ffffff;float:right;border:1px solid black;font-size:30px">返回村友集市列表</div>
   	<div id="timestamp" style="display:none">${timestamp }</div>
   	<div id="nonceStr" style="display:none">${nonceStr }</div>
   	<div id="signature" style="display:none">${signature }</div>
+  	<div id="openId" style="display:none">${openId }</div>
   </body>
 </html>

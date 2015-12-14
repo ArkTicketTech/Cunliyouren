@@ -61,15 +61,18 @@ public class ProductSearch extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		String openId=request.getParameter("openId");
+		String key=request.getParameter("keyword");
+		System.out.println(key);
 		IUserService userv=new UserService();
 		User u=userv.searchByOpenId(openId);
 		IProductService service=new ProductService();
 		ArrayList<Product> a=new ArrayList<Product>();
-		a=service.searchByProductName(request.getParameter("productName"));
-		a=service.addConstraint(a, request.getParameter("hometown"), u);
-		a=service.addConstraint(a, request.getParameter("school"), u);
-		a=service.addConstraint(a, request.getParameter("workAdd"), u);
-		a=service.addConstraint(a, request.getParameter("homeAdd"), u);
+		String productName=request.getParameter("productName");
+		if(productName==null)
+			productName="";
+		System.out.print(productName);
+		a=service.searchByProductName(productName);
+		a=service.addConstraint(a,key, u);
 		JSONArray result=JSONArray.fromObject(a);
 		ArrayList<RelationBean> a_r=new ArrayList<RelationBean>();
 		for(int i=0;i<a.size();i++)
@@ -94,6 +97,8 @@ public class ProductSearch extends HttpServlet {
 		JSONArray ja=JSONArray.fromObject(r);
 		request.setAttribute("result", ja);
 		request.setAttribute("openId", openId);
+		request.setAttribute("pname", productName);
+		request.setAttribute("key", key);
 		request.getRequestDispatcher("/WEB-INF/pages/Main.jsp").forward(request, response);
 	}
 

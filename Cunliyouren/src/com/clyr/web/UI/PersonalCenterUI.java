@@ -55,6 +55,12 @@ public class PersonalCenterUI extends HttpServlet {
 		if(!u.getHomeTown().equals(""))
 		{
 			String[] str=(u.getHomeTown()).split(" ");
+			if(str[0].equals("-"))
+				str[0]="";
+			if(str[1].equals("-"))
+				str[1]="";
+			if(str[2].equals("-"))
+				str[2]="";
 			request.setAttribute("province", str[0]);
 			request.setAttribute("city", str[1]);
 			request.setAttribute("country", str[2]);
@@ -62,6 +68,12 @@ public class PersonalCenterUI extends HttpServlet {
 		if(!u.getHomeAddress().equals(""))
 		{
 			String[] str1=(u.getHomeAddress()).split(" ");
+			if(str1[0].equals("-"))
+				str1[0]="";
+			if(str1[1].equals("-"))
+				str1[1]="";
+			if(str1[2].equals("-"))
+				str1[2]="";
 			request.setAttribute("homeAddressCity", str1[0]);
 			request.setAttribute("homeAddressRoad", str1[1]);
 			request.setAttribute("homeAddressNum", str1[2]);
@@ -69,6 +81,12 @@ public class PersonalCenterUI extends HttpServlet {
 		if(!u.getWorkingAddress().equals(""))
 		{
 			String[] str2=(u.getWorkingAddress()).split(" ");
+			if(str2[0].equals("-"))
+				str2[0]="";
+			if(str2[1].equals("-"))
+				str2[1]="";
+			if(str2[2].equals("-"))
+				str2[2]="";
 			request.setAttribute("workingAddressCity", str2[0]);
 			request.setAttribute("workingAddressRoad", str2[1]);
 			request.setAttribute("workingAddressNum", str2[2]);
@@ -76,6 +94,7 @@ public class PersonalCenterUI extends HttpServlet {
 		request.setAttribute("accessToken", u.getAccessToken());
 		request.setAttribute("userInfo", ja);
 		request.setAttribute("user", ju);
+		request.setAttribute("openId", openId);
 		request.getRequestDispatcher("/WEB-INF/pages/PersonalCenter.jsp").forward(request, response);
 	}
 

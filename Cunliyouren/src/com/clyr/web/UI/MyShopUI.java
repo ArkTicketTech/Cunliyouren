@@ -57,6 +57,7 @@ public class MyShopUI extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		String 	openId=request.getParameter("openId");
+		String message=request.getParameter("message");
 		System.out.println(openId);
 		IUserService uservice=new UserService();
 		IProductService pservice=new ProductService();
@@ -81,6 +82,7 @@ public class MyShopUI extends HttpServlet {
 		
 		request.setAttribute("myProduct", ja);
 		request.setAttribute("openId", openId);
+		request.setAttribute("message", message);
 		request.getRequestDispatcher("/WEB-INF/pages/MyShop.jsp").forward(request, response);
 	}
 
